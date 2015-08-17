@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "../../blowbox/filesystem/file_system_manager.h"
+
 namespace blowbox
 {
 	BootManager::BootManager()
@@ -23,12 +25,14 @@ namespace blowbox
 		memory_ = Memory::Instance();
 		memory_->StartUp(settings.memory);
 
-		
+		FileSystemManager::Instance()->StartUp();
 	}
 
-	void BootManager::Shutdown()
+	void BootManager::ShutDown()
 	{
-		memory_->Shutdown();
+		FileSystemManager::Instance()->ShutDown();
+
+		memory_->ShutDown();
 		delete memory_;
 
 		delete cvar_;

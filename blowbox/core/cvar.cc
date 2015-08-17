@@ -22,8 +22,6 @@ namespace blowbox
 
 	void CVar::Parse(int argc, char** argv)
 	{
-		std::cout << argc << std::endl;
-		
 		std::map<std::string, std::string> arguments_;
 
 		std::string subject;

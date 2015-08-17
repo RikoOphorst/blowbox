@@ -7,6 +7,9 @@
     <Filter Include="core">
       <UniqueIdentifier>{f5f517b5-0758-4910-a7e0-0f5b0a498fa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="filesystem">
+      <UniqueIdentifier>{8d8e1690-eed9-43c8-85a2-b4404c617ca8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="memory\pointer_math.cc">
@@ -40,6 +43,9 @@
     <ClCompile Include="core\cvar.cc">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="filesystem\file_system_manager.cc">
+      <Filter>filesystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="memory\pointer_math.h">
@@ -71,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="core\cvar.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem\file_system_manager.h">
+      <Filter>filesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

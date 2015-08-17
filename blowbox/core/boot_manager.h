@@ -12,7 +12,7 @@ namespace blowbox
 		~BootManager();
 
 		void Boot(int argc, char** argv);
-		void Shutdown();
+		void ShutDown();
 	private:
 		Memory* memory_;
 		CVar* cvar_;

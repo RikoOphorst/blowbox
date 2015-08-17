@@ -28,10 +28,11 @@ namespace blowbox
 		all_memory_ = malloc(max_memory_);
 
 		all_allocators_ = new FreeListAllocator(max_memory_, all_memory_);
+		singleton_allocator_ = CreateFreeListAllocator(100000);
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void Memory::Shutdown()
+	void Memory::ShutDown()
 	{
 		// Check if there is still memory marked as in use
 

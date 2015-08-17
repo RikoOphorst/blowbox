@@ -45,7 +45,7 @@ namespace blowbox
 		/**
 		* @brief Shuts the Memory manager down
 		*/
-		void Shutdown();
+		void ShutDown();
 
 		/**
 		* @brief Creates & allocates a new LinearAllocator
@@ -86,11 +86,18 @@ namespace blowbox
 		*/
 		template<typename T>
 		inline void Deallocate(Allocator* allocator, T* ptr);
+
+		/**
+		* @brief Allocates a singleton in a special allocator meant for use by singletons only
+		*/
+		template<typename T>
+		inline T* AllocateSingleton();
 	private:
 		int max_memory_; //<! The maximum amount of heap allocated memory the application can use in bytes
 		void* all_memory_; //<! Pointer to "all" heap allocated memory the application is using
 
 		FreeListAllocator* all_allocators_; //<! A free list allocator that allows allocators to be stored in the pre-allocated heap memory (What an inception, eh?)
+		FreeListAllocator* singleton_allocator_; //<! A free list allocator that is supposed to store the pointers to singletons
 	};
 
 	//------------------------------------------------------------------------------------------------------
@@ -106,6 +113,13 @@ namespace blowbox
 	{
 		ptr->~T();
 		allocator->Deallocate(ptr);
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	template <typename T>
+	T* Memory::AllocateSingleton()
+	{
+		return new (singleton_allocator_->Allocate(sizeof(T), __alignof(T))) T;
 	}
 
 	//------------------------------------------------------------------------------------------------------

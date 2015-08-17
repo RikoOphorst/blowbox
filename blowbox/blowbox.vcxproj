@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="core\boot_manager.cc" />
     <ClCompile Include="core\cvar.cc" />
+    <ClCompile Include="filesystem\file_system_manager.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="memory\allocator.cc" />
     <ClCompile Include="memory\free_list_allocator.cc" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="core\boot_manager.h" />
     <ClInclude Include="core\cvar.h" />
+    <ClInclude Include="filesystem\file_system_manager.h" />
     <ClInclude Include="memory\allocator.h" />
     <ClInclude Include="memory\free_list_allocator.h" />
     <ClInclude Include="memory\linear_allocator.h" />
