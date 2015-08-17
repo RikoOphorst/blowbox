@@ -4,6 +4,9 @@
     <Filter Include="memory">
       <UniqueIdentifier>{eb9d8056-2180-488a-8d35-3911f8f36e3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{f5f517b5-0758-4910-a7e0-0f5b0a498fa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="memory\pointer_math.cc">
@@ -31,6 +34,12 @@
       <Filter>memory</Filter>
     </ClCompile>
     <ClCompile Include="main.cc" />
+    <ClCompile Include="core\boot_manager.cc">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cvar.cc">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="memory\pointer_math.h">
@@ -56,6 +65,12 @@
     </ClInclude>
     <ClInclude Include="memory\memory.h">
       <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\boot_manager.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cvar.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
