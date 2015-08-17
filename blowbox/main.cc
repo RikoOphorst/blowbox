@@ -7,8 +7,9 @@ int main(int argc, char** argv)
 	BootManager* boot_manager = new BootManager();
 	boot_manager->Boot(argc, argv);
 
-	while (true) {}
+	
 
+	boot_manager->Shutdown();
 	delete boot_manager;
 
 	return 0;

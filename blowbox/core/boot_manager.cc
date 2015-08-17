@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#include "../../blowbox/core/cvar.h"
-
 namespace blowbox
 {
 	BootManager::BootManager()
@@ -18,10 +16,21 @@ namespace blowbox
 
 	void BootManager::Boot(int argc, char** argv)
 	{
-		CVar* cvar = CVar::Instance();
-		cvar->Parse(argc, argv);
-		CVar::Settings& settings = cvar->GetSettings();
+		cvar_ = CVar::Instance();
+		cvar_->Parse(argc, argv);
+		CVar::Settings& settings = cvar_->GetSettings();
 
-		std::cout << settings.memory << std::endl;
+		memory_ = Memory::Instance();
+		memory_->StartUp(settings.memory);
+
+		
+	}
+
+	void BootManager::Shutdown()
+	{
+		memory_->Shutdown();
+		delete memory_;
+
+		delete cvar_;
 	}
 }
