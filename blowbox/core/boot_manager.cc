@@ -3,6 +3,8 @@
 #include <iostream>
 
 #include "../../blowbox/filesystem/file_system_manager.h"
+#include "../../blowbox/window/window_manager.h"
+#include "../../blowbox/graphics/render_manager.h"
 
 namespace blowbox
 {
@@ -26,10 +28,14 @@ namespace blowbox
 		memory_->StartUp(settings.memory);
 
 		FileSystemManager::Instance()->StartUp();
+		WindowManager::Instance()->StartUp();
+		RenderManager::Instance()->StartUp();
 	}
 
 	void BootManager::ShutDown()
 	{
+		RenderManager::Instance()->ShutDown();
+		WindowManager::Instance()->ShutDown();
 		FileSystemManager::Instance()->ShutDown();
 
 		memory_->ShutDown();

@@ -125,6 +125,7 @@
     <ClCompile Include="core\boot_manager.cc" />
     <ClCompile Include="core\cvar.cc" />
     <ClCompile Include="filesystem\file_system_manager.cc" />
+    <ClCompile Include="graphics\render_manager.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="memory\allocator.cc" />
     <ClCompile Include="memory\free_list_allocator.cc" />
@@ -134,11 +135,14 @@
     <ClCompile Include="memory\pool_allocator.cc" />
     <ClCompile Include="memory\proxy_allocator.cc" />
     <ClCompile Include="memory\stack_allocator.cc" />
+    <ClCompile Include="window\window.cc" />
+    <ClCompile Include="window\window_manager.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\boot_manager.h" />
     <ClInclude Include="core\cvar.h" />
     <ClInclude Include="filesystem\file_system_manager.h" />
+    <ClInclude Include="graphics\render_manager.h" />
     <ClInclude Include="memory\allocator.h" />
     <ClInclude Include="memory\free_list_allocator.h" />
     <ClInclude Include="memory\linear_allocator.h" />
@@ -147,6 +151,8 @@
     <ClInclude Include="memory\pool_allocator.h" />
     <ClInclude Include="memory\proxy_allocator.h" />
     <ClInclude Include="memory\stack_allocator.h" />
+    <ClInclude Include="window\window.h" />
+    <ClInclude Include="window\window_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

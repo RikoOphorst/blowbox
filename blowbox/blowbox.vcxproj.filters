@@ -10,6 +10,12 @@
     <Filter Include="filesystem">
       <UniqueIdentifier>{8d8e1690-eed9-43c8-85a2-b4404c617ca8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graphics">
+      <UniqueIdentifier>{eff1f206-2f16-4c62-a1ef-6a736c846195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="window">
+      <UniqueIdentifier>{8b52ebad-e9b7-49bd-bcd8-b5787eb10d4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="memory\pointer_math.cc">
@@ -46,6 +52,15 @@
     <ClCompile Include="filesystem\file_system_manager.cc">
       <Filter>filesystem</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\render_manager.cc">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="window\window_manager.cc">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="window\window.cc">
+      <Filter>window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="memory\pointer_math.h">
@@ -80,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="filesystem\file_system_manager.h">
       <Filter>filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\render_manager.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="window\window.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="window\window_manager.h">
+      <Filter>window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

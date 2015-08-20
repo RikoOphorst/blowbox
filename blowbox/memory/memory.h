@@ -1,6 +1,7 @@
 #pragma once
 
 #include <new>
+#include <cstdarg>
 
 // These are included in the header file because they simplify life for the programmer a lot
 // Because he won't need to include these allocators manually, instead simply include this file
@@ -76,8 +77,8 @@ namespace blowbox
 		* @brief Allocates an object of type T in the given allocator
 		* @param[in] allocator (Allocator*) the allocator in which the object should be allocated
 		*/
-		template<typename T>
-		inline T* Allocate(Allocator* allocator);
+		template<typename T, typename...Args>
+		inline T* Allocate(Allocator* allocator, Args...args);
 
 		/**
 		* @brief Deallocates an object of type T in the given allocator
@@ -101,10 +102,10 @@ namespace blowbox
 	};
 
 	//------------------------------------------------------------------------------------------------------
-	template <typename T>
-	T* Memory::Allocate(Allocator* allocator)
+	template <typename T, typename...Args>
+	T* Memory::Allocate(Allocator* allocator, Args...args)
 	{
-		return new (allocator->Allocate(sizeof(T), __alignof(T))) T;
+		return new (allocator->Allocate(sizeof(T), __alignof(T))) T(args...);
 	}
 
 	//------------------------------------------------------------------------------------------------------
