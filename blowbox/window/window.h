@@ -24,9 +24,14 @@ namespace blowbox
 		~Window();
 
 		/**
-		* @brief Windows message queue thing
+		* @brief Reads windows messages
 		*/
 		static LRESULT CALLBACK WindowProc(HWND hwindow, UINT message, WPARAM wparam, LPARAM lparam);
+
+		/**
+		* @brief Reads the windows message queue
+		*/
+		void ProcessMessages();
 	private:
 		HWND hwindow_; //<! Handle to the window
 		HINSTANCE hinstance_; //<! Windows process handle

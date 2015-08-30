@@ -16,6 +16,9 @@
     <Filter Include="window">
       <UniqueIdentifier>{8b52ebad-e9b7-49bd-bcd8-b5787eb10d4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hid">
+      <UniqueIdentifier>{5c01553e-f02f-42a6-b3b6-ce47eac7a620}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="memory\pointer_math.cc">
@@ -61,6 +64,9 @@
     <ClCompile Include="window\window.cc">
       <Filter>window</Filter>
     </ClCompile>
+    <ClCompile Include="hid\hid_manager.cc">
+      <Filter>hid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="memory\pointer_math.h">
@@ -104,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="window\window_manager.h">
       <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="hid\hid_manager.h">
+      <Filter>hid</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

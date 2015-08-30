@@ -12,9 +12,13 @@ int main(int argc, char** argv)
 	BootManager* boot_manager = new BootManager();
 	boot_manager->Boot(argc, argv);
 
-	WindowManager::Instance()->MakeWindow("derp", 100, 100);
+	Window* main1 = WindowManager::Instance()->MakeWindow("Blowbox - Main1", 1280, 720);
+	Window* main2 = WindowManager::Instance()->MakeWindow("Blowbox - Main2", 1300, 720);
+	Window* main3 = WindowManager::Instance()->MakeWindow("Blowbox - Main3", 1280, 740);
 
-	while (true) {}
+	while (true) {
+		main1->ProcessMessages();
+	}
 
 	boot_manager->ShutDown();
 	delete boot_manager;

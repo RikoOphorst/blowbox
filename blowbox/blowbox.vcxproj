@@ -126,6 +126,7 @@
     <ClCompile Include="core\cvar.cc" />
     <ClCompile Include="filesystem\file_system_manager.cc" />
     <ClCompile Include="graphics\render_manager.cc" />
+    <ClCompile Include="hid\hid_manager.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="memory\allocator.cc" />
     <ClCompile Include="memory\free_list_allocator.cc" />
@@ -143,6 +144,7 @@
     <ClInclude Include="core\cvar.h" />
     <ClInclude Include="filesystem\file_system_manager.h" />
     <ClInclude Include="graphics\render_manager.h" />
+    <ClInclude Include="hid\hid_manager.h" />
     <ClInclude Include="memory\allocator.h" />
     <ClInclude Include="memory\free_list_allocator.h" />
     <ClInclude Include="memory\linear_allocator.h" />

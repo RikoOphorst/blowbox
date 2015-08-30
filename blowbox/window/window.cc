@@ -1,5 +1,7 @@
 #include "window.h"
 
+#include "../../blowbox/hid/hid_manager.h"
+
 namespace blowbox
 {	//------------------------------------------------------------------------------------------------------
 	Window::Window(const std::string& name, unsigned int width, unsigned int height) :
@@ -55,11 +57,20 @@ namespace blowbox
 		}
 		Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
 
-		POINT p;
-		if (GetCursorPos(&p))
-		{
-			ScreenToClient(hwindow, &p);
-		}
+		HIDManager::Instance()->HandleMessage(window, message, wparam, lparam);
+		
 		return DefWindowProcA(hwindow, message, wparam, lparam);
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	void Window::ProcessMessages()
+	{
+		MSG msg;
+
+		while (PeekMessageA(&msg, hwindow_, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessageA(&msg);
+		}
 	}
 }
