@@ -1,35 +1,30 @@
-#include "render_manager.h"
+#include "boot_sequence.h"
+
+#include <iostream>
 
 namespace blowbox
 {
 	//------------------------------------------------------------------------------------------------------
-	RenderManager::RenderManager()
+	BootSequence::BootSequence()
 	{
 
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	RenderManager::~RenderManager()
+	BootSequence::~BootSequence()
 	{
 
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	RenderManager* RenderManager::Instance()
+	void BootSequence::Boot()
 	{
-		static RenderManager* ptr = Memory::Instance()->AllocateSingleton<RenderManager>();
-		return ptr;
+		
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void RenderManager::StartUp()
+	void BootSequence::ShutDown()
 	{
-
-	}
-
-	//------------------------------------------------------------------------------------------------------
-	void RenderManager::ShutDown()
-	{
-
+		
 	}
 }

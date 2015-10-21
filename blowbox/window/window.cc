@@ -1,7 +1,5 @@
 #include "window.h"
 
-#include "../../blowbox/hid/hid_manager.h"
-
 namespace blowbox
 {	//------------------------------------------------------------------------------------------------------
 	Window::Window(const std::string& name, unsigned int width, unsigned int height) :
@@ -56,8 +54,6 @@ namespace blowbox
 			return DefWindowProcA(hwindow, message, wparam, lparam);
 		}
 		Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
-
-		HIDManager::Instance()->HandleMessage(window, message, wparam, lparam);
 		
 		return DefWindowProcA(hwindow, message, wparam, lparam);
 	}

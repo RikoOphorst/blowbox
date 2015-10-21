@@ -1,7 +1,5 @@
-#include "../blowbox/core/boot_manager.h"
-
-#include "../blowbox/filesystem/file_system_manager.h"
-#include "../blowbox/window/window_manager.h"
+#include "../blowbox/core/boot_sequence.h"
+#include "../blowbox/window/window.h"
 
 #include <iostream>
 
@@ -9,19 +7,19 @@ using namespace blowbox;
 
 int main(int argc, char** argv)
 {
-	BootManager* boot_manager = new BootManager();
-	boot_manager->Boot(argc, argv);
+	BootSequence* boot_sequence = new BootSequence();
 
-	Window* main1 = WindowManager::Instance()->MakeWindow("Blowbox - Main1", 1280, 720);
-	Window* main2 = WindowManager::Instance()->MakeWindow("Blowbox - Main2", 1300, 720);
-	Window* main3 = WindowManager::Instance()->MakeWindow("Blowbox - Main3", 1280, 740);
+	boot_sequence->Boot();
 
-	while (true) {
-		main1->ProcessMessages();
+	Window* window = new Window("Blowbox", 1280, 720);
+	
+	while (true)
+	{
+		window->ProcessMessages();
 	}
 
-	boot_manager->ShutDown();
-	delete boot_manager;
+	boot_sequence->ShutDown();
+	delete boot_sequence;
 
 	return 0;
 }

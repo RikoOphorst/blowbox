@@ -6,9 +6,9 @@
 namespace blowbox
 {
 	/**
-	* @brief A window that can be used for rendering
-	* @author Riko Ophorst
 	* @class blowbox::Window
+	* @author Riko Ophorst
+	* @brief A window that can be used for rendering
 	*/
 	class Window
 	{
@@ -38,6 +38,5 @@ namespace blowbox
 		unsigned int width_; //<! Width of the window
 		unsigned int height_; //<! Height of the window
 		unsigned int aspect_ratio_; //<! Aspect ratio of the window
-
 	};
 }
