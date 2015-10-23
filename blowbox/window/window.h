@@ -14,9 +14,20 @@ namespace blowbox
 	{
 	public:
 		/**
-		* @brief Default Window constructor
+		* @brief Factory method for creating a window
+		* @param[in] name (const std::string&) the name of the window (the title)
+		* @param[in] width (unsigned int) the width of the inner window
+		* @param[in] height (unsigned int) the height of the inner window
 		*/
-		Window(const std::string& name, unsigned int width_, unsigned int height_);
+		static Window* MakeWindow(const std::string& name, unsigned int width, unsigned int height);
+		
+		/**
+		* @brief Default Window constructor
+		* @param[in] name (const std::string&) the name of the window (the title)
+		* @param[in] width (unsigned int) the width of the inner window
+		* @param[in] height (unsigned int) the height of the inner window
+		*/
+		Window(const std::string& name, unsigned int width, unsigned int height);
 
 		/**
 		* @brief Default Window destructor
@@ -32,6 +43,12 @@ namespace blowbox
 		* @brief Reads the windows message queue
 		*/
 		void ProcessMessages();
+
+		const HWND& GetWindowHandle() const;
+		const HINSTANCE& GetWindowInstance() const;
+		const unsigned int& GetWidth() const;
+		const unsigned int& GetHeight() const;
+		const unsigned int& GetAspectRatio() const;
 	private:
 		HWND hwindow_; //<! Handle to the window
 		HINSTANCE hinstance_; //<! Windows process handle

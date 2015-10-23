@@ -16,22 +16,37 @@
     <Filter Include="hid">
       <UniqueIdentifier>{5c01553e-f02f-42a6-b3b6-ce47eac7a620}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graphics\direct3d">
+      <UniqueIdentifier>{187f4cd0-0030-4b2e-82c8-a80d62398b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{e935618a-56cd-4f32-a73e-234fdedf8e1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc" />
     <ClCompile Include="window\window.cc">
       <Filter>window</Filter>
     </ClCompile>
-    <ClCompile Include="core\boot_sequence.cc">
+    <ClCompile Include="core\blowbox.cc">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\direct3d\renderer.cc">
+      <Filter>graphics\direct3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
       <Filter>window</Filter>
     </ClInclude>
-    <ClInclude Include="core\boot_sequence.h">
+    <ClInclude Include="core\blowbox.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d\renderer.h">
+      <Filter>graphics\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="util\macros.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

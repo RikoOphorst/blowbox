@@ -1,7 +1,14 @@
 #include "window.h"
 
 namespace blowbox
-{	//------------------------------------------------------------------------------------------------------
+{
+	//------------------------------------------------------------------------------------------------------
+	Window* Window::MakeWindow(const std::string& name, unsigned int width, unsigned int height)
+	{
+		return new Window(name, width, height);
+	}
+
+	//------------------------------------------------------------------------------------------------------
 	Window::Window(const std::string& name, unsigned int width, unsigned int height) :
 		width_(width),
 		height_(height),
@@ -68,5 +75,30 @@ namespace blowbox
 			TranslateMessage(&msg);
 			DispatchMessageA(&msg);
 		}
+	}
+	
+	const HWND& Window::GetWindowHandle() const
+	{
+		return hwindow_;
+	}
+	
+	const HINSTANCE& Window::GetWindowInstance() const
+	{
+		return hinstance_;
+	}
+	
+	const unsigned int& Window::GetWidth() const
+	{
+		return width_;
+	}
+	
+	const unsigned int& Window::GetHeight() const
+	{
+		return height_;
+	}
+	
+	const unsigned int& Window::GetAspectRatio() const
+	{
+		return aspect_ratio_;
 	}
 }

@@ -1,25 +1,25 @@
-#include "../blowbox/core/boot_sequence.h"
+#include "../blowbox/core/blowbox.h"
 #include "../blowbox/window/window.h"
+#include "../blowbox/graphics/direct3d/renderer.h"
+#include <PxPhysicsAPI.h>
 
 #include <iostream>
 
 using namespace blowbox;
+using namespace blowbox::direct3d;
 
 int main(int argc, char** argv)
-{
-	BootSequence* boot_sequence = new BootSequence();
-
-	boot_sequence->Boot();
-
-	Window* window = new Window("Blowbox", 1280, 720);
+{	
+	Blowbox* blowbox = new Blowbox();
+	Window* window = Window::MakeWindow("My Blowbox Game", 1280, 720);
+	Renderer* renderer = Renderer::MakeRenderer();
 	
-	while (true)
-	{
-		window->ProcessMessages();
-	}
+	renderer->SetWindow(window);
+	blowbox->SetRenderer(renderer);
 
-	boot_sequence->ShutDown();
-	delete boot_sequence;
+	blowbox->Run();
+
+	delete blowbox;
 
 	return 0;
 }

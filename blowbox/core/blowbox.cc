@@ -1,30 +1,34 @@
-#include "boot_sequence.h"
+#include "blowbox.h"
+
+#include "../util/macros.h"
+#include "../graphics/direct3d/renderer.h"
 
 #include <iostream>
 
 namespace blowbox
 {
 	//------------------------------------------------------------------------------------------------------
-	BootSequence::BootSequence()
+	Blowbox::Blowbox() :
+		renderer_(nullptr)
 	{
 
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	BootSequence::~BootSequence()
+	Blowbox::~Blowbox()
 	{
-
+		BB_SAFE_DELETE(renderer_);
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void BootSequence::Boot()
+	void Blowbox::Run()
 	{
-		
-	}
 
+	}
+	
 	//------------------------------------------------------------------------------------------------------
-	void BootSequence::ShutDown()
+	void Blowbox::SetRenderer(direct3d::Renderer* renderer)
 	{
-		
+		renderer_ = renderer;
 	}
 }
