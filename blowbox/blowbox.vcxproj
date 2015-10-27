@@ -123,12 +123,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\blowbox.cc" />
+    <ClCompile Include="core\threading\job.cc" />
+    <ClCompile Include="core\threading\job_manager.cc" />
+    <ClCompile Include="core\threading\worker_thread.cc" />
     <ClCompile Include="graphics\direct3d\renderer.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="window\window.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\blowbox.h" />
+    <ClInclude Include="core\threading\job.h" />
+    <ClInclude Include="core\threading\job_manager.h" />
+    <ClInclude Include="core\threading\worker_thread.h" />
     <ClInclude Include="graphics\direct3d\renderer.h" />
     <ClInclude Include="util\macros.h" />
     <ClInclude Include="window\window.h" />

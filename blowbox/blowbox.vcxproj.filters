@@ -22,6 +22,9 @@
     <Filter Include="util">
       <UniqueIdentifier>{e935618a-56cd-4f32-a73e-234fdedf8e1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\threading">
+      <UniqueIdentifier>{ad593066-c4c7-4b19-a3e8-2ce0353a8be5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc" />
@@ -33,6 +36,15 @@
     </ClCompile>
     <ClCompile Include="graphics\direct3d\renderer.cc">
       <Filter>graphics\direct3d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\threading\job_manager.cc">
+      <Filter>core\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="core\threading\job.cc">
+      <Filter>core\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="core\threading\worker_thread.cc">
+      <Filter>core\threading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +59,15 @@
     </ClInclude>
     <ClInclude Include="util\macros.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="core\threading\job_manager.h">
+      <Filter>core\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="core\threading\job.h">
+      <Filter>core\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="core\threading\worker_thread.h">
+      <Filter>core\threading</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
