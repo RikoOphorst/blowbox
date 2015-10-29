@@ -24,14 +24,14 @@ namespace blowbox
 		void StartUp();
 		void ShutDown();
 
-		void AddJobToQueue(const Job& job);
-		std::queue<Job>& GetJobQueue();
+		void AddJobToQueue(Job* job);
+		std::queue<Job*>& GetJobQueue();
 		std::condition_variable& GetJobAddedCV();
 		std::mutex& GetJobMutex();
 
 	private:
 		std::mutex job_mutex_;
-		std::queue<Job> jobs_;
+		std::queue<Job*> jobs_;
 		std::vector<WorkerThread*> workers_;
 		std::condition_variable job_added_;
 	};

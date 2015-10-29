@@ -41,7 +41,7 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void JobManager::AddJobToQueue(const Job& job)
+	void JobManager::AddJobToQueue(Job* job)
 	{
 		std::lock_guard<std::mutex> guard(job_mutex_);
 
@@ -50,7 +50,7 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	std::queue<Job>& JobManager::GetJobQueue()
+	std::queue<Job*>& JobManager::GetJobQueue()
 	{
 		return jobs_;
 	}

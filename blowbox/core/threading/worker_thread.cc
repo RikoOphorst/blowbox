@@ -28,7 +28,7 @@ namespace blowbox
 	{
 		start:
 		{
-			std::queue<Job>& job_queue = JobManager::Instance()->GetJobQueue();
+			std::queue<Job*>& job_queue = JobManager::Instance()->GetJobQueue();
 			std::condition_variable& job_added_cv = JobManager::Instance()->GetJobAddedCV();
 			std::mutex& job_mutex = JobManager::Instance()->GetJobMutex();
 
@@ -36,13 +36,28 @@ namespace blowbox
 			while (job_queue.empty())
 				job_added_cv.wait(lock);
 
-			Job& job = job_queue.front();
-			job_queue.pop();
+			Job* job = job_queue.front();
 
-			lock.unlock();
+			bool runnable = true;
 
-			job.func(id, job.mem_ptr, job.mem_size);
-			job.finished = true;
+			for (int i = 0; i < job->others.size(); i++)
+			{
+				if (job->others[i]->finished == false)
+					runnable = false;
+			}
+
+			if (runnable)
+			{
+				job_queue.pop();
+				lock.unlock();
+
+				job->func(id, job->mem_ptr, job->mem_size);
+				job->finished = true;
+			}
+			else
+			{
+				lock.unlock();
+			}
 		}
 		goto start;
 	}
