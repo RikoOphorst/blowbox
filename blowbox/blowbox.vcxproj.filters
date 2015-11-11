@@ -27,7 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cc" />
     <ClCompile Include="window\window.cc">
       <Filter>window</Filter>
     </ClCompile>
@@ -88,6 +87,7 @@
     <ClCompile Include="graphics\direct3d\shader.cc">
       <Filter>graphics\direct3d</Filter>
     </ClCompile>
+    <ClCompile Include="blowbox_include.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
