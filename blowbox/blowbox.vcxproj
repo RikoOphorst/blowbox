@@ -84,11 +84,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(DXSDK_UM_LIB_X64)\d3d12.lib;$(DXSDK_UM_LIB_X64)\dxgi.lib;$(DXSDK_UM_LIB_X64)\d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,13 +112,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(DXSDK_UM_LIB_X64)\d3d12.h;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -126,7 +126,21 @@
     <ClCompile Include="core\threading\job.cc" />
     <ClCompile Include="core\threading\job_manager.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
+    <ClCompile Include="graphics\direct3d\command_allocator.cc" />
+    <ClCompile Include="graphics\direct3d\command_list.cc" />
+    <ClCompile Include="graphics\direct3d\command_queue.cc" />
+    <ClCompile Include="graphics\direct3d\debug_controller.cc" />
+    <ClCompile Include="graphics\direct3d\depth_stencil.cc" />
+    <ClCompile Include="graphics\direct3d\descriptor_heap.cc" />
+    <ClCompile Include="graphics\direct3d\device.cc" />
+    <ClCompile Include="graphics\direct3d\index_buffer.cc" />
+    <ClCompile Include="graphics\direct3d\pipeline_state.cc" />
     <ClCompile Include="graphics\direct3d\renderer.cc" />
+    <ClCompile Include="graphics\direct3d\render_target.cc" />
+    <ClCompile Include="graphics\direct3d\root_signature.cc" />
+    <ClCompile Include="graphics\direct3d\shader.cc" />
+    <ClCompile Include="graphics\direct3d\swap_chain.cc" />
+    <ClCompile Include="graphics\direct3d\vertex_buffer.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="window\window.cc" />
   </ItemGroup>
@@ -135,7 +149,23 @@
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
+    <ClInclude Include="graphics\direct3d\command_allocator.h" />
+    <ClInclude Include="graphics\direct3d\command_list.h" />
+    <ClInclude Include="graphics\direct3d\command_queue.h" />
+    <ClInclude Include="graphics\direct3d\debug_controller.h" />
+    <ClInclude Include="graphics\direct3d\depth_stencil.h" />
+    <ClInclude Include="graphics\direct3d\descriptor_heap.h" />
+    <ClInclude Include="graphics\direct3d\device.h" />
+    <ClInclude Include="graphics\direct3d\direct3d.h" />
+    <ClInclude Include="graphics\direct3d\index_buffer.h" />
+    <ClInclude Include="graphics\direct3d\pipeline_state.h" />
     <ClInclude Include="graphics\direct3d\renderer.h" />
+    <ClInclude Include="graphics\direct3d\render_target.h" />
+    <ClInclude Include="graphics\direct3d\root_signature.h" />
+    <ClInclude Include="graphics\direct3d\shader.h" />
+    <ClInclude Include="graphics\direct3d\swap_chain.h" />
+    <ClInclude Include="graphics\direct3d\vertex.h" />
+    <ClInclude Include="graphics\direct3d\vertex_buffer.h" />
     <ClInclude Include="util\macros.h" />
     <ClInclude Include="window\window.h" />
   </ItemGroup>
