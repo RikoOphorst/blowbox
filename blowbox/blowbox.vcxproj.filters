@@ -88,6 +88,9 @@
       <Filter>graphics\direct3d</Filter>
     </ClCompile>
     <ClCompile Include="blowbox_include.h" />
+    <ClCompile Include="core\game_object.cc">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -161,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="util\s2ws.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="core\game_object.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../blowbox/core/blowbox.h"
 
 // Threading

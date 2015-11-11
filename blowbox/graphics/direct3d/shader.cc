@@ -93,7 +93,7 @@ namespace blowbox
 		{
 #ifdef _DEBUG
 			UINT compile_flags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
-#elif
+#else
 			UINT compile_flags = 0;
 #endif
 			

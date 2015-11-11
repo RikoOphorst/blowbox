@@ -84,7 +84,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -112,7 +112,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -123,6 +123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\blowbox.cc" />
+    <ClCompile Include="core\game_object.cc" />
     <ClCompile Include="core\threading\job.cc" />
     <ClCompile Include="core\threading\job_manager.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\blowbox.h" />
+    <ClInclude Include="core\game_object.h" />
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
