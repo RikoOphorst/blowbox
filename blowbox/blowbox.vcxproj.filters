@@ -159,5 +159,8 @@
     <ClInclude Include="graphics\direct3d\vertex.h">
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
+    <ClInclude Include="util\s2ws.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

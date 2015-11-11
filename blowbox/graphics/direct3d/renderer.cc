@@ -13,6 +13,7 @@
 #include "../../graphics/direct3d/vertex.h"
 #include "../../graphics/direct3d/vertex_buffer.h"
 #include "../../graphics/direct3d/pipeline_state.h"
+#include "../../graphics/direct3d/shader.h"
 
 namespace blowbox
 {
@@ -37,6 +38,11 @@ namespace blowbox
 			BB_SAFE_DELETE(frame_heap_);
 			BB_SAFE_DELETE(pipeline_state_);
 			BB_SAFE_DELETE(root_signature_);
+			BB_SAFE_DELETE(shader_);
+			BB_GUARANTEE_RELEASE(back_buffers_[0]);
+			BB_GUARANTEE_RELEASE(back_buffers_[1]);
+			BB_GUARANTEE_RELEASE(frame_fence_);
+			BB_SAFE_DELETE(triangle_);
 		}
 
 		//------------------------------------------------------------------------------------------------------
@@ -48,6 +54,8 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		void Renderer::Initialise()
 		{
+			BB_ASSERT_NOTNULL(window_, "A window has to be set in order to initialise the renderer. Use Renderer::SetWindow() to set a window.");
+			
 			ID3D12Debug* debug_controller;
 			if (D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)) == S_OK)
 			{
@@ -129,14 +137,7 @@ namespace blowbox
 
 			root_signature_ = RootSignature::Create(rs_desc, device_);
 
-#ifdef _DEBUG
-			UINT compile_flags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
-#else
-			UINT compile_flags = 0;
-#endif
-
-			BB_CHECK(D3DCompileFromFile(L"E:\\Projects\\blowbox\\blowbox\\shaders\\shaders.hlsl", nullptr, nullptr, "VSMain", "vs_5_0", compile_flags, 0, &vertex_shader_, nullptr));
-			BB_CHECK(D3DCompileFromFile(L"E:\\Projects\\blowbox\\blowbox\\shaders\\shaders.hlsl", nullptr, nullptr, "PSMain", "ps_5_0", compile_flags, 0, &pixel_shader_, nullptr));
+			shader_ = Shader::Create("E:\\Projects\\blowbox\\blowbox\\shaders\\shaders.hlsl", BB_SHADER_TYPE_PIXEL_SHADER | BB_SHADER_TYPE_VERTEX_SHADER);
 
 			D3D12_INPUT_ELEMENT_DESC input_element_descs[] =
 			{
@@ -147,9 +148,8 @@ namespace blowbox
 			};
 
 			BB_CREATE_PSO_DESC(main_pso_desc, input_element_descs, root_signature_);
-			main_pso_desc.VS = { reinterpret_cast<UINT8*>(vertex_shader_->GetBufferPointer()), vertex_shader_->GetBufferSize() };
-			main_pso_desc.PS = { reinterpret_cast<UINT8*>(pixel_shader_->GetBufferPointer()), pixel_shader_->GetBufferSize() };
-			main_pso_desc.RasterizerState.CullMode = D3D12_CULL_MODE::D3D12_CULL_MODE_NONE;
+			main_pso_desc.VS = shader_->GetVertexShader();
+			main_pso_desc.PS = shader_->GetPixelShader();
 			pipeline_state_ = PipelineState::Create(main_pso_desc, device_);
 
 			command_list_ = CommandList::Create(D3D12_COMMAND_LIST_TYPE::D3D12_COMMAND_LIST_TYPE_DIRECT, command_allocator_, pipeline_state_, device_);

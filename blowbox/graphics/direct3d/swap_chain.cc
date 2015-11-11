@@ -17,13 +17,13 @@ namespace blowbox
 			BB_CHECK(factory->CreateSwapChain(command_queue, &desc, &temp_swap_chain));
 			swap_chain_ = static_cast<IDXGISwapChain3*>(temp_swap_chain);
 
-			BB_SAFE_RELEASE(factory);
+			BB_GUARANTEE_RELEASE(factory);
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		SwapChain::~SwapChain()
 		{
-			BB_SAFE_RELEASE(swap_chain_);
+			BB_GUARANTEE_RELEASE(swap_chain_);
 		}
 
 		//------------------------------------------------------------------------------------------------------

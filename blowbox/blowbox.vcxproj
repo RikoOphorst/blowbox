@@ -167,6 +167,7 @@
     <ClInclude Include="graphics\direct3d\vertex.h" />
     <ClInclude Include="graphics\direct3d\vertex_buffer.h" />
     <ClInclude Include="util\macros.h" />
+    <ClInclude Include="util\s2ws.h" />
     <ClInclude Include="window\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -17,6 +17,7 @@ namespace blowbox
 		class RootSignature;
 		class SwapChain;
 		class VertexBuffer;
+		class Shader;
 		
 		/**
 		* @class blowbox::direct3d::Renderer
@@ -70,8 +71,7 @@ namespace blowbox
 			RootSignature* root_signature_;
 			SwapChain* swap_chain_;
 			ID3D12Resource* back_buffers_[2];
-			ID3DBlob* vertex_shader_;
-			ID3DBlob* pixel_shader_;
+			Shader* shader_;
 
 			ID3D12Fence* frame_fence_;
 			HANDLE frame_event_;

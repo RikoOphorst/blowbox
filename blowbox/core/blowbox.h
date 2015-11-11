@@ -26,6 +26,16 @@ namespace blowbox
 		~Blowbox();
 
 		/**
+		* @brief Creates a blowbox instance
+		*/
+		static Blowbox* Create();
+
+		/**
+		* @brief Initialises the blowbox engine
+		*/
+		void Initialise();
+
+		/**
 		* @brief Run the blowbox engine
 		*/
 		void Run();
@@ -36,6 +46,8 @@ namespace blowbox
 		*/
 		void SetRenderer(direct3d::Renderer* renderer);
 	private:
+		bool can_run_; //<! Can the application be run?
+		bool running_; //<! Is the application running?
 		direct3d::Renderer* renderer_; //<! The renderer this Blowbox uses
 	};
 }

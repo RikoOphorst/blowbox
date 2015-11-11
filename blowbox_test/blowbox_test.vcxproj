@@ -84,7 +84,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../;$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -112,12 +112,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../;$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>../x64/Release/blowbox.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../x64/Release/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

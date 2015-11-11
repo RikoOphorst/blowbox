@@ -16,7 +16,7 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		CommandAllocator::~CommandAllocator()
 		{
-			BB_SAFE_RELEASE(command_allocator_);
+			BB_GUARANTEE_RELEASE(command_allocator_);
 		}
 
 		//------------------------------------------------------------------------------------------------------
