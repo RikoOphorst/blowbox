@@ -9,10 +9,9 @@ namespace blowbox
 	{
 		//------------------------------------------------------------------------------------------------------
 		IndexedVertexBuffer::IndexedVertexBuffer(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const D3D12_PRIMITIVE_TOPOLOGY& topology, ID3D12Device* device) :
-			VertexBuffer(vertices, device),
+			VertexBuffer(vertices, topology, device),
 			index_buffer_(nullptr),
-			indices_(indices),
-			topology_(topology)
+			indices_(indices)
 		{
 			BB_CHECK(device->CreateCommittedResource(
 				&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
@@ -47,21 +46,21 @@ namespace blowbox
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		ID3D12Resource* IndexedVertexBuffer::GetIndexBuffer()
+		ID3D12Resource* IndexedVertexBuffer::GetIndexBuffer() const
 		{
 			return index_buffer_;
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		const D3D12_INDEX_BUFFER_VIEW& IndexedVertexBuffer::GetIndexView()
+		const D3D12_INDEX_BUFFER_VIEW& IndexedVertexBuffer::GetIndexView() const
 		{
 			return index_buffer_view_;
 		}
 		
 		//------------------------------------------------------------------------------------------------------
-		const D3D12_PRIMITIVE_TOPOLOGY& IndexedVertexBuffer::GetTopology()
+		const std::vector<unsigned int>& IndexedVertexBuffer::GetIndices() const
 		{
-			return topology_;
+			return indices_;
 		}
 	}
 }

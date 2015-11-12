@@ -44,8 +44,9 @@ namespace blowbox
 
 			/**
 			* @brief Initialises the renderer
+			* @param[in] window (Window*) the window the renderer should use
 			*/
-			void Initialise();
+			void Initialise(Window* window);
 
 			/**
 			* @brief Set this renderer's window output target
@@ -59,10 +60,10 @@ namespace blowbox
 		private:
 			Window* window_; //<! The output window of this renderer
 
-			D3D12_VIEWPORT viewport_;
-			D3D12_RECT scissor_rect_;
+			D3D12_VIEWPORT viewport_; //<! The viewport of the application
+			D3D12_RECT scissor_rect_; //<! The scissor rect of the application
 
-			CommandAllocator* command_allocator_;
+			CommandAllocator* command_allocator_; //<! The command allocator that is used to allocate lists
 			CommandList* command_list_;
 			CommandQueue* command_queue_;
 			DescriptorHeap* frame_heap_;

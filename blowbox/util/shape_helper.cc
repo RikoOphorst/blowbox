@@ -10,9 +10,14 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		Shape ShapeHelper::CreateQuad()
 		{
-			std::vector<Vertex> vertices;
-			std::vector<unsigned int> indices;
-			D3D12_PRIMITIVE_TOPOLOGY topology;
+			std::vector<Vertex> vertices = { 
+				{ { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+				{ { -0.5f, 0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+				{ { 0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+				{ { 0.5f, 0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } } 
+			};
+			std::vector<unsigned int> indices = { 0, 1, 2, 3 };
+			D3D12_PRIMITIVE_TOPOLOGY topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
 			return Shape(vertices, indices, topology);
 		}

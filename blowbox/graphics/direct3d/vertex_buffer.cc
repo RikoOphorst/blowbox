@@ -8,9 +8,10 @@ namespace blowbox
 	namespace direct3d
 	{
 		//------------------------------------------------------------------------------------------------------
-		VertexBuffer::VertexBuffer(const std::vector<Vertex> verts, ID3D12Device* device) :
+		VertexBuffer::VertexBuffer(const std::vector<Vertex>& verts, const D3D12_PRIMITIVE_TOPOLOGY& topology, ID3D12Device* device) :
 			vert_buffer_(nullptr),
-			verts_(verts)
+			verts_(verts),
+			topology_(topology)
 		{
 			BB_CHECK(device->CreateCommittedResource(
 				&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
@@ -39,21 +40,33 @@ namespace blowbox
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		VertexBuffer* VertexBuffer::Create(const std::vector<Vertex> verts, Device* device)
+		VertexBuffer* VertexBuffer::Create(const std::vector<Vertex>& verts, const D3D12_PRIMITIVE_TOPOLOGY& topology, Device* device)
 		{
-			return new VertexBuffer(verts, device->Get());
+			return new VertexBuffer(verts, topology, device->Get());
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		ID3D12Resource* VertexBuffer::Get()
+		ID3D12Resource* VertexBuffer::GetVertexBuffer() const
 		{
 			return vert_buffer_;
 		}
 		
 		//------------------------------------------------------------------------------------------------------
-		const D3D12_VERTEX_BUFFER_VIEW & VertexBuffer::GetView()
+		const D3D12_VERTEX_BUFFER_VIEW & VertexBuffer::GetVertexView() const
 		{
 			return vert_buffer_view_;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		const D3D12_PRIMITIVE_TOPOLOGY& VertexBuffer::GetTopology() const
+		{
+			return topology_;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		const std::vector<Vertex>& VertexBuffer::GetVertices() const
+		{
+			return verts_;
 		}
 	}
 }

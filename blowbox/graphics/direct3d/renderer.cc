@@ -52,9 +52,11 @@ namespace blowbox
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		void Renderer::Initialise()
+		void Renderer::Initialise(Window* window)
 		{
-			BB_ASSERT_NOTNULL(window_, "A window has to be set in order to initialise the renderer. Use Renderer::SetWindow() to set a window.");
+			BB_ASSERT_NOTNULL(window, "A window has to be set in order to initialise the renderer. Use Renderer::SetWindow() to set a window.");
+
+			window_ = window;
 			
 			ID3D12Debug* debug_controller;
 			if (D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)) == S_OK)
@@ -202,7 +204,7 @@ namespace blowbox
 			const float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };
 			command_list_->Get()->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 			command_list_->Get()->IASetPrimitiveTopology(triangle_->GetTopology());
-			command_list_->Get()->IASetVertexBuffers(0, 1, &triangle_->GetView());
+			command_list_->Get()->IASetVertexBuffers(0, 1, &triangle_->GetVertexView());
 			command_list_->Get()->IASetIndexBuffer(&triangle_->GetIndexView());
 			command_list_->Get()->DrawIndexedInstanced(4, 1, 0, 0, 0);
 

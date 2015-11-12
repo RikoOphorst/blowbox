@@ -6,6 +6,8 @@ namespace blowbox
 	{
 		class Renderer;
 	}
+
+	class Window;
 	
 	/**
 	* @class blowbox::Blowbox
@@ -45,9 +47,16 @@ namespace blowbox
 		* @param[in] renderer (blowbox::direct3d::Renderer*) The renderer
 		*/
 		void SetRenderer(direct3d::Renderer* renderer);
+
+		/**
+		* @brief Set the Window used by blowbox
+		* @param[in] window (blowbox::Window*) the window 
+		*/
+		void SetWindow(Window* window);
 	private:
 		bool can_run_; //<! Can the application be run?
 		bool running_; //<! Is the application running?
 		direct3d::Renderer* renderer_; //<! The renderer this Blowbox uses
+		Window* window_; //<! The window this Blowbox uses
 	};
 }

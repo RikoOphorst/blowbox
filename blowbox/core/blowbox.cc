@@ -2,6 +2,7 @@
 
 #include "../util/macros.h"
 #include "../graphics/direct3d/renderer.h"
+#include "../window/window.h"
 
 #include <iostream>
 
@@ -33,7 +34,7 @@ namespace blowbox
 	{
 		BB_ASSERT_NOTNULL(renderer_, "A renderer has to be set in order to initialise Blowbox. Use Blowbox::SetRenderer() to set a renderer.");
 
-		renderer_->Initialise();
+		renderer_->Initialise(window_);
 
 		can_run_ = true;
 	}
@@ -50,10 +51,16 @@ namespace blowbox
 			renderer_->Draw();
 		}
 	}
-	
+
 	//------------------------------------------------------------------------------------------------------
 	void Blowbox::SetRenderer(direct3d::Renderer* renderer)
 	{
 		renderer_ = renderer;
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	void Blowbox::SetWindow(Window* window)
+	{
+		window_ = window;
 	}
 }
