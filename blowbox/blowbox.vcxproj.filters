@@ -78,9 +78,6 @@
     <ClCompile Include="graphics\direct3d\device.cc">
       <Filter>graphics\direct3d</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\direct3d\index_buffer.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\direct3d\pipeline_state.cc">
       <Filter>graphics\direct3d</Filter>
     </ClCompile>
@@ -90,6 +87,12 @@
     <ClCompile Include="blowbox_include.h" />
     <ClCompile Include="core\game_object.cc">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="util\shape_helper.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\direct3d\indexed_vertex_buffer.cc">
+      <Filter>graphics\direct3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +153,6 @@
     <ClInclude Include="graphics\direct3d\device.h">
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\direct3d\index_buffer.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\direct3d\pipeline_state.h">
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
@@ -167,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="core\game_object.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="util\shape_helper.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d\indexed_vertex_buffer.h">
+      <Filter>graphics\direct3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

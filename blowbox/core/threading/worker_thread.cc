@@ -26,7 +26,7 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	void WorkerThread::ThreadFunction(int id)
 	{
-		start:
+		while(true)
 		{
 			std::queue<Job*>& job_queue = JobManager::Instance()->GetJobQueue();
 			std::condition_variable& job_added_cv = JobManager::Instance()->GetJobAddedCV();
@@ -59,6 +59,5 @@ namespace blowbox
 				lock.unlock();
 			}
 		}
-		goto start;
 	}
 }

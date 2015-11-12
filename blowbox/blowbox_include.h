@@ -1,6 +1,8 @@
 #pragma once
 
+// Core
 #include "../blowbox/core/blowbox.h"
+#include "../blowbox/core/game_object.h"
 
 // Threading
 #include "../blowbox/core/threading/job.h"
@@ -19,6 +21,8 @@
 #include "../blowbox/graphics/direct3d/swap_chain.h"
 #include "../blowbox/graphics/direct3d/vertex.h"
 #include "../blowbox/graphics/direct3d/vertex_buffer.h"
+#include "../blowbox/graphics/direct3d/indexed_vertex_buffer.h"
+#include "../blowbox/graphics/direct3d/shader.h"
 
 // Utils
 #include "../blowbox/util/macros.h"

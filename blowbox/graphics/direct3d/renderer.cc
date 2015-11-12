@@ -11,7 +11,7 @@
 #include "../../graphics/direct3d/descriptor_heap.h"
 #include "../../graphics/direct3d/root_signature.h"
 #include "../../graphics/direct3d/vertex.h"
-#include "../../graphics/direct3d/vertex_buffer.h"
+#include "../../graphics/direct3d/indexed_vertex_buffer.h"
 #include "../../graphics/direct3d/pipeline_state.h"
 #include "../../graphics/direct3d/shader.h"
 
@@ -157,12 +157,13 @@ namespace blowbox
 			BB_CHECK(command_list_->Get()->Close());
 
 			std::vector<Vertex> verts = {
-				{ { 0.0f, 0.25f, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
-				{ { 0.25f, -0.25f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
-				{ { -0.25f, -0.25f, 0.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } }
+				{ { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+				{ { -0.5f, 0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+				{ { 0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+				{ { 0.5f, 0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
 			};
 
-			triangle_ = VertexBuffer::Create(verts, device_);
+			triangle_ = IndexedVertexBuffer::Create(verts, { 0, 1, 2, 3 }, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP, device_);
 
 			device_->Get()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&frame_fence_));
 			frame_fence_value_ = 1;
@@ -200,9 +201,10 @@ namespace blowbox
 			// Record commands.
 			const float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };
 			command_list_->Get()->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-			command_list_->Get()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			command_list_->Get()->IASetPrimitiveTopology(triangle_->GetTopology());
 			command_list_->Get()->IASetVertexBuffers(0, 1, &triangle_->GetView());
-			command_list_->Get()->DrawInstanced(3, 1, 0, 0);
+			command_list_->Get()->IASetIndexBuffer(&triangle_->GetIndexView());
+			command_list_->Get()->DrawIndexedInstanced(4, 1, 0, 0, 0);
 
 			// Indicate that the back buffer will now be used to present.
 			command_list_->Get()->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(back_buffers_[frame_index_], D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));

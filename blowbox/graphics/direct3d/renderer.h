@@ -16,7 +16,7 @@ namespace blowbox
 		class PipelineState;
 		class RootSignature;
 		class SwapChain;
-		class VertexBuffer;
+		class IndexedVertexBuffer;
 		class Shader;
 		
 		/**
@@ -78,7 +78,7 @@ namespace blowbox
 			UINT64 frame_fence_value_;
 			UINT frame_index_;
 
-			VertexBuffer* triangle_;
+			IndexedVertexBuffer* triangle_;
 		};
 	}
 }
