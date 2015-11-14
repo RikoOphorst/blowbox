@@ -14,6 +14,9 @@
 #include "../../graphics/direct3d/indexed_vertex_buffer.h"
 #include "../../graphics/direct3d/pipeline_state.h"
 #include "../../graphics/direct3d/shader.h"
+#include "../../graphics/direct3d/camera.h"
+#include "../../graphics/direct3d/constant_buffer.h"
+#include "../../core/game_object.h"
 
 namespace blowbox
 {
@@ -21,9 +24,22 @@ namespace blowbox
 	{
 		//------------------------------------------------------------------------------------------------------
 		Renderer::Renderer() :
-			window_(nullptr)
+			window_(nullptr),
+			camera_(nullptr),
+			swap_chain_(nullptr),
+			command_queue_(nullptr),
+			command_allocator_(nullptr),
+			command_list_(nullptr),
+			frame_heap_(nullptr),
+			pipeline_state_(nullptr),
+			root_signature_(nullptr),
+			shader_(nullptr),
+			frame_fence_(nullptr)
 		{
-			
+			for (unsigned int i = 0; i < 2; i++)
+			{
+				back_buffers_[i] = nullptr;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------------------
@@ -42,7 +58,6 @@ namespace blowbox
 			BB_GUARANTEE_RELEASE(back_buffers_[0]);
 			BB_GUARANTEE_RELEASE(back_buffers_[1]);
 			BB_GUARANTEE_RELEASE(frame_fence_);
-			BB_SAFE_DELETE(triangle_);
 		}
 
 		//------------------------------------------------------------------------------------------------------
@@ -57,7 +72,11 @@ namespace blowbox
 			BB_ASSERT_NOTNULL(window, "A window has to be set in order to initialise the renderer. Use Renderer::SetWindow() to set a window.");
 
 			window_ = window;
-			
+
+			camera_ = Camera::Create(BB_CAMERA_PROJECTION_MODES::BB_CAMERA_PROJECTION_MODE_PERSPECTIVE);
+			camera_->SetPosition(0.0f, 0.0f, -4.0f);
+			camera_->SetTarget(0.0f, 1.0f, 1.0f);
+
 			ID3D12Debug* debug_controller;
 			if (D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)) == S_OK)
 			{
@@ -103,6 +122,12 @@ namespace blowbox
 			dh_desc.NumDescriptors = 2;
 			frame_heap_ = DescriptorHeap::Create(dh_desc, device_);
 
+			D3D12_DESCRIPTOR_HEAP_DESC cbh_desc = {};
+			cbh_desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+			cbh_desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+			cbh_desc.NumDescriptors = 1;
+			constant_buffer_heap_ = DescriptorHeap::Create(cbh_desc, device_);
+
 			CD3DX12_CPU_DESCRIPTOR_HANDLE rtv_handle = frame_heap_->GetCPUHandle();
 			for (int i = 0; i < 2; i++)
 			{
@@ -114,10 +139,10 @@ namespace blowbox
 			command_allocator_ = CommandAllocator::Create(D3D12_COMMAND_LIST_TYPE::D3D12_COMMAND_LIST_TYPE_DIRECT, device_);
 
 			CD3DX12_DESCRIPTOR_RANGE ranges[1];
-			ranges[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0);
+			ranges[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
 
 			CD3DX12_ROOT_PARAMETER root_parameters[1];
-			root_parameters[0].InitAsDescriptorTable(1, &ranges[0], D3D12_SHADER_VISIBILITY_PIXEL);
+			root_parameters[0].InitAsDescriptorTable(1, &ranges[0], D3D12_SHADER_VISIBILITY_VERTEX);
 
 			D3D12_STATIC_SAMPLER_DESC sampler_desc = {};
 			sampler_desc.Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
@@ -135,7 +160,12 @@ namespace blowbox
 			sampler_desc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
 			CD3DX12_ROOT_SIGNATURE_DESC rs_desc;
-			rs_desc.Init(_countof(root_parameters), root_parameters, 1, &sampler_desc, D3D12_ROOT_SIGNATURE_FLAGS::D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+			rs_desc.Init(_countof(root_parameters), root_parameters, 1, &sampler_desc, 
+				D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_HULL_SHADER_ROOT_ACCESS |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_DOMAIN_SHADER_ROOT_ACCESS |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_GEOMETRY_SHADER_ROOT_ACCESS |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_PIXEL_SHADER_ROOT_ACCESS);
 
 			root_signature_ = RootSignature::Create(rs_desc, device_);
 
@@ -158,14 +188,7 @@ namespace blowbox
 
 			BB_CHECK(command_list_->Get()->Close());
 
-			std::vector<Vertex> verts = {
-				{ { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
-				{ { -0.5f, 0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
-				{ { 0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
-				{ { 0.5f, 0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
-			};
-
-			triangle_ = IndexedVertexBuffer::Create(verts, { 0, 1, 2, 3 }, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP, device_);
+			constant_buffer_ = ConstantBuffer::Create(constant_buffer_heap_, device_);
 
 			device_->Get()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&frame_fence_));
 			frame_fence_value_ = 1;
@@ -186,27 +209,58 @@ namespace blowbox
 		}
 		
 		//------------------------------------------------------------------------------------------------------
-		void Renderer::Draw()
+		void Renderer::SetCamera(Camera* camera)
 		{
+			camera_ = camera;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		Device* Renderer::GetDevice()
+		{
+			return device_;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::Draw(const std::vector<GameObject*>& game_objects)
+		{
+			constant_buffer_->GetData().view = camera_->GetViewMatrix();
+			constant_buffer_->GetData().projection = camera_->GetProjectionMatrix(window_);
+			memcpy(constant_buffer_->GetGPUDataPointer(), &constant_buffer_->GetData(), sizeof(constant_buffer_->GetData()));
+			
 			command_allocator_->Get()->Reset();
 			command_list_->Get()->Reset(command_allocator_->Get(), pipeline_state_->Get());
 
 			command_list_->Get()->SetGraphicsRootSignature(root_signature_->Get());
+
+			ID3D12DescriptorHeap* heaps[] = { constant_buffer_heap_->Get() };
+			command_list_->Get()->SetDescriptorHeaps(_countof(heaps), heaps);
+
+			command_list_->Get()->SetGraphicsRootDescriptorTable(0, constant_buffer_heap_->Get()->GetGPUDescriptorHandleForHeapStart());
+
 			command_list_->Get()->RSSetViewports(1, &viewport_);
 			command_list_->Get()->RSSetScissorRects(1, &scissor_rect_);
 
 			command_list_->Get()->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(back_buffers_[frame_index_], D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
-
+				
 			CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(frame_heap_->Get()->GetCPUDescriptorHandleForHeapStart(), frame_index_, frame_heap_->GetSize());
 			command_list_->Get()->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
 
-			// Record commands.
 			const float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };
 			command_list_->Get()->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-			command_list_->Get()->IASetPrimitiveTopology(triangle_->GetTopology());
-			command_list_->Get()->IASetVertexBuffers(0, 1, &triangle_->GetVertexView());
-			command_list_->Get()->IASetIndexBuffer(&triangle_->GetIndexView());
-			command_list_->Get()->DrawIndexedInstanced(4, 1, 0, 0, 0);
+			
+			if (game_objects.size() > 0)
+			{
+				for (int i = 0; i < game_objects.size(); i++)
+				{
+					constant_buffer_->GetData().world = game_objects[i]->GetWorld();
+					memcpy(constant_buffer_->GetGPUDataPointer(), &constant_buffer_->GetData(), sizeof(constant_buffer_->GetData()));
+
+					command_list_->Get()->IASetPrimitiveTopology(game_objects[i]->GetVertexBuffer()->GetTopology());
+					command_list_->Get()->IASetVertexBuffers(0, 1, &game_objects[i]->GetVertexBuffer()->GetVertexView());
+					command_list_->Get()->IASetIndexBuffer(&game_objects[i]->GetVertexBuffer()->GetIndexView());
+					command_list_->Get()->DrawIndexedInstanced(4, 1, 0, 0, 0);
+				}
+			}
 
 			// Indicate that the back buffer will now be used to present.
 			command_list_->Get()->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(back_buffers_[frame_index_], D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));

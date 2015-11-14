@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 namespace blowbox
 {
 	namespace direct3d
@@ -8,6 +10,7 @@ namespace blowbox
 	}
 
 	class Window;
+	class GameObject;
 	
 	/**
 	* @class blowbox::Blowbox
@@ -53,10 +56,13 @@ namespace blowbox
 		* @param[in] window (blowbox::Window*) the window 
 		*/
 		void SetWindow(Window* window);
+
+		void AddGameObject(GameObject* game_object);
 	private:
 		bool can_run_; //<! Can the application be run?
 		bool running_; //<! Is the application running?
 		direct3d::Renderer* renderer_; //<! The renderer this Blowbox uses
 		Window* window_; //<! The window this Blowbox uses
+		std::vector<GameObject*> game_objects_; //<! All the game objects in the game
 	};
 }

@@ -17,7 +17,7 @@ namespace blowbox
 {
 	namespace direct3d
 	{
-		class VertexBuffer;
+		class IndexedVertexBuffer;
 		class Shader;
 	}
 	
@@ -54,7 +54,7 @@ namespace blowbox
 
 		void SetAlpha(const float& a);
 
-		void SetVertexBuffer(VertexBuffer* vertex_buffer);
+		void SetVertexBuffer(IndexedVertexBuffer* vertex_buffer);
 		void SetShader(Shader* shader);
 
 		const XMVECTOR& GetPosition() const;
@@ -63,8 +63,10 @@ namespace blowbox
 		const XMVECTOR& GetAnchor() const;
 		const float& GetAlpha() const;
 
-		VertexBuffer* GetVertexBuffer() const;
+		IndexedVertexBuffer* GetVertexBuffer() const;
 		Shader* GetShader() const;
+
+		XMMATRIX GetWorld() const;
 	private:
 		XMVECTOR position_;
 		XMVECTOR rotation_;
@@ -73,7 +75,7 @@ namespace blowbox
 		
 		float alpha_;
 
-		VertexBuffer* vertex_buffer_;
+		IndexedVertexBuffer* vertex_buffer_;
 		Shader* shader_;
 	};
 }

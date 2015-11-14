@@ -1,7 +1,7 @@
 #include "game_object.h"
 
 #include "../graphics/direct3d/vertex.h"
-#include "../graphics/direct3d/vertex_buffer.h"
+#include "../graphics/direct3d/indexed_vertex_buffer.h"
 #include "../graphics/direct3d/shader.h"
 
 namespace blowbox
@@ -120,7 +120,7 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void GameObject::SetVertexBuffer(VertexBuffer* vertex_buffer)
+	void GameObject::SetVertexBuffer(IndexedVertexBuffer* vertex_buffer)
 	{
 		vertex_buffer_ = vertex_buffer;
 	}
@@ -162,7 +162,7 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	VertexBuffer* GameObject::GetVertexBuffer() const
+	IndexedVertexBuffer* GameObject::GetVertexBuffer() const
 	{
 		return vertex_buffer_;
 	}
@@ -171,5 +171,11 @@ namespace blowbox
 	Shader* GameObject::GetShader() const
 	{
 		return shader_;
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	XMMATRIX GameObject::GetWorld() const
+	{
+		return XMMatrixScalingFromVector(scale_) * XMMatrixTranslationFromVector(anchor_ * scale_) * XMMatrixRotationRollPitchYawFromVector(rotation_) * XMMatrixTranslationFromVector(position_);
 	}
 }

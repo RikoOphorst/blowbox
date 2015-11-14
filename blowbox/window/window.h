@@ -48,12 +48,12 @@ namespace blowbox
 		const HINSTANCE& GetWindowInstance() const;
 		const unsigned int& GetWidth() const;
 		const unsigned int& GetHeight() const;
-		const unsigned int& GetAspectRatio() const;
+		const float& GetAspectRatio() const;
 	private:
 		HWND hwindow_; //<! Handle to the window
 		HINSTANCE hinstance_; //<! Windows process handle
 		unsigned int width_; //<! Width of the window
 		unsigned int height_; //<! Height of the window
-		unsigned int aspect_ratio_; //<! Aspect ratio of the window
+		float aspect_ratio_; //<! Aspect ratio of the window
 	};
 }

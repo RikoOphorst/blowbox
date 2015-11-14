@@ -94,6 +94,12 @@
     <ClCompile Include="graphics\direct3d\indexed_vertex_buffer.cc">
       <Filter>graphics\direct3d</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\direct3d\camera.cc">
+      <Filter>graphics\direct3d</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\direct3d\constant_buffer.cc">
+      <Filter>graphics\direct3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -172,6 +178,12 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="graphics\direct3d\indexed_vertex_buffer.h">
+      <Filter>graphics\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d\camera.h">
+      <Filter>graphics\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d\constant_buffer.h">
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
   </ItemGroup>

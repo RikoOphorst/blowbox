@@ -97,6 +97,8 @@ namespace blowbox
 			UINT compile_flags = 0;
 #endif
 			
+			compile_flags |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
+
 			D3DCompileFromFile(util::s2ws(path).c_str(), nullptr, nullptr, func.c_str(), target.c_str(), compile_flags, 0, blob, &error_blob_);
 
 			if (error_blob_ != nullptr)

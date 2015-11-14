@@ -10,6 +10,7 @@
 #include "../blowbox/core/threading/worker_thread.h"
 
 // Graphics
+#include "../blowbox/graphics/direct3d/camera.h"
 #include "../blowbox/graphics/direct3d/command_allocator.h"
 #include "../blowbox/graphics/direct3d/command_list.h"
 #include "../blowbox/graphics/direct3d/command_queue.h"
@@ -26,6 +27,7 @@
 
 // Utils
 #include "../blowbox/util/macros.h"
+#include "../blowbox/util/shape_helper.h"
 
 // Window
 #include "../blowbox/window/window.h"

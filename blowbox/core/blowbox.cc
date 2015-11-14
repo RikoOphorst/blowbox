@@ -1,5 +1,6 @@
 #include "blowbox.h"
 
+#include "../core/game_object.h"
 #include "../util/macros.h"
 #include "../graphics/direct3d/renderer.h"
 #include "../window/window.h"
@@ -48,7 +49,7 @@ namespace blowbox
 
 		while (running_)
 		{
-			renderer_->Draw();
+			renderer_->Draw(game_objects_);
 		}
 	}
 
@@ -62,5 +63,11 @@ namespace blowbox
 	void Blowbox::SetWindow(Window* window)
 	{
 		window_ = window;
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	void Blowbox::AddGameObject(GameObject* game_object)
+	{
+		game_objects_.push_back(game_object);
 	}
 }

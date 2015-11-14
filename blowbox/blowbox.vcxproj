@@ -127,9 +127,11 @@
     <ClCompile Include="core\threading\job.cc" />
     <ClCompile Include="core\threading\job_manager.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
+    <ClCompile Include="graphics\direct3d\camera.cc" />
     <ClCompile Include="graphics\direct3d\command_allocator.cc" />
     <ClCompile Include="graphics\direct3d\command_list.cc" />
     <ClCompile Include="graphics\direct3d\command_queue.cc" />
+    <ClCompile Include="graphics\direct3d\constant_buffer.cc" />
     <ClCompile Include="graphics\direct3d\debug_controller.cc" />
     <ClCompile Include="graphics\direct3d\depth_stencil.cc" />
     <ClCompile Include="graphics\direct3d\descriptor_heap.cc" />
@@ -152,9 +154,11 @@
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
+    <ClInclude Include="graphics\direct3d\camera.h" />
     <ClInclude Include="graphics\direct3d\command_allocator.h" />
     <ClInclude Include="graphics\direct3d\command_list.h" />
     <ClInclude Include="graphics\direct3d\command_queue.h" />
+    <ClInclude Include="graphics\direct3d\constant_buffer.h" />
     <ClInclude Include="graphics\direct3d\debug_controller.h" />
     <ClInclude Include="graphics\direct3d\depth_stencil.h" />
     <ClInclude Include="graphics\direct3d\descriptor_heap.h" />

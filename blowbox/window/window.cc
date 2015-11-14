@@ -12,7 +12,7 @@ namespace blowbox
 	Window::Window(const std::string& name, unsigned int width, unsigned int height) :
 		width_(width),
 		height_(height),
-		aspect_ratio_(width / height)
+		aspect_ratio_((float)width / (float)height)
 	{
 		WNDCLASSA wndclass;
 		hinstance_ = GetModuleHandle(0);
@@ -97,7 +97,7 @@ namespace blowbox
 		return height_;
 	}
 	
-	const unsigned int& Window::GetAspectRatio() const
+	const float& Window::GetAspectRatio() const
 	{
 		return aspect_ratio_;
 	}

@@ -2,12 +2,16 @@
 
 #include "../../graphics/direct3d/direct3d.h"
 
+#include <vector>
+
 namespace blowbox
 {
 	class Window;
-	
+	class GameObject;
+
 	namespace direct3d
 	{
+		class Camera;
 		class CommandAllocator;
 		class CommandList;
 		class CommandQueue;
@@ -18,6 +22,7 @@ namespace blowbox
 		class SwapChain;
 		class IndexedVertexBuffer;
 		class Shader;
+		class ConstantBuffer;
 		
 		/**
 		* @class blowbox::direct3d::Renderer
@@ -54,7 +59,15 @@ namespace blowbox
 			*/
 			void SetWindow(Window* window);
 
-			void Draw();
+			/**
+			* @brief Set this renderer's camera
+			* @param[in] camera (Camera*) the camera
+			*/
+			void SetCamera(Camera* camera);
+
+			Device* GetDevice();
+
+			void Draw(const std::vector<GameObject*>& game_objects);
 
 			void WaitForFrame();
 		private:
@@ -63,10 +76,13 @@ namespace blowbox
 			D3D12_VIEWPORT viewport_; //<! The viewport of the application
 			D3D12_RECT scissor_rect_; //<! The scissor rect of the application
 
+			Camera* camera_;
 			CommandAllocator* command_allocator_; //<! The command allocator that is used to allocate lists
 			CommandList* command_list_;
 			CommandQueue* command_queue_;
 			DescriptorHeap* frame_heap_;
+			DescriptorHeap* constant_buffer_heap_;
+			ConstantBuffer* constant_buffer_;
 			Device* device_;
 			PipelineState* pipeline_state_;
 			RootSignature* root_signature_;
@@ -78,8 +94,6 @@ namespace blowbox
 			HANDLE frame_event_;
 			UINT64 frame_fence_value_;
 			UINT frame_index_;
-
-			IndexedVertexBuffer* triangle_;
 		};
 	}
 }
