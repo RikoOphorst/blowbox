@@ -9,12 +9,16 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		Camera::Camera(const BB_CAMERA_PROJECTION_MODES& projection_mode) :
 			position_({ 0.0f, 0.0f, 0.0f, 1.0f }),
+			rotation_({ 0.0f, 0.0f, 0.0f, 1.0f }),
 			target_({0.0f, 0.0f, 1.0f, 1.0f }),
-			up_({ 0.0f, 1.0f, 0.0f, 1.0f }),
+			up_({ 0.0f, 1.0f, 0.0f, 0.0f }),
 			nearz_(0.0f),
 			farz_(1000.0f),
 			fov_(0.2f * 3.14f),
-			projection_mode_(projection_mode)
+			projection_mode_(projection_mode),
+			translate_right_(0.0f),
+			translate_forward_(0.0f),
+			translate_up_(0.0f)
 		{
 
 		}
@@ -74,8 +78,29 @@ namespace blowbox
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		XMMATRIX Camera::GetViewMatrix() const
+		XMMATRIX Camera::GetViewMatrix()
 		{
+			XMVECTOR cam_forward = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
+			XMVECTOR cam_right = XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
+			
+			XMMATRIX rotation = XMMatrixRotationRollPitchYawFromVector(rotation_);
+			target_ = XMVector3TransformCoord(cam_forward, rotation);
+			target_ = XMVector3Normalize(target_);
+
+			right_ = XMVector3TransformCoord(cam_right, rotation);
+			forward_ = XMVector3TransformCoord(cam_forward, rotation);
+			up_ = XMVector3Cross(forward_, right_);
+
+			position_ += translate_right_ * right_;
+			position_ += translate_forward_ * forward_;
+			position_ += translate_up_ * up_;
+
+			translate_right_ = 0.0f;
+			translate_forward_ = 0.0f;
+			translate_up_ = 0.0f;
+
+			target_ = position_ + target_;
+
 			return XMMatrixLookAtLH(position_, target_, up_);
 		}
 
@@ -110,27 +135,61 @@ namespace blowbox
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		void Camera::TranslateBy(const XMVECTOR& translation)
+		void Camera::TranslateBy(const XMVECTOR& translation, const BB_CAMERA_TRANSFORMATION_SPACES& transform_space)
 		{
-			position_ += translation;
+			switch (transform_space)
+			{
+			default:
+				position_ += translation;
+				break;
+
+			case BB_CAMERA_TRANSFORMATION_SPACE_LOCAL:
+				translate_right_ += XMVectorGetX(translation);
+				translate_up_ += XMVectorGetY(translation);
+				translate_forward_ += XMVectorGetZ(translation);
+				break;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		void Camera::TranslateBy(const float& x, const float& y, const float& z)
+		void Camera::TranslateBy(const float& x, const float& y, const float& z, const BB_CAMERA_TRANSFORMATION_SPACES& transform_space)
 		{
-			position_ += { x, y, z, 1.0f };
+			switch (transform_space)
+			{
+			default:
+				position_ += { x, y, z, 1.0f };
+				break;
+
+			case BB_CAMERA_TRANSFORMATION_SPACE_LOCAL:
+				translate_right_ += x;
+				translate_up_ += y;
+				translate_forward_ += z;
+				break;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		void Camera::SetTarget(const XMVECTOR& target)
+		void Camera::SetRotation(const XMVECTOR& rotation)
 		{
-			target_ = target;
+			rotation_ = rotation;
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		void Camera::SetTarget(const float& x, const float& y, const float& z)
+		void Camera::SetRotation(const float& x, const float& y, const float& z)
 		{
-			target_ = { x, y, z, 1.0f };
+			rotation_ = { x, y, z, 1.0f };
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Camera::RotateBy(const XMVECTOR& rotation)
+		{
+			rotation_ += rotation;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Camera::RotateBy(const float& x, const float& y, const float& z)
+		{
+			rotation_ += { x, y, z, 0.0f };
 		}
 
 		//------------------------------------------------------------------------------------------------------

@@ -73,10 +73,6 @@ namespace blowbox
 
 			window_ = window;
 
-			camera_ = Camera::Create(BB_CAMERA_PROJECTION_MODES::BB_CAMERA_PROJECTION_MODE_PERSPECTIVE);
-			camera_->SetPosition(0.0f, 0.0f, -4.0f);
-			camera_->SetTarget(0.0f, 1.0f, 1.0f);
-
 			ID3D12Debug* debug_controller;
 			if (D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)) == S_OK)
 			{

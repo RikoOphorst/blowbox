@@ -10,6 +10,12 @@ namespace blowbox
 
 	namespace direct3d
 	{
+		enum BB_CAMERA_TRANSFORMATION_SPACES
+		{
+			BB_CAMERA_TRANSFORMATION_SPACE_LOCAL,
+			BB_CAMERA_TRANSFORMATION_SPACE_WORLD
+		};
+
 		enum BB_CAMERA_PROJECTION_MODES
 		{
 			BB_CAMERA_PROJECTION_MODE_ORTHOGRAPHIC,
@@ -37,16 +43,18 @@ namespace blowbox
 			const float& GetFOV() const;
 			const BB_CAMERA_PROJECTION_MODES& GetProjectionMode() const;
 
-			XMMATRIX GetViewMatrix() const;
+			XMMATRIX GetViewMatrix();
 			XMMATRIX GetProjectionMatrix(Window* window) const;
 
 			void SetPosition(const XMVECTOR& position);
 			void SetPosition(const float& x, const float& y, const float& z);
-			void TranslateBy(const XMVECTOR& translation);
-			void TranslateBy(const float& x, const float& y, const float& z);
+			void TranslateBy(const XMVECTOR& translation, const BB_CAMERA_TRANSFORMATION_SPACES& transform_space = BB_CAMERA_TRANSFORMATION_SPACE_WORLD);
+			void TranslateBy(const float& x, const float& y, const float& z, const BB_CAMERA_TRANSFORMATION_SPACES& transform_space = BB_CAMERA_TRANSFORMATION_SPACE_WORLD);
 
-			void SetTarget(const XMVECTOR& target);
-			void SetTarget(const float& x, const float& y, const float& z);
+			void SetRotation(const XMVECTOR& rotation);
+			void SetRotation(const float& x, const float& y, const float& z);
+			void RotateBy(const XMVECTOR& rotation);
+			void RotateBy(const float& x, const float& y, const float& z);
 
 			void SetUp(const XMVECTOR& up);
 			void SetUp(const float& x, const float& y, const float& z);
@@ -60,12 +68,18 @@ namespace blowbox
 
 		private:
 			XMVECTOR position_; //<! The position of the camera
-			XMVECTOR target_; //<! The target of the camera (direction)
-			XMVECTOR up_; //<! The up/top of the camera
+			XMVECTOR rotation_; //<! The rotation of the camera
+			XMVECTOR target_; //<! The actu8al target of the camera
+			XMVECTOR up_; //<! The positive up direction of the camera
+			XMVECTOR right_; //<! The positive right direction of the camera
+			XMVECTOR forward_; //<! The positive forward direction of the camera
 			float nearz_; //<! The near z plane of the camera
 			float farz_; //<! The far z plane of the camera
 			float fov_; //<! The fov of the camera
 			BB_CAMERA_PROJECTION_MODES projection_mode_;
+			float translate_right_;
+			float translate_forward_;
+			float translate_up_;
 		};
 	}
 }

@@ -10,12 +10,14 @@ int main(int argc, char** argv)
 	Window* window = Window::MakeWindow("A blowbox game", 1280, 720);
 
 	Renderer* renderer = Renderer::Create();
-	Camera* camera = Camera::Create(BB_CAMERA_PROJECTION_MODES::BB_CAMERA_PROJECTION_MODE_ORTHOGRAPHIC);
+	Camera* camera = Camera::Create(BB_CAMERA_PROJECTION_MODES::BB_CAMERA_PROJECTION_MODE_PERSPECTIVE);
 	
 	blowbox->SetWindow(window);
 	blowbox->SetRenderer(renderer);
 
 	renderer->SetCamera(camera);
+	camera->SetRotation(0.0f, 0.0f, 1.0f);
+	camera->TranslateBy(0.0f, 0.0f, -4.0f, BB_CAMERA_TRANSFORMATION_SPACE_LOCAL);
 
 	blowbox->Initialise();
 
