@@ -100,6 +100,9 @@
     <ClCompile Include="graphics\direct3d\constant_buffer.cc">
       <Filter>graphics\direct3d</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\direct3d\buffer.cc">
+      <Filter>graphics\direct3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -184,6 +187,12 @@
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
     <ClInclude Include="graphics\direct3d\constant_buffer.h">
+      <Filter>graphics\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d\resource.h">
+      <Filter>graphics\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d\buffer.h">
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
   </ItemGroup>

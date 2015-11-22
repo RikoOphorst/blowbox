@@ -127,6 +127,7 @@
     <ClCompile Include="core\threading\job.cc" />
     <ClCompile Include="core\threading\job_manager.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
+    <ClCompile Include="graphics\direct3d\buffer.cc" />
     <ClCompile Include="graphics\direct3d\camera.cc" />
     <ClCompile Include="graphics\direct3d\command_allocator.cc" />
     <ClCompile Include="graphics\direct3d\command_list.cc" />
@@ -154,6 +155,7 @@
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
+    <ClInclude Include="graphics\direct3d\buffer.h" />
     <ClInclude Include="graphics\direct3d\camera.h" />
     <ClInclude Include="graphics\direct3d\command_allocator.h" />
     <ClInclude Include="graphics\direct3d\command_list.h" />
@@ -168,6 +170,7 @@
     <ClInclude Include="graphics\direct3d\pipeline_state.h" />
     <ClInclude Include="graphics\direct3d\renderer.h" />
     <ClInclude Include="graphics\direct3d\render_target.h" />
+    <ClInclude Include="graphics\direct3d\resource.h" />
     <ClInclude Include="graphics\direct3d\root_signature.h" />
     <ClInclude Include="graphics\direct3d\shader.h" />
     <ClInclude Include="graphics\direct3d\swap_chain.h" />

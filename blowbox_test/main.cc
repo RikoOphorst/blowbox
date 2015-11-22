@@ -17,14 +17,14 @@ int main(int argc, char** argv)
 
 	renderer->SetCamera(camera);
 	camera->SetRotation(0.0f, 0.0f, 1.0f);
-	camera->TranslateBy(0.0f, 0.0f, -4.0f, BB_CAMERA_TRANSFORMATION_SPACE_LOCAL);
+	camera->TranslateBy(0.0f, 0.0f, -1.0f, BB_CAMERA_TRANSFORMATION_SPACE_LOCAL);
 
 	blowbox->Initialise();
 
 	GameObject* player = GameObject::Create();
 	player->SetVertexBuffer(IndexedVertexBuffer::Create(util::ShapeHelper::CreateQuad().vertices, util::ShapeHelper::CreateQuad().indices, util::ShapeHelper::CreateQuad().topology, renderer->GetDevice()));
-	player->SetScale({ 50.0f, 50.0f, 50.0f, 1.0f });
-	player->SetPosition({ 0.0f, 1.0f, 0.0f, 1.0f });
+	player->SetScale({ 1.0f, 1.0f, 1.0f, 1.0f });
+	player->SetPosition({ 0.0f, 0.0f, 0.0f, 1.0f });
 
 	blowbox->AddGameObject(player);
 

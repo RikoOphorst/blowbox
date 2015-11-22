@@ -73,97 +73,23 @@ namespace blowbox
 
 			window_ = window;
 
-			ID3D12Debug* debug_controller;
-			if (D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)) == S_OK)
-			{
-				debug_controller->EnableDebugLayer();
-			}
+			InitialiseDebugController();
 			
-			device_ = Device::Create(D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0);
+			InitialiseDevice();
 
-			viewport_.TopLeftX = 0;
-			viewport_.TopLeftY = 0;
-			viewport_.Width = static_cast<float>(window_->GetWidth());
-			viewport_.Height = static_cast<float>(window_->GetHeight());
-			viewport_.MinDepth = 0.0f;
-			viewport_.MaxDepth = 1.0f;
+			InitialiseViewportsAndScissorRects();
 
-			scissor_rect_.left = 0;
-			scissor_rect_.top = 0;
-			scissor_rect_.right = window_->GetWidth();
-			scissor_rect_.bottom = window_->GetHeight();
+			InitialiseCommandQueue();
 
-			D3D12_COMMAND_QUEUE_DESC cq_desc = {};
-			cq_desc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
-			cq_desc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-			command_queue_ = CommandQueue::Create(cq_desc, device_);
+			InitialiseSwapChain();
 
-			DXGI_SWAP_CHAIN_DESC sc_desc = {};
-			sc_desc.BufferCount = 2;
-			sc_desc.BufferDesc.Width = window_->GetWidth();
-			sc_desc.BufferDesc.Height = window_->GetHeight();
-			sc_desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-			sc_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-			sc_desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-			sc_desc.OutputWindow = window_->GetWindowHandle();
-			sc_desc.SampleDesc.Count = 1;
-			sc_desc.Windowed = TRUE;
-			swap_chain_ = SwapChain::Create(sc_desc, command_queue_);
+			InitialiseRenderTargets();
 
-			frame_index_ = swap_chain_->Get()->GetCurrentBackBufferIndex();
+			InitialiseConstantBuffer();
 
-			D3D12_DESCRIPTOR_HEAP_DESC dh_desc = {};
-			dh_desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-			dh_desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-			dh_desc.NumDescriptors = 2;
-			frame_heap_ = DescriptorHeap::Create(dh_desc, device_);
+			InitialiseCommandAllocator();
 
-			D3D12_DESCRIPTOR_HEAP_DESC cbh_desc = {};
-			cbh_desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-			cbh_desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-			cbh_desc.NumDescriptors = 1;
-			constant_buffer_heap_ = DescriptorHeap::Create(cbh_desc, device_);
-
-			CD3DX12_CPU_DESCRIPTOR_HANDLE rtv_handle = frame_heap_->GetCPUHandle();
-			for (int i = 0; i < 2; i++)
-			{
-				BB_CHECK(swap_chain_->Get()->GetBuffer(i, IID_PPV_ARGS(&back_buffers_[i])));
-				device_->Get()->CreateRenderTargetView(back_buffers_[i], nullptr, rtv_handle);
-				rtv_handle.Offset(frame_heap_->GetSize());
-			}
-
-			command_allocator_ = CommandAllocator::Create(D3D12_COMMAND_LIST_TYPE::D3D12_COMMAND_LIST_TYPE_DIRECT, device_);
-
-			CD3DX12_DESCRIPTOR_RANGE ranges[1];
-			ranges[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
-
-			CD3DX12_ROOT_PARAMETER root_parameters[1];
-			root_parameters[0].InitAsDescriptorTable(1, &ranges[0], D3D12_SHADER_VISIBILITY_VERTEX);
-
-			D3D12_STATIC_SAMPLER_DESC sampler_desc = {};
-			sampler_desc.Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
-			sampler_desc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
-			sampler_desc.AddressV = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
-			sampler_desc.AddressW = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
-			sampler_desc.MipLODBias = 0;
-			sampler_desc.MaxAnisotropy = 0;
-			sampler_desc.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
-			sampler_desc.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
-			sampler_desc.MinLOD = 0.0f;
-			sampler_desc.MaxLOD = D3D12_FLOAT32_MAX;
-			sampler_desc.ShaderRegister = 0;
-			sampler_desc.RegisterSpace = 0;
-			sampler_desc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-
-			CD3DX12_ROOT_SIGNATURE_DESC rs_desc;
-			rs_desc.Init(_countof(root_parameters), root_parameters, 1, &sampler_desc, 
-				D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT |
-				D3D12_ROOT_SIGNATURE_FLAG_DENY_HULL_SHADER_ROOT_ACCESS |
-				D3D12_ROOT_SIGNATURE_FLAG_DENY_DOMAIN_SHADER_ROOT_ACCESS |
-				D3D12_ROOT_SIGNATURE_FLAG_DENY_GEOMETRY_SHADER_ROOT_ACCESS |
-				D3D12_ROOT_SIGNATURE_FLAG_DENY_PIXEL_SHADER_ROOT_ACCESS);
-
-			root_signature_ = RootSignature::Create(rs_desc, device_);
+			InitialiseRootSignature();
 
 			shader_ = Shader::Create("E:\\Projects\\blowbox\\blowbox\\shaders\\shaders.hlsl", BB_SHADER_TYPE_PIXEL_SHADER | BB_SHADER_TYPE_VERTEX_SHADER);
 
@@ -184,8 +110,6 @@ namespace blowbox
 
 			BB_CHECK(command_list_->Get()->Close());
 
-			constant_buffer_ = ConstantBuffer::Create(constant_buffer_heap_, device_);
-
 			device_->Get()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&frame_fence_));
 			frame_fence_value_ = 1;
 
@@ -203,11 +127,23 @@ namespace blowbox
 		{
 			window_ = window;
 		}
+
+		//------------------------------------------------------------------------------------------------------
+		Window* Renderer::GetWindow()
+		{
+			return window_;
+		}
 		
 		//------------------------------------------------------------------------------------------------------
 		void Renderer::SetCamera(Camera* camera)
 		{
 			camera_ = camera;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		Camera* Renderer::GetCamera()
+		{
+			return camera_;
 		}
 
 		//------------------------------------------------------------------------------------------------------
@@ -293,6 +229,136 @@ namespace blowbox
 			}
 
 			frame_index_ = swap_chain_->Get()->GetCurrentBackBufferIndex();
+		}
+		
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseDebugController()
+		{
+			ID3D12Debug* debug_controller;
+			if (D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)) == S_OK)
+			{
+				debug_controller->EnableDebugLayer();
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseDevice()
+		{
+			device_ = Device::Create(D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseViewportsAndScissorRects()
+		{
+			viewport_.TopLeftX = 0;
+			viewport_.TopLeftY = 0;
+			viewport_.Width = static_cast<float>(window_->GetWidth());
+			viewport_.Height = static_cast<float>(window_->GetHeight());
+			viewport_.MinDepth = 0.0f;
+			viewport_.MaxDepth = 1.0f;
+
+			scissor_rect_.left = 0;
+			scissor_rect_.top = 0;
+			scissor_rect_.right = window_->GetWidth();
+			scissor_rect_.bottom = window_->GetHeight();
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseCommandQueue()
+		{
+			D3D12_COMMAND_QUEUE_DESC cq_desc = {};
+			cq_desc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
+			cq_desc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
+			command_queue_ = CommandQueue::Create(cq_desc, device_);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseSwapChain()
+		{
+			DXGI_SWAP_CHAIN_DESC sc_desc = {};
+			sc_desc.BufferCount = 2;
+			sc_desc.BufferDesc.Width = window_->GetWidth();
+			sc_desc.BufferDesc.Height = window_->GetHeight();
+			sc_desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+			sc_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+			sc_desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+			sc_desc.OutputWindow = window_->GetWindowHandle();
+			sc_desc.SampleDesc.Count = 1;
+			sc_desc.Windowed = TRUE;
+			swap_chain_ = SwapChain::Create(sc_desc, command_queue_);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseRenderTargets()
+		{
+			frame_index_ = swap_chain_->Get()->GetCurrentBackBufferIndex();
+
+			D3D12_DESCRIPTOR_HEAP_DESC dh_desc = {};
+			dh_desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+			dh_desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+			dh_desc.NumDescriptors = 2;
+			frame_heap_ = DescriptorHeap::Create(dh_desc, device_);
+
+			CD3DX12_CPU_DESCRIPTOR_HANDLE rtv_handle = frame_heap_->GetCPUHandle();
+			for (int i = 0; i < 2; i++)
+			{
+				BB_CHECK(swap_chain_->Get()->GetBuffer(i, IID_PPV_ARGS(&back_buffers_[i])));
+				device_->Get()->CreateRenderTargetView(back_buffers_[i], nullptr, rtv_handle);
+				rtv_handle.Offset(frame_heap_->GetSize());
+			}
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseConstantBuffer()
+		{
+			D3D12_DESCRIPTOR_HEAP_DESC cbh_desc = {};
+			cbh_desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+			cbh_desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+			cbh_desc.NumDescriptors = 1;
+			constant_buffer_heap_ = DescriptorHeap::Create(cbh_desc, device_);
+
+			constant_buffer_ = ConstantBuffer::Create(constant_buffer_heap_, device_);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseCommandAllocator()
+		{
+			command_allocator_ = CommandAllocator::Create(D3D12_COMMAND_LIST_TYPE::D3D12_COMMAND_LIST_TYPE_DIRECT, device_);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		void Renderer::InitialiseRootSignature()
+		{
+			CD3DX12_DESCRIPTOR_RANGE ranges[1];
+			ranges[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
+
+			CD3DX12_ROOT_PARAMETER root_parameters[1];
+			root_parameters[0].InitAsDescriptorTable(1, &ranges[0], D3D12_SHADER_VISIBILITY_VERTEX);
+
+			D3D12_STATIC_SAMPLER_DESC sampler_desc = {};
+			sampler_desc.Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+			sampler_desc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+			sampler_desc.AddressV = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+			sampler_desc.AddressW = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+			sampler_desc.MipLODBias = 0;
+			sampler_desc.MaxAnisotropy = 0;
+			sampler_desc.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
+			sampler_desc.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
+			sampler_desc.MinLOD = 0.0f;
+			sampler_desc.MaxLOD = D3D12_FLOAT32_MAX;
+			sampler_desc.ShaderRegister = 0;
+			sampler_desc.RegisterSpace = 0;
+			sampler_desc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+
+			CD3DX12_ROOT_SIGNATURE_DESC rs_desc;
+			rs_desc.Init(_countof(root_parameters), root_parameters, 1, &sampler_desc,
+				D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_HULL_SHADER_ROOT_ACCESS |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_DOMAIN_SHADER_ROOT_ACCESS |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_GEOMETRY_SHADER_ROOT_ACCESS |
+				D3D12_ROOT_SIGNATURE_FLAG_DENY_PIXEL_SHADER_ROOT_ACCESS);
+
+			root_signature_ = RootSignature::Create(rs_desc, device_);
 		}
 	}
 }

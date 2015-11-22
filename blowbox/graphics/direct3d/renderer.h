@@ -58,18 +58,48 @@ namespace blowbox
 			* @param[in] window (Window*) the window
 			*/
 			void SetWindow(Window* window);
+			
+			/**
+			* @brief Retrieves the window the renderer uses
+			*/
+			Window* GetWindow();
 
 			/**
 			* @brief Set this renderer's camera
 			* @param[in] camera (Camera*) the camera
 			*/
 			void SetCamera(Camera* camera);
+			
+			/**
+			* @brief Get this renderer's camera
+			*/
+			Camera* GetCamera();
 
+			/**
+			* @brief Get this renderer's device
+			*/
 			Device* GetDevice();
 
+			/**
+			* @brief Draws the given game objects
+			* @param[in] game_objects (const std::vector<GameObject*>&) the game object to be rendered
+			*/
 			void Draw(const std::vector<GameObject*>& game_objects);
-
+		protected:
+			/**
+			* @brief Halts the thread execution GPU is finished rendering the frame
+			*/
 			void WaitForFrame();
+
+			void InitialiseDebugController();
+			void InitialiseDevice();
+			void InitialiseViewportsAndScissorRects();
+			void InitialiseCommandQueue();
+			void InitialiseSwapChain();
+			void InitialiseRenderTargets();
+			void InitialiseConstantBuffer();
+			void InitialiseCommandAllocator();
+			void InitialiseRootSignature();
 		private:
 			Window* window_; //<! The output window of this renderer
 

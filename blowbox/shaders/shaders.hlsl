@@ -29,7 +29,7 @@ PSInput VSMain(float4 position : POSITION, float4 color : COLOR)
 	PSInput result;
 
 	result.position = position;
-	//result.position = mul(result.position, world);
+	result.position = mul(result.position, world);
 	result.position = mul(result.position, view);
 	result.position = mul(result.position, projection);
 	result.color = color;

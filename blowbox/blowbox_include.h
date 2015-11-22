@@ -24,6 +24,7 @@
 #include "../blowbox/graphics/direct3d/vertex_buffer.h"
 #include "../blowbox/graphics/direct3d/indexed_vertex_buffer.h"
 #include "../blowbox/graphics/direct3d/shader.h"
+#include "../blowbox/graphics/direct3d/resource.h"
 
 // Utils
 #include "../blowbox/util/macros.h"
