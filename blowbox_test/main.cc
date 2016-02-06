@@ -1,36 +1,28 @@
 #include "blowbox/blowbox_include.h"
 
+#include <iostream>
+#include <vector>
+
 using namespace blowbox;
 using namespace blowbox::direct3d;
 
 int main(int argc, char** argv)
 {
-	Blowbox* blowbox = Blowbox::Create();
+#ifdef _DEBUG
+	HeapInspectorServer::Initialise(3000, HeapInspectorServer::WaitForConnection_Enabled);
+	HeapInspectorServer::SetHeapName(0, "blowbox_main");
+#endif
 
-	Window* window = Window::MakeWindow("A blowbox game", 1280, 720);
+	Sleep(250);
 
-	Renderer* renderer = Renderer::Create();
-	Camera* camera = Camera::Create(BB_CAMERA_PROJECTION_MODES::BB_CAMERA_PROJECTION_MODE_PERSPECTIVE);
-	
-	blowbox->SetWindow(window);
-	blowbox->SetRenderer(renderer);
+	memory::MemoryManager* mem_manager = memory::MemoryManager::Create();
 
-	renderer->SetCamera(camera);
-	camera->SetRotation(0.0f, 0.0f, 1.0f);
-	camera->TranslateBy(0.0f, 0.0f, -1.0f, BB_CAMERA_TRANSFORMATION_SPACE_LOCAL);
+	std::cout << sizeof(memory::MemoryManager) << std::endl;
 
-	blowbox->Initialise();
+	std::cin.get();
 
-	GameObject* player = GameObject::Create();
-	player->SetVertexBuffer(IndexedVertexBuffer::Create(util::ShapeHelper::CreateQuad().vertices, util::ShapeHelper::CreateQuad().indices, util::ShapeHelper::CreateQuad().topology, renderer->GetDevice()));
-	player->SetScale({ 1.0f, 1.0f, 1.0f, 1.0f });
-	player->SetPosition({ 0.0f, 0.0f, 0.0f, 1.0f });
-
-	blowbox->AddGameObject(player);
-
-	blowbox->Run();
-
-	delete blowbox;
-
+#ifdef _DEBUG
+	HeapInspectorServer::Shutdown();
+#endif
 	return 0;
 }

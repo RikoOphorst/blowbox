@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include <vector>
 #include <functional>
@@ -25,4 +25,4 @@ namespace blowbox
 		void* mem_ptr;
 		int mem_size;
 	};
-}
+}*/

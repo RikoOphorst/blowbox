@@ -27,26 +27,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -84,11 +84,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../;$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);$(HEAPINSPECTOR_SERVER_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../x64/Debug/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3DEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CommonDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CookingDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3ExtensionsDEBUG.lib;$(PXSDK_LIB_X64)/PhysX3VehicleDEBUG.lib;$(PXSDK_LIB_X64)/PhysXProfileSDKDEBUG.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../x64/Debug/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3DEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CommonDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CookingDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3ExtensionsDEBUG.lib;$(PXSDK_LIB_X64)/PhysX3VehicleDEBUG.lib;$(PXSDK_LIB_X64)/PhysXProfileSDKDEBUG.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDKDEBUG.lib;$(HEAPINSPECTOR_SERVER_LIB_DEBUG_X64)/HeapInspectorServer.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

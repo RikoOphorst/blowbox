@@ -1,5 +1,23 @@
 #pragma once
 
+class BlowboxInclude
+{
+	BlowboxInclude()
+	{
+
+	}
+
+	~BlowboxInclude()
+	{
+
+	}
+};
+
+#ifdef _DEBUG
+#include "HeapInspectorServer.h"
+#include "PC_Windows\HeapHooks.h"
+#endif
+
 // Core
 #include "../blowbox/core/blowbox.h"
 #include "../blowbox/core/game_object.h"
@@ -8,6 +26,10 @@
 #include "../blowbox/core/threading/job.h"
 #include "../blowbox/core/threading/job_manager.h"
 #include "../blowbox/core/threading/worker_thread.h"
+
+// Memory
+#include "../blowbox/core/memory/memory_manager.h"
+#include "../blowbox/core/memory/memory_pool.h"
 
 // Graphics
 #include "../blowbox/graphics/direct3d/camera.h"

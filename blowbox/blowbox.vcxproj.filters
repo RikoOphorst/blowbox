@@ -25,6 +25,9 @@
     <Filter Include="core\threading">
       <UniqueIdentifier>{ad593066-c4c7-4b19-a3e8-2ce0353a8be5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\memory">
+      <UniqueIdentifier>{20417435-41ac-4d44-9736-fc9844b1a756}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window\window.cc">
@@ -102,6 +105,12 @@
     </ClCompile>
     <ClCompile Include="graphics\direct3d\buffer.cc">
       <Filter>graphics\direct3d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\memory\memory_manager.cc">
+      <Filter>core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="core\memory\memory_pool.cc">
+      <Filter>core\memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +203,15 @@
     </ClInclude>
     <ClInclude Include="graphics\direct3d\buffer.h">
       <Filter>graphics\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\memory_manager.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\memory_pool.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\heap_inspector.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

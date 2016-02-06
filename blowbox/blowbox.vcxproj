@@ -27,26 +27,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -84,7 +84,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);$(HEAPINSPECTOR_SERVER_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -124,6 +124,8 @@
   <ItemGroup>
     <ClCompile Include="core\blowbox.cc" />
     <ClCompile Include="core\game_object.cc" />
+    <ClCompile Include="core\memory\memory_manager.cc" />
+    <ClCompile Include="core\memory\memory_pool.cc" />
     <ClCompile Include="core\threading\job.cc" />
     <ClCompile Include="core\threading\job_manager.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
@@ -152,6 +154,9 @@
   <ItemGroup>
     <ClInclude Include="core\blowbox.h" />
     <ClInclude Include="core\game_object.h" />
+    <ClInclude Include="core\memory\heap_inspector.h" />
+    <ClInclude Include="core\memory\memory_manager.h" />
+    <ClInclude Include="core\memory\memory_pool.h" />
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
