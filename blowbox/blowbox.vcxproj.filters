@@ -112,6 +112,12 @@
     <ClCompile Include="core\memory\memory_pool.cc">
       <Filter>core\memory</Filter>
     </ClCompile>
+    <ClCompile Include="core\memory\allocator.cc">
+      <Filter>core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="core\memory\pointer_util.cc">
+      <Filter>core\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -211,6 +217,12 @@
       <Filter>core\memory</Filter>
     </ClInclude>
     <ClInclude Include="core\memory\heap_inspector.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\allocator.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\pointer_util.h">
       <Filter>core\memory</Filter>
     </ClInclude>
   </ItemGroup>

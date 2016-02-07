@@ -16,9 +16,11 @@ namespace blowbox
 		
 		public:
 			static MemoryManager* Create();
-
+			static MemoryManager* Instance();
 		private:
 			void* memory_pool_;
+
+			static MemoryManager* instance_;
 		};
 	}
 }

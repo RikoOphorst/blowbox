@@ -7,6 +7,8 @@ namespace blowbox
 {
 	namespace memory
 	{
+		MemoryManager* MemoryManager::instance_ = nullptr;
+
 		//------------------------------------------------------------------------------------------------------
 		MemoryManager::MemoryManager(MemoryPool* memory_pool) :
 			memory_pool_(memory_pool)
@@ -17,7 +19,7 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		MemoryManager::~MemoryManager()
 		{
-
+			
 		}
 
 		//------------------------------------------------------------------------------------------------------
@@ -33,7 +35,15 @@ namespace blowbox
 			
 			pool->SetStartOffset(sizeof(MemoryPool) + sizeof(MemoryManager));
 
+			instance_ = memory_manager;
+
 			return memory_manager;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		MemoryManager* MemoryManager::Instance()
+		{
+			return instance_;
 		}
 	}
 }

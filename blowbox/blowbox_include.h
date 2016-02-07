@@ -1,19 +1,6 @@
 #pragma once
 
-class BlowboxInclude
-{
-	BlowboxInclude()
-	{
-
-	}
-
-	~BlowboxInclude()
-	{
-
-	}
-};
-
-#ifdef _DEBUG
+#ifdef HEAP_INSPECTOR_ENABLED
 #include "HeapInspectorServer.h"
 #include "PC_Windows\HeapHooks.h"
 #endif
@@ -30,6 +17,7 @@ class BlowboxInclude
 // Memory
 #include "../blowbox/core/memory/memory_manager.h"
 #include "../blowbox/core/memory/memory_pool.h"
+#include "../blowbox/core/memory/pointer_util.h"
 
 // Graphics
 #include "../blowbox/graphics/direct3d/camera.h"

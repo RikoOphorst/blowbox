@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blowbox", "blowbox\blowbox.vcxproj", "{6D58A2CD-DB60-4547-AC94-52F06545C3F2}"
 EndProject
@@ -14,6 +14,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		DebugHeap|x64 = DebugHeap|x64
+		DebugHeap|x86 = DebugHeap|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -23,6 +25,11 @@ Global
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.Deploy.0 = Debug|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x86.ActiveCfg = Debug|Win32
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x86.Build.0 = Debug|Win32
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|x64.ActiveCfg = DebugHeap|x64
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|x64.Build.0 = DebugHeap|x64
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|x64.Deploy.0 = DebugHeap|x64
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|x86.ActiveCfg = DebugHeap|Win32
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|x86.Build.0 = DebugHeap|Win32
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Release|x64.ActiveCfg = Release|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Release|x64.Build.0 = Release|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Release|x86.ActiveCfg = Release|Win32
@@ -31,6 +38,11 @@ Global
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x64.Build.0 = Debug|x64
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x86.ActiveCfg = Debug|Win32
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x86.Build.0 = Debug|Win32
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.DebugHeap|x64.ActiveCfg = DebugHeap|x64
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.DebugHeap|x64.Build.0 = DebugHeap|x64
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.DebugHeap|x64.Deploy.0 = DebugHeap|x64
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.DebugHeap|x86.ActiveCfg = DebugHeap|Win32
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.DebugHeap|x86.Build.0 = DebugHeap|Win32
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Release|x64.ActiveCfg = Release|x64
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Release|x64.Build.0 = Release|x64
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Release|x86.ActiveCfg = Release|Win32
