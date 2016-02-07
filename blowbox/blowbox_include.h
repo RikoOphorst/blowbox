@@ -17,6 +17,7 @@
 // Memory
 #include "../blowbox/core/memory/memory_manager.h"
 #include "../blowbox/core/memory/memory_pool.h"
+#include "../blowbox/core/memory/linear_allocator.h"
 #include "../blowbox/core/memory/pointer_util.h"
 
 // Graphics

@@ -5,11 +5,10 @@
 using namespace blowbox;
 using namespace blowbox::direct3d;
 
-struct Header
+struct SomeBullshitObject
 {
-	uintptr_t hallo;
-	int bay;
-	int bay2;
+	int abc[20];
+	uint64_t lol;
 };
 
 int main(int argc, char** argv)
@@ -19,29 +18,19 @@ int main(int argc, char** argv)
 	HeapInspectorServer::SetHeapName(0, "blowbox_main");
 #endif
 
-	memory::MemoryManager::Create();
-	memory::MemoryManager::Instance();
+	memory::LinearAllocator* linear_allocator = new memory::LinearAllocator(malloc(100000), 100000);
 
-	uintptr_t address = 1240;
+	std::cout << "Size of object:\t\t" << sizeof(SomeBullshitObject) << std::endl;
+	std::cout << "Align of object:\t" << __alignof(SomeBullshitObject) << std::endl;
+	std::cout << "Start of alloc:\t\t" << (uintptr_t)linear_allocator->GetStart() << std::endl;
 
-	std::vector<int> alignments;
-	alignments.push_back(1024);
-	alignments.push_back(512);
-	alignments.push_back(256);
-	alignments.push_back(128);
-	alignments.push_back(64);
-	alignments.push_back(32);
-	alignments.push_back(16);
-
-	for (int i = 0; i < alignments.size(); i++)
+	for (int i = 0; i < 1136; i++)
 	{
-		std::cout << "Address: " << address;
-		std::cout << "\tAlignment: " << alignments[i];
-		std::cout << "\tAligned address: " << (uintptr_t)memory::PointerUtil::AlignForward((void*)address, alignments[i]);
-		std::cout << "\tAdjustment: " << (uintptr_t)memory::PointerUtil::AlignForwardAdjustment((void*)address, alignments[i]);
-		std::cout << "\tHeader size: " << sizeof(Header);
-		std::cout << "\tHeaded adjustment: " << (uintptr_t)memory::PointerUtil::AlignForwardAdjustmentWithHeader((void*)address, alignments[i], sizeof(Header)) << std::endl;
+		std::cout << "New alloc on:\t\t" << (uintptr_t)linear_allocator->Allocate(sizeof(SomeBullshitObject), __alignof(SomeBullshitObject)) << std::endl;
 	}
+
+	std::cout << "Used memory:\t\t" << linear_allocator->GetUsedMemory() << std::endl;
+	std::cout << "Num allocations:\t" << linear_allocator->GetNumAllocations() << std::endl;
 
 	std::cin.get();
 

@@ -106,13 +106,13 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		void* PointerUtil::Subtract(void* ptr, const uint32_t& value)
 		{
-			return (void*)((uintptr_t)ptr + value);
+			return (void*)((uintptr_t)ptr - value);
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		const void* PointerUtil::Subtract(const void* ptr, const uint32_t& value)
 		{
-			return (const void*)((uintptr_t)ptr + value);
+			return (const void*)((uintptr_t)ptr - value);
 		}
 	}
 }
