@@ -1,6 +1,9 @@
 #include "memory_pool.h"
 
 #include "../../../blowbox/core/memory/heap_inspector.h"
+#include "../../../blowbox/core/memory/pointer_util.h"
+
+#include <iostream>
 
 namespace blowbox
 {
@@ -10,7 +13,7 @@ namespace blowbox
 		MemoryPool::MemoryPool(void* start, const size_t& size) :
 			memory_pool_(start),
 			size_(size),
-			start_offset_(sizeof(MemoryPool))
+			start_offset_(0)
 		{
 
 		}
@@ -28,7 +31,11 @@ namespace blowbox
 			void* memory = malloc(size);
 			BB_HEAP_END_ALLOC(memory, size);
 
-			MemoryPool* memory_pool = new (memory) MemoryPool(memory, size);
+			void* aligned_address = PointerUtil::AlignForward(memory, __alignof(MemoryPool));
+			uint32_t adjustment = PointerUtil::AlignForwardAdjustment(memory, __alignof(MemoryPool));
+
+			MemoryPool* memory_pool = new (aligned_address) MemoryPool(memory, size);
+			memory_pool->SetStartOffset(adjustment + sizeof(MemoryPool));
 
 			return memory_pool;
 		}
@@ -36,7 +43,7 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		void* MemoryPool::GetStartOfMemoryPool()
 		{
-			return (void*)((uintptr_t)memory_pool_ + start_offset_);
+			return (void*)((uintptr_t)memory_pool_ + (uintptr_t)start_offset_);
 		}
 
 		//------------------------------------------------------------------------------------------------------

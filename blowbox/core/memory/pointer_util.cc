@@ -5,47 +5,27 @@ namespace blowbox
 	namespace memory
 	{
 		//------------------------------------------------------------------------------------------------------
-		std::string PointerUtil::ConvertToBinaryString(unsigned int val)
-		{
-			unsigned int mask = 1 << (sizeof(int) * 8 - 1);
-
-			std::string result = "";
-
-			for (int i = 0; i < sizeof(int) * 8; i++)
-			{
-				if ((val & mask) == 0)
-					result += "0";
-				else
-					result += "1";
-
-				mask >>= 1;
-			}
-
-			return result;
-		}
-
-		//------------------------------------------------------------------------------------------------------
 		void* PointerUtil::AlignForward(void* address, const uint32_t& alignment)
 		{
-			return (void*)(((uintptr_t)(address)+(uintptr_t)(alignment - 1)) & (uintptr_t)(~(alignment - 1)));
+			return (void*)(((uintptr_t)(address)+(uintptr_t)(alignment - 1)) & (uintptr_t)(~(uintptr_t)(alignment - 1)));
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		const void* PointerUtil::AlignForward(const void* address, const uint32_t& alignment)
 		{
-			return (void*)(((uintptr_t)(address)+(uintptr_t)(alignment - 1)) & (uintptr_t)(~(alignment - 1)));
+			return (void*)(((uintptr_t)(address)+(uintptr_t)(alignment - 1)) & (uintptr_t)(~(uintptr_t)(alignment - 1)));
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		void* PointerUtil::AlignBackward(void* address, const uint32_t& alignment)
 		{
-			return (void*)(((uintptr_t)(address)) & (uintptr_t)(~(alignment - 1)));
+			return (void*)(((uintptr_t)(address)) & (uintptr_t)(~(uintptr_t)(alignment - 1)));
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		const void* PointerUtil::AlignBackward(const void* address, const uint32_t& alignment)
 		{
-			return (void*)(((uintptr_t)(address)) & (uintptr_t)(~(alignment - 1)));
+			return (void*)(((uintptr_t)(address)) & (uintptr_t)(~(uintptr_t)(alignment - 1)));
 		}
 
 		//------------------------------------------------------------------------------------------------------

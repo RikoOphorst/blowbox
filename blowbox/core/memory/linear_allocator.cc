@@ -35,7 +35,7 @@ namespace blowbox
 
 			uintptr_t aligned_address = (uintptr_t)marker_ + adjustment;
 			
-			marker_ = PointerUtil::Add(marker_, size + adjustment);
+			marker_ = PointerUtil::Add(marker_, (uint32_t)size + adjustment);
 			used_memory_ += adjustment + size;
 			num_allocations_++;
 

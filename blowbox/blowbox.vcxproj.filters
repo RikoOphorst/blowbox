@@ -121,6 +121,9 @@
     <ClCompile Include="core\memory\linear_allocator.cc">
       <Filter>core\memory</Filter>
     </ClCompile>
+    <ClCompile Include="core\memory\free_list_allocator.cc">
+      <Filter>core\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -229,6 +232,9 @@
       <Filter>core\memory</Filter>
     </ClInclude>
     <ClInclude Include="core\memory\linear_allocator.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\free_list_allocator.h">
       <Filter>core\memory</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <bitset>
 
 namespace blowbox
 {
@@ -10,7 +11,8 @@ namespace blowbox
 		class PointerUtil
 		{
 		public:
-			static std::string ConvertToBinaryString(unsigned int val);
+			template<typename T>
+			static std::string ConvertToBinaryString(T val);
 
 			static void* AlignForward(void* address, const uint32_t& alignment);
 			static const void* AlignForward(const void* address, const uint32_t& alignment);
@@ -28,5 +30,21 @@ namespace blowbox
 			static void* Subtract(void* ptr, const uint32_t& value);
 			static const void* Subtract(const void* ptr, const uint32_t& value);
 		};
+
+
+		template<typename T>
+		inline std::string PointerUtil::ConvertToBinaryString(T val)
+		{
+			std::string result = "";
+
+			const char* beg = reinterpret_cast<const char*>(&val);
+			const char* end = beg + sizeof(val);
+			while (beg != end)
+			{
+				result += std::bitset<8>(*beg++).to_string() + ' ';
+			}
+
+			return result;
+		}
 	}
 }
