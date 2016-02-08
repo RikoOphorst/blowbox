@@ -87,14 +87,10 @@ namespace blowbox
 
 				BB_ASSERT(PointerUtil::AlignForwardAdjustment((void*)aligned_address, alignment) == 0, "Somewhere the alignments of the memory block got messed up.");
 
+				if (heap_inspector_notifications_enabled_)
 				{
-					BB_HEAP_BEGIN_ALLOC();
-					BB_HEAP_END_ALLOC(header, sizeof(AllocationHeader));
-				}
-
-				{
-					BB_HEAP_BEGIN_ALLOC();
-					BB_HEAP_END_ALLOC((void*)aligned_address, size);
+					BB_HEAP_ALLOC(header, sizeof(AllocationHeader));
+					BB_HEAP_ALLOC((void*)aligned_address, size);
 				}
 
 				return (void*)aligned_address;
@@ -155,14 +151,10 @@ namespace blowbox
 				previous_block->size += current_block->size;
 			}
 
+			if (heap_inspector_notifications_enabled_)
 			{
-				BB_HEAP_BEGIN_FREE();
-				BB_HEAP_END_FREE(header);
-			}
-
-			{
-				BB_HEAP_BEGIN_FREE();
-				BB_HEAP_END_FREE(ptr);
+				BB_HEAP_FREE(header);
+				BB_HEAP_FREE(ptr);
 			}
 
 			num_allocations_--;

@@ -8,7 +8,8 @@ namespace blowbox
 			start_(start),
 			size_(size),
 			used_memory_(0),
-			num_allocations_(0)
+			num_allocations_(0),
+			heap_inspector_notifications_enabled_(true)
 		{
 
 		}
@@ -40,6 +41,16 @@ namespace blowbox
 		const size_t& Allocator::GetNumAllocations()
 		{
 			return num_allocations_;
+		}
+
+		void Allocator::SetHeapInspectorNotifications(const bool& enabled)
+		{
+			heap_inspector_notifications_enabled_ = enabled;
+		}
+
+		const bool& Allocator::GetHeapInspectorNotifications()
+		{
+			return heap_inspector_notifications_enabled_;
 		}
 	}
 }

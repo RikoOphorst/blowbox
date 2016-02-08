@@ -20,12 +20,17 @@ namespace blowbox
 
 			const size_t& GetUsedMemory();
 			const size_t& GetNumAllocations();
+
+			void SetHeapInspectorNotifications(const bool& enabled);
+			const bool& GetHeapInspectorNotifications();
 		protected:
 			void* start_;
 			size_t size_;
 
 			size_t used_memory_;
 			size_t num_allocations_;
+
+			bool heap_inspector_notifications_enabled_;
 		};
 	}
 }

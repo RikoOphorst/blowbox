@@ -179,6 +179,7 @@
     <ClCompile Include="core\memory\memory_manager.cc" />
     <ClCompile Include="core\memory\memory_pool.cc" />
     <ClCompile Include="core\memory\pointer_util.cc" />
+    <ClCompile Include="core\memory\stack_allocator.cc" />
     <ClCompile Include="core\threading\job.cc" />
     <ClCompile Include="core\threading\job_manager.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
@@ -214,6 +215,7 @@
     <ClInclude Include="core\memory\memory_manager.h" />
     <ClInclude Include="core\memory\memory_pool.h" />
     <ClInclude Include="core\memory\pointer_util.h" />
+    <ClInclude Include="core\memory\stack_allocator.h" />
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />
     <ClInclude Include="core\threading\worker_thread.h" />

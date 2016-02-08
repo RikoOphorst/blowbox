@@ -22,7 +22,6 @@ namespace blowbox
 
 		void* LinearAllocator::Allocate(const size_t& size, const uint32_t& alignment)
 		{
-			BB_HEAP_BEGIN_ALLOC();
 			BB_ASSERT(size > 0, "A block with no size cannot be allocated.");
 
 			uint32_t adjustment = PointerUtil::AlignForwardAdjustment(marker_, alignment);
@@ -39,7 +38,12 @@ namespace blowbox
 			used_memory_ += adjustment + size;
 			num_allocations_++;
 
-			BB_HEAP_END_ALLOC((void*)aligned_address, size);
+
+			if (heap_inspector_notifications_enabled_)
+			{
+				BB_HEAP_ALLOC((void*)aligned_address, size);
+			}
+
 			return (void*)aligned_address;
 		}
 
