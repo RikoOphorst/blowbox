@@ -20,6 +20,12 @@ namespace blowbox
 			static MemoryManager* Create();
 			static MemoryManager* Instance();
 
+			template<typename T, typename...Args>
+			static T* Allocate(Allocator* allocator, Args...args);
+
+			template<typename T>
+			static void Deallocate(Allocator* allocator, T* ptr);
+
 			template<typename T>
 			T* ConstructAllocator(const size_t& size);
 
@@ -31,6 +37,19 @@ namespace blowbox
 
 			static MemoryManager* instance_;
 		};
+
+		template<typename T, typename...Args>
+		inline T* MemoryManager::Allocate(Allocator* allocator, Args...args)
+		{
+			return new (allocator->Allocate(sizeof(T), __alignof(T))) T(args...);
+		}
+
+		template<typename T>
+		inline void MemoryManager::Deallocate(Allocator* allocator, T* ptr)
+		{
+			ptr->~T();
+			allocator->Deallocate(ptr);
+		}
 
 		template<typename T>
 		inline T* MemoryManager::ConstructAllocator(const size_t& size)

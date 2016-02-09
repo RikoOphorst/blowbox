@@ -11,6 +11,7 @@ class Foo
 {
 public:
 	Foo(){
+		m1 = 'E';
 		std::cout << "Foo constructed" << std::endl;
 	}
 	~Foo()
@@ -31,26 +32,30 @@ int main(int argc, char** argv)
 
 	MemoryManager::Create();
 
-	FreeListAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<FreeListAllocator>(10000);
+	FreeListAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<FreeListAllocator>(20000);
+
+	util::LinkedList<Foo> list(allocator);
+
+	std::cout << "List is empty: " << list.IsEmpty() << std::endl;
+
+	std::cout << "Add an element" << std::endl;
 	
-	Sleep(1000);
-	void* foo_addr = allocator->Allocate(sizeof(Foo), __alignof(Foo));
+	Foo* fighters[4];
 
-	Sleep(2500);
-	Foo* act_foo = new (foo_addr)Foo();
+	std::cout << "sizeof foo " << sizeof(Foo) << std::endl;
 
+	for (int i = 0; i < 4; i++)
 	{
-		SharedPtr<Foo> foo_outside;
-		{
-			Sleep(2500);
-			SharedPtr<Foo> foo = SharedPtr<Foo>(act_foo, allocator);
-			foo_outside = foo;
-			Sleep(2500);
-		}
-		std::cout << "outside first block" << std::endl;
-		Sleep(2500);
+		fighters[i] = MemoryManager::Allocate<Foo>(allocator);
+		list.PushFront(*fighters[i]);
 	}
-	std::cout << "outside all blocks" << std::endl;
+
+	fighters[2]->m1 = 'R';
+	
+	for (auto i = list.Begin(); i != list.End(); i++)
+	{
+		std::cout << i->m1 << std::endl;
+	}
 
 	std::cin.get();
 

@@ -130,6 +130,9 @@
     <ClCompile Include="core\memory\stack_allocator.cc">
       <Filter>core\memory</Filter>
     </ClCompile>
+    <ClCompile Include="util\linked_list.cc">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -251,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="core\memory\smart_ptrs\ref_count.h">
       <Filter>core\memory\smart_ptrs</Filter>
+    </ClInclude>
+    <ClInclude Include="util\linked_list.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
