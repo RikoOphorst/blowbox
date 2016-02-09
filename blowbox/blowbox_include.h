@@ -22,6 +22,9 @@
 #include "../blowbox/core/memory/stack_allocator.h"
 #include "../blowbox/core/memory/pointer_util.h"
 
+// Smart pointers
+#include "../blowbox/core/memory/smart_ptrs/shared_ptr.h"
+
 // Graphics
 #include "../blowbox/graphics/direct3d/camera.h"
 #include "../blowbox/graphics/direct3d/command_allocator.h"

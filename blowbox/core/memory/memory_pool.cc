@@ -27,9 +27,9 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		MemoryPool* MemoryPool::Create(const size_t& size)
 		{
-			BB_HEAP_BEGIN_ALLOC();
+			//BB_HEAP_BEGIN_ALLOC();
 			void* memory = malloc(size);
-			BB_HEAP_END_ALLOC(memory, size);
+			//BB_HEAP_END_ALLOC(memory, size);
 
 			void* aligned_address = PointerUtil::AlignForward(memory, __alignof(MemoryPool));
 			uint32_t adjustment = PointerUtil::AlignForwardAdjustment(memory, __alignof(MemoryPool));

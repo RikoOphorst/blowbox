@@ -7,11 +7,19 @@ using namespace blowbox;
 using namespace blowbox::direct3d;
 using namespace blowbox::memory;
 
-struct Foo
+class Foo
 {
+public:
+	Foo(){
+		std::cout << "Foo constructed" << std::endl;
+	}
+	~Foo()
+	{
+		std::cout << "Foo destroyed" << std::endl;
+	}
 	char m1;
 	char m3;
-	int m2;
+	int m2[500];
 };
 
 int main(int argc, char** argv)
@@ -22,23 +30,27 @@ int main(int argc, char** argv)
 #endif
 
 	MemoryManager::Create();
+
+	FreeListAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<FreeListAllocator>(10000);
 	
-	Sleep(2000);
-	FreeListAllocator* stack_allocator = MemoryManager::Instance()->ConstructAllocator<FreeListAllocator>(10000);
-	StackAllocator* stack_allocator2 = MemoryManager::Instance()->ConstructAllocator<StackAllocator>(10000);
-	
-	void* p1 = stack_allocator->Allocate(1000, 16);
-	void* p2 = stack_allocator->Allocate(1000, 8);
-	void* p3 = stack_allocator->Allocate(1000, 8);
+	Sleep(1000);
+	void* foo_addr = allocator->Allocate(sizeof(Foo), __alignof(Foo));
 
-	stack_allocator->Deallocate(p3);
-	stack_allocator->Deallocate(p2);
-	stack_allocator->Deallocate(p1);
+	Sleep(2500);
+	Foo* act_foo = new (foo_addr)Foo();
 
-	p1 = stack_allocator->Allocate(1000, 8);
-
-	p2 = stack_allocator2->Allocate(2000, 8);
-	p3 = stack_allocator2->Allocate(2000, 8);
+	{
+		SharedPtr<Foo> foo_outside;
+		{
+			Sleep(2500);
+			SharedPtr<Foo> foo = SharedPtr<Foo>(act_foo, allocator);
+			foo_outside = foo;
+			Sleep(2500);
+		}
+		std::cout << "outside first block" << std::endl;
+		Sleep(2500);
+	}
+	std::cout << "outside all blocks" << std::endl;
 
 	std::cin.get();
 

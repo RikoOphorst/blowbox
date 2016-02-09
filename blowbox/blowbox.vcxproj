@@ -215,6 +215,8 @@
     <ClInclude Include="core\memory\memory_manager.h" />
     <ClInclude Include="core\memory\memory_pool.h" />
     <ClInclude Include="core\memory\pointer_util.h" />
+    <ClInclude Include="core\memory\smart_ptrs\ref_count.h" />
+    <ClInclude Include="core\memory\smart_ptrs\shared_ptr.h" />
     <ClInclude Include="core\memory\stack_allocator.h" />
     <ClInclude Include="core\threading\job.h" />
     <ClInclude Include="core\threading\job_manager.h" />

@@ -28,6 +28,9 @@
     <Filter Include="core\memory">
       <UniqueIdentifier>{20417435-41ac-4d44-9736-fc9844b1a756}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\memory\smart_ptrs">
+      <UniqueIdentifier>{1cea4814-b3f6-457e-84ad-db3fbd86a70b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window\window.cc">
@@ -242,6 +245,12 @@
     </ClInclude>
     <ClInclude Include="core\memory\stack_allocator.h">
       <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\smart_ptrs\shared_ptr.h">
+      <Filter>core\memory\smart_ptrs</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\smart_ptrs\ref_count.h">
+      <Filter>core\memory\smart_ptrs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
