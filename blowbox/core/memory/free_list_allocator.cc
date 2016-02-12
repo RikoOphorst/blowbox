@@ -113,7 +113,6 @@ namespace blowbox
 			FreeBlock* previous_block = nullptr;
 			FreeBlock* current_block = first_block_;
 
-			unsigned long long iteration = 0;
 			while (current_block != nullptr)
 			{
 				if ((uintptr_t)current_block >= block_end)
@@ -123,8 +122,6 @@ namespace blowbox
 
 				previous_block = current_block;
 				current_block = current_block->next;
-
-				iteration++;
 			}
 
 			if (previous_block == nullptr)
