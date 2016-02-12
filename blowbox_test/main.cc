@@ -7,22 +7,6 @@ using namespace blowbox;
 using namespace blowbox::direct3d;
 using namespace blowbox::memory;
 
-class Foo
-{
-public:
-	Foo()
-	{
-		std::cout << "Foo constructed" << std::endl;
-	}
-	~Foo()
-	{
-		std::cout << "Foo destroyed" << std::endl;
-	}
-	char m1;
-	char m3;
-	int m2[10];
-};
-
 int main(int argc, char** argv)
 {
 #ifdef HEAP_INSPECTOR_ENABLED
@@ -30,19 +14,20 @@ int main(int argc, char** argv)
 	HeapInspectorServer::SetHeapName(0, "blowbox_main");
 #endif
 
-	MemoryManager::Create();
+	Blowbox* blowbox = Blowbox::Create();
+	Window* window = Window::MakeWindow("blowbox", 800, 600);
+	Renderer* renderer = Renderer::Create();
+	blowbox->SetWindow(window);
+	blowbox->SetRenderer(renderer);
 
-	PoolAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<PoolAllocator, Foo>(20000);
+	Camera* camera = Camera::Create(BB_CAMERA_PROJECTION_MODES::BB_CAMERA_PROJECTION_MODE_PERSPECTIVE);
 
-	Foo* f1 = MemoryManager::Allocate<Foo>(allocator);
-	Foo* f2 = MemoryManager::Allocate<Foo>(allocator);
-	Foo* f3 = MemoryManager::Allocate<Foo>(allocator);
+	renderer->SetWindow(window);
+	renderer->SetCamera(camera);
 
-	for (int i = 0; i < 416; i++)
-	{
-		Sleep(25);
-		MemoryManager::Allocate<Foo>(allocator);
-	}
+	blowbox->Initialise();
+
+	blowbox->Run();
 
 	std::cin.get();
 

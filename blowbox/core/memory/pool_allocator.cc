@@ -50,7 +50,7 @@ namespace blowbox
 				// --
 				// The result will be that the newest block in the list (at this point, the previous one)
 				// will have its pointer point to the next block - like a linked list, just way more abstract.
-				*new_block = PointerUtil::Add(new_block, object_size_);
+				*new_block = PointerUtil::Add(new_block, (uint32_t)object_size_);
 
 				// The lvalue here is new_block. It is a void**, and stored in the allocators memory.
 				// This is NOT in the memory pool itself, which is easily mistaken. At this point,
