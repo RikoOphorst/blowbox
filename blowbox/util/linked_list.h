@@ -220,7 +220,7 @@ namespace blowbox
 				head_ = temp;
 			}
 
-			void InsertAfter(Iterator& iterator, T& data)
+			void InsertAfter(Iterator& iterator, const T& data)
 			{
 				if (IsEmpty())
 				{

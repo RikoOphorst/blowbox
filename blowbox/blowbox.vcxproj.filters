@@ -133,6 +133,9 @@
     <ClCompile Include="util\linked_list.cc">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="core\memory\pool_allocator.cc">
+      <Filter>core\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -257,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="util\linked_list.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\pool_allocator.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

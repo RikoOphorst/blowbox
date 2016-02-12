@@ -20,6 +20,7 @@
 #include "../blowbox/core/memory/linear_allocator.h"
 #include "../blowbox/core/memory/free_list_allocator.h"
 #include "../blowbox/core/memory/stack_allocator.h"
+#include "../blowbox/core/memory/pool_allocator.h"
 #include "../blowbox/core/memory/pointer_util.h"
 
 // Smart pointers

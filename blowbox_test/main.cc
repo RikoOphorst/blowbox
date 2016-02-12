@@ -10,8 +10,8 @@ using namespace blowbox::memory;
 class Foo
 {
 public:
-	Foo(){
-		m1 = 'E';
+	Foo()
+	{
 		std::cout << "Foo constructed" << std::endl;
 	}
 	~Foo()
@@ -20,7 +20,7 @@ public:
 	}
 	char m1;
 	char m3;
-	int m2[500];
+	int m2[10];
 };
 
 int main(int argc, char** argv)
@@ -32,29 +32,16 @@ int main(int argc, char** argv)
 
 	MemoryManager::Create();
 
-	FreeListAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<FreeListAllocator>(20000);
+	PoolAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<PoolAllocator, Foo>(20000);
 
-	util::LinkedList<Foo> list(allocator);
+	Foo* f1 = MemoryManager::Allocate<Foo>(allocator);
+	Foo* f2 = MemoryManager::Allocate<Foo>(allocator);
+	Foo* f3 = MemoryManager::Allocate<Foo>(allocator);
 
-	std::cout << "List is empty: " << list.IsEmpty() << std::endl;
-
-	std::cout << "Add an element" << std::endl;
-	
-	Foo* fighters[4];
-
-	std::cout << "sizeof foo " << sizeof(Foo) << std::endl;
-
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 416; i++)
 	{
-		fighters[i] = MemoryManager::Allocate<Foo>(allocator);
-		list.PushFront(*fighters[i]);
-	}
-
-	fighters[2]->m1 = 'R';
-	
-	for (auto i = list.Begin(); i != list.End(); i++)
-	{
-		std::cout << i->m1 << std::endl;
+		Sleep(25);
+		MemoryManager::Allocate<Foo>(allocator);
 	}
 
 	std::cin.get();

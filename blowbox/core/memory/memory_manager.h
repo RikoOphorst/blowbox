@@ -29,6 +29,9 @@ namespace blowbox
 			template<typename T>
 			T* ConstructAllocator(const size_t& size);
 
+			template<typename T, typename B>
+			T* ConstructAllocator(const size_t& size);
+
 			void DestructAllocator(Allocator* allocator);
 		private:
 			FreeListAllocator* all_allocators_;
@@ -58,6 +61,15 @@ namespace blowbox
 			void* new_memory_zone = memory_allocator_->Allocate(size);
 
 			return new (new_alloc)T(new_memory_zone, size);
+		}
+
+		template<typename T, typename B>
+		inline T* MemoryManager::ConstructAllocator(const size_t& size)
+		{
+			void* new_alloc = all_allocators_->Allocate(sizeof(T), __alignof(T));
+			void* new_memory_zone = memory_allocator_->Allocate(size);
+
+			return new (new_alloc)T(new_memory_zone, size, sizeof(B), __alignof(B));
 		}
 	}
 }
