@@ -17,6 +17,7 @@
 // Memory
 #include "../blowbox/core/memory/memory_manager.h"
 #include "../blowbox/core/memory/memory_pool.h"
+#include "../blowbox/core/memory/stl_allocator.h"
 #include "../blowbox/core/memory/linear_allocator.h"
 #include "../blowbox/core/memory/free_list_allocator.h"
 #include "../blowbox/core/memory/stack_allocator.h"

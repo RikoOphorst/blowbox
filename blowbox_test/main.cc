@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <chrono>
 
 using namespace blowbox;
 using namespace blowbox::direct3d;
@@ -10,6 +12,7 @@ using namespace blowbox::memory;
 int main(int argc, char** argv)
 {
 #ifdef HEAP_INSPECTOR_ENABLED
+	HeapInspectorServer::InitialiseHeapHooks();
 	HeapInspectorServer::Initialise(3000, HeapInspectorServer::WaitForConnection_Enabled);
 	HeapInspectorServer::SetHeapName(0, "blowbox_main");
 #endif
@@ -33,6 +36,7 @@ int main(int argc, char** argv)
 
 #ifdef HEAP_INSPECTOR_ENABLED
 	HeapInspectorServer::Shutdown();
+	HeapInspectorServer::ShutdownHeapHooks();
 #endif
 	return 0;
 }

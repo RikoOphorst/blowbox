@@ -68,8 +68,8 @@ namespace blowbox
 		//------------------------------------------------------------------------------------------------------
 		void MemoryManager::DestructAllocator(Allocator* allocator)
 		{
-			memory_allocator_->Deallocate(allocator->GetStart());
 			all_allocators_->Deallocate(allocator);
+			memory_allocator_->Deallocate(allocator->GetStart());
 		}
 	}
 }
