@@ -136,9 +136,6 @@
     <ClCompile Include="core\memory\pool_allocator.cc">
       <Filter>core\memory</Filter>
     </ClCompile>
-    <ClCompile Include="core\memory\stl_allocator.cc">
-      <Filter>core\memory</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
