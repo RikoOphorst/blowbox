@@ -1,5 +1,5 @@
 #include "console\console.h"
-#include "network\client.h"
+#include "network\server.h"
 
 using namespace console;
 using namespace network;
@@ -10,8 +10,10 @@ int main(int argc, char** argv)
 
 	Console* console = new Console();
 
-	Client* client = new Client();
+	Server* client = new Server();
 	client->Initialise(console);
+
+	client->Run();
 
 	return QApp.exec();
 }

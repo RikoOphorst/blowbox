@@ -65,39 +65,39 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(QT_5_5_VS13_64_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_5_5_VS13_64_INCLUDE);$(RAKNET_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(QT_5_5_VS13_64_LIB)\qtmaind.lib;$(QT_5_5_VS13_64_LIB)\Qt5Cored.lib;$(QT_5_5_VS13_64_LIB)\Qt5Widgetsd.lib;$(QT_5_5_VS13_64_LIB)\Qt5Guid.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Debug_x64.lib;$(QT_5_5_VS13_64_LIB)\qtmaind.lib;$(QT_5_5_VS13_64_LIB)\Qt5Cored.lib;$(QT_5_5_VS13_64_LIB)\Qt5Widgetsd.lib;$(QT_5_5_VS13_64_LIB)\Qt5Guid.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(QT_5_5_VS13_64_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_5_5_VS13_64_INCLUDE);$(RAKNET_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QT_5_5_VS13_64_LIB)\qtmain.lib;$(QT_5_5_VS13_64_LIB)\Qt5Core.lib;$(QT_5_5_VS13_64_LIB)\Qt5Widgets.lib;$(QT_5_5_VS13_64_LIB)\Qt5Gui.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Release_x64.lib;$(QT_5_5_VS13_64_LIB)\qtmain.lib;$(QT_5_5_VS13_64_LIB)\Qt5Core.lib;$(QT_5_5_VS13_64_LIB)\Qt5Widgets.lib;$(QT_5_5_VS13_64_LIB)\Qt5Gui.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugHeap|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QT_5_5_VS13_64_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QT_5_5_VS13_64_INCLUDE);$(RAKNET_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QT_5_5_VS13_64_LIB)\qtmaind.lib;$(QT_5_5_VS13_64_LIB)\Qt5Cored.lib;$(QT_5_5_VS13_64_LIB)\Qt5Widgetsd.lib;$(QT_5_5_VS13_64_LIB)\Qt5Guid.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Debug_x64.lib;$(QT_5_5_VS13_64_LIB)\qtmaind.lib;$(QT_5_5_VS13_64_LIB)\Qt5Cored.lib;$(QT_5_5_VS13_64_LIB)\Qt5Widgetsd.lib;$(QT_5_5_VS13_64_LIB)\Qt5Guid.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="console\console.cc" />
     <ClCompile Include="main.cc" />
-    <ClCompile Include="network\client.cc" />
+    <ClCompile Include="network\server.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console\console.h" />
     <ClInclude Include="design\console_design.h" />
-    <ClInclude Include="network\client.h" />
+    <ClInclude Include="network\server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,7 +5,7 @@
     <ClCompile Include="console\console.cc">
       <Filter>console</Filter>
     </ClCompile>
-    <ClCompile Include="network\client.cc">
+    <ClCompile Include="network\server.cc">
       <Filter>network</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,7 +27,7 @@
     <ClInclude Include="console\console.h">
       <Filter>console</Filter>
     </ClInclude>
-    <ClInclude Include="network\client.h">
+    <ClInclude Include="network\server.h">
       <Filter>network</Filter>
     </ClInclude>
   </ItemGroup>

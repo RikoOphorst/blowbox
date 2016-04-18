@@ -16,6 +16,8 @@ namespace console
 
 		QMainWindow* GetQtMainWindow();
 		Ui::Console* GetQtConsole();
+
+		bool IsClosed();
 	private:
 		QMainWindow* main_window_;
 		Ui::Console* qt_console_;
