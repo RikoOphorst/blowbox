@@ -73,8 +73,6 @@ namespace console
 		main_window_->show();
 
 		main_window_->setPalette(palette);
-
-		main_window_->move(3000, 1080 / 2);
 	}
 
 	//------------------------------------------------------------------------------------------------------
