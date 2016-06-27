@@ -31,6 +31,9 @@
     <Filter Include="core\memory\smart_ptrs">
       <UniqueIdentifier>{1cea4814-b3f6-457e-84ad-db3fbd86a70b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\console">
+      <UniqueIdentifier>{29a170a6-1807-4141-bca3-c822dad55528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window\window.cc">
@@ -135,6 +138,12 @@
     </ClCompile>
     <ClCompile Include="core\memory\pool_allocator.cc">
       <Filter>core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="core\console\console.cc">
+      <Filter>core\console</Filter>
+    </ClCompile>
+    <ClCompile Include="core\console\message.cc">
+      <Filter>core\console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +275,12 @@
     </ClInclude>
     <ClInclude Include="core\memory\stl_allocator.h">
       <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\console\console.h">
+      <Filter>core\console</Filter>
+    </ClInclude>
+    <ClInclude Include="core\console\message.h">
+      <Filter>core\console</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

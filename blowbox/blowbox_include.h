@@ -8,6 +8,8 @@
 // Core
 #include "../blowbox/core/blowbox.h"
 #include "../blowbox/core/game_object.h"
+#include "../blowbox/core/console/console.h"
+#include "../blowbox/core/console/message.h"
 
 // Threading
 #include "../blowbox/core/threading/job.h"
