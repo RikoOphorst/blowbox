@@ -5,8 +5,8 @@
 #include <PacketLogger.h>
 #include <MessageIdentifiers.h>
 
-#define BB_CONSOLE_SERVER_PORT 55342
-#define BB_CONSOLE_MAX_CLIENTS 1
+#define BB_CONSOLE_SERVER_PORT 60000
+#define BB_CONSOLE_MAX_CLIENTS 10
 
 namespace console
 {

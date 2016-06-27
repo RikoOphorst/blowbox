@@ -102,7 +102,6 @@ namespace console
 	//------------------------------------------------------------------------------------------------------
 	bool Console::IsClosed()
 	{
-		return false;
-		//return main_window_->IsClosed();
+		return !main_window_->isVisible();
 	}
 }

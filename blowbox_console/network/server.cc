@@ -26,27 +26,31 @@ namespace network
 	{
 		console_ = console;
 
-		console_->AddLog("Booting up server..");
+		//console_->AddLog("Booting up server..");
 		peer_ = RakNet::RakPeerInterface::GetInstance();
 
 		RakNet::SocketDescriptor sd(BB_CONSOLE_SERVER_PORT, 0);
 		peer_->Startup(BB_CONSOLE_MAX_CLIENTS, &sd, 1);
-		peer_->SetMaximumIncomingConnections(BB_CONSOLE_MAX_CLIENTS);
 
-		console_->AddLog(std::string("Console listening on port ") + std::to_string(BB_CONSOLE_SERVER_PORT) + " for connections..");
+		//console_->AddLog(std::string("Console listening on port ") + std::to_string(BB_CONSOLE_SERVER_PORT) + " for connections..");
+		// We need to let the server accept incoming connections from the clients
+		peer_->SetMaximumIncomingConnections(BB_CONSOLE_MAX_CLIENTS);
 	}
 
 	//------------------------------------------------------------------------------------------------------
 	void Server::Run()
 	{
-		if (console_ != nullptr)
+		if (console_ != nullptr || true)
 		{
+			qApp->processEvents();
+
 			RakNet::Packet* packet;
 
 			bool exit = false;
 
-			while (!exit && !console_->IsClosed())
-			{
+			while (!console_->IsClosed())
+			{	
+				qApp->processEvents();
 				for (packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
 				{
 					switch (packet->data[0])
@@ -75,10 +79,9 @@ namespace network
 						break;
 					}
 				}
-
-				qApp->processEvents();
 			}
 
+			std::cout << "duuurp" << std::endl;
 			RakNet::RakPeerInterface::DestroyInstance(peer_);
 		}
 	}

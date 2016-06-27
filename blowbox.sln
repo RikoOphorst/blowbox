@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blowbox", "blowbox\blowbox.vcxproj", "{6D58A2CD-DB60-4547-AC94-52F06545C3F2}"
 EndProject
@@ -35,9 +35,9 @@ Global
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|Win32.ActiveCfg = Debug|x64
-		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.ActiveCfg = DebugHeap|x64
-		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.Build.0 = DebugHeap|x64
-		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.Deploy.0 = DebugHeap|x64
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.ActiveCfg = Debug|x64
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.Build.0 = Debug|x64
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x64.Deploy.0 = Debug|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.Debug|x86.ActiveCfg = Debug|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|Mixed Platforms.ActiveCfg = DebugHeap|x64
 		{6D58A2CD-DB60-4547-AC94-52F06545C3F2}.DebugHeap|Mixed Platforms.Build.0 = DebugHeap|x64
@@ -56,8 +56,8 @@ Global
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|Win32.Build.0 = Debug|Win32
-		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x64.ActiveCfg = DebugHeap|x64
-		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x64.Build.0 = DebugHeap|x64
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x64.ActiveCfg = Debug|x64
+		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x64.Build.0 = Debug|x64
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x86.ActiveCfg = Debug|Win32
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.Debug|x86.Build.0 = Debug|Win32
 		{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}.DebugHeap|Mixed Platforms.ActiveCfg = DebugHeap|Win32
