@@ -1,5 +1,8 @@
 #include "console.h"
 
+#include <iostream>
+#include <time.h>
+
 namespace console
 {
 
@@ -48,6 +51,7 @@ namespace console
 		qt_console_->logging_view->setStyleSheet(""
 			"QTextEdit, QTextEdit::focus {"
 			"	background-color: rgb(25, 25, 35);"
+			//"	background-image: url('D:/header.png');"
 			"	border: 1px solid rgb(100, 100, 100);"
 			"	color: rgb(150, 150, 150);"
 			"	font-family: Consolas;"
@@ -82,9 +86,66 @@ namespace console
 	}
 
 	//------------------------------------------------------------------------------------------------------
+	void Console::AddLog(const network::ConsoleMessageTextLog& log)
+	{
+		time_t t = time(0);
+		struct tm now;
+		localtime_s(&now, &t);
+		QString hour = QString::number(now.tm_hour);
+
+		if (hour.size() < 2)
+		{
+			hour = "0" + hour;
+		}
+
+		QString min = QString::number(now.tm_min);
+		if (min.size() < 2)
+			min = "0" + min;
+
+		QString sec = QString::number(now.tm_sec);
+		if (sec.size() < 2)
+			sec = "0" + sec;
+
+		QString timeStamp = hour + ":" + min + ":" + sec + " ";
+
+
+		std::string string = std::string(log.log, log.log_length);
+
+		QTextCursor cursor = qt_console_->logging_view->textCursor();
+		cursor.movePosition(QTextCursor::End);
+
+		string += "\n";
+
+		QTextCharFormat format;
+		format.setForeground(QBrush(QColor(log.foregroundR, log.foregroundG, log.foregroundB, log.foregroundA)));
+		format.setBackground(QBrush(QColor(log.backgroundR, log.backgroundG, log.backgroundB, log.backgroundA)));
+		format.setFontPointSize(10);
+		cursor.setCharFormat(format);
+
+		cursor.insertText(timeStamp + string.c_str());
+		cursor.movePosition(QTextCursor::End);
+
+		qt_console_->logging_view->setTextCursor(cursor);
+	}
+
+	//------------------------------------------------------------------------------------------------------
 	void Console::AddLog(const std::string& log)
 	{
-		qt_console_->logging_view->append(QString((log).c_str()));
+		network::ConsoleMessageTextLog msg;
+
+		memcpy(msg.log, log.c_str(), log.size());
+		msg.log_length = log.size();
+		msg.foregroundR = 150;
+		msg.foregroundG = 150;
+		msg.foregroundB = 150;
+		msg.foregroundA = 255;
+		msg.backgroundR = 0;
+		msg.backgroundG = 0;
+		msg.backgroundB = 0;
+		msg.backgroundA = 0;
+		msg.dateSend = time(0);
+
+		AddLog(msg);
 	}
 
 	//------------------------------------------------------------------------------------------------------

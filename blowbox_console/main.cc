@@ -4,6 +4,8 @@
 using namespace console;
 using namespace network;
 
+#include <iostream>
+
 int main(int argc, char** argv)
 {
 	QApplication QApp(argc, argv);
@@ -15,5 +17,5 @@ int main(int argc, char** argv)
 
 	server->Run();
 
-	return QApp.exec();
+	return 0;
 }

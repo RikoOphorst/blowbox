@@ -30,5 +30,8 @@
     <ClInclude Include="network\server.h">
       <Filter>network</Filter>
     </ClInclude>
+    <ClInclude Include="network\message_types.h">
+      <Filter>network</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

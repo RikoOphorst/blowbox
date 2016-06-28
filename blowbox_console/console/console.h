@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../design/console_design.h"
+#include "../network/message_types.h"
 
 #include <string>
 
@@ -13,6 +14,7 @@ namespace console
 		~Console();
 
 		void AddLog(const std::string& log);
+		void AddLog(const network::ConsoleMessageTextLog& log);
 
 		QMainWindow* GetQtMainWindow();
 		Ui::Console* GetQtConsole();

@@ -125,7 +125,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../x64/Debug/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3DEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CommonDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CookingDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3ExtensionsDEBUG.lib;$(PXSDK_LIB_X64)/PhysX3VehicleDEBUG.lib;$(PXSDK_LIB_X64)/PhysXProfileSDKDEBUG.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDKDEBUG.lib;$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Debug_x64.lib;$(HEAP_INSPECTOR_LIB)\HeapInspectorServer.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../x64/Debug/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3DEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CommonDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CookingDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3ExtensionsDEBUG.lib;$(PXSDK_LIB_X64)/PhysX3VehicleDEBUG.lib;$(PXSDK_LIB_X64)/PhysXProfileSDKDEBUG.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDKDEBUG.lib;$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Debug_x64.lib;$(HEAP_INSPECTOR_DEBUG_LIB)\HeapInspectorServer.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugHeap|x64'">
@@ -138,7 +138,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../x64/DebugHeap/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3DEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CommonDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CookingDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3ExtensionsDEBUG.lib;$(PXSDK_LIB_X64)/PhysX3VehicleDEBUG.lib;$(PXSDK_LIB_X64)/PhysXProfileSDKDEBUG.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDKDEBUG.lib;$(HEAP_INSPECTOR_LIB)\HeapInspectorServer.lib;$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Debug_x64.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../x64/DebugHeap/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3DEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CommonDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3CookingDEBUG_x64.lib;$(PXSDK_LIB_X64)/PhysX3ExtensionsDEBUG.lib;$(PXSDK_LIB_X64)/PhysX3VehicleDEBUG.lib;$(PXSDK_LIB_X64)/PhysXProfileSDKDEBUG.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDKDEBUG.lib;$(HEAP_INSPECTOR_DEBUG_LIB)\HeapInspectorServer.lib;$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Debug_x64.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -168,7 +168,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>../x64/Release/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3_x64.lib;$(PXSDK_LIB_X64)/PhysX3Common_x64.lib;$(PXSDK_LIB_X64)/PhysX3Cooking_x64.lib;$(PXSDK_LIB_X64)/PhysX3Extensions.lib;$(PXSDK_LIB_X64)/PhysX3Vehicle.lib;$(PXSDK_LIB_X64)/PhysXProfileSDK.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDK.lib;$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Release_x64.lib;$(HEAP_INSPECTOR_LIB)\HeapInspectorServer.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../x64/Release/blowbox.lib;$(DXSDK_UM_LIB_X64)/d3d12.lib;$(DXSDK_UM_LIB_X64)/dxgi.lib;$(DXSDK_UM_LIB_X64)/d3dcompiler.lib;$(PXSDK_LIB_X64)/PhysX3_x64.lib;$(PXSDK_LIB_X64)/PhysX3Common_x64.lib;$(PXSDK_LIB_X64)/PhysX3Cooking_x64.lib;$(PXSDK_LIB_X64)/PhysX3Extensions.lib;$(PXSDK_LIB_X64)/PhysX3Vehicle.lib;$(PXSDK_LIB_X64)/PhysXProfileSDK.lib;$(PXSDK_LIB_X64)/PhysXVisualDebuggerSDK.lib;$(RAKNET_LIB)\RakNet_VS2008_LibStatic_Release_x64.lib;$(HEAP_INSPECTOR_RELEASE_LIB)\HeapInspectorServer.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

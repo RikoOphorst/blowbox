@@ -1,15 +1,12 @@
 #pragma once
+#include "../blowbox/util/macros.h"
 
-#ifdef HEAP_INSPECTOR_ENABLED
-#include "HeapInspectorServer.h"
-#include "PC_Windows\HeapHooks.h"
-#endif
+#include "../blowbox/core/console/console.h"
+#include "../blowbox/core/console/message.h"
 
 // Core
 #include "../blowbox/core/blowbox.h"
 #include "../blowbox/core/game_object.h"
-#include "../blowbox/core/console/console.h"
-#include "../blowbox/core/console/message.h"
 
 // Threading
 #include "../blowbox/core/threading/job.h"
@@ -47,7 +44,6 @@
 #include "../blowbox/graphics/direct3d/resource.h"
 
 // Utils
-#include "../blowbox/util/macros.h"
 #include "../blowbox/util/shape_helper.h"
 #include "../blowbox/util/linked_list.h"
 

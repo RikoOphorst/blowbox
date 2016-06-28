@@ -120,7 +120,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);$(HEAP_INSPECTOR_INCLUDE);%(AdditionalIncludeDirectories);$(RAKNET_INCLUDE)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_UM_INCLUDE);$(DXSDK_SHARED_INCLUDE);$(PXSDK_INCLUDE);$(HEAP_INSPECTOR_INCLUDE);$(RAKNET_INCLUDE)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -179,6 +179,7 @@
     <ClCompile Include="core\memory\free_list_allocator.cc" />
     <ClCompile Include="core\memory\linear_allocator.cc" />
     <ClCompile Include="core\memory\memory_manager.cc" />
+    <ClCompile Include="core\memory\memory_object.cc" />
     <ClCompile Include="core\memory\memory_pool.cc" />
     <ClCompile Include="core\memory\pointer_util.cc" />
     <ClCompile Include="core\memory\pool_allocator.cc" />
@@ -213,12 +214,14 @@
     <ClInclude Include="core\blowbox.h" />
     <ClInclude Include="core\console\console.h" />
     <ClInclude Include="core\console\message.h" />
+    <ClInclude Include="core\console\message_types.h" />
     <ClInclude Include="core\game_object.h" />
     <ClInclude Include="core\memory\allocator.h" />
     <ClInclude Include="core\memory\free_list_allocator.h" />
     <ClInclude Include="core\memory\heap_inspector.h" />
     <ClInclude Include="core\memory\linear_allocator.h" />
     <ClInclude Include="core\memory\memory_manager.h" />
+    <ClInclude Include="core\memory\memory_object.h" />
     <ClInclude Include="core\memory\memory_pool.h" />
     <ClInclude Include="core\memory\pointer_util.h" />
     <ClInclude Include="core\memory\pool_allocator.h" />

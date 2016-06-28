@@ -145,6 +145,9 @@
     <ClCompile Include="core\console\message.cc">
       <Filter>core\console</Filter>
     </ClCompile>
+    <ClCompile Include="core\memory\memory_object.cc">
+      <Filter>core\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -280,6 +283,12 @@
       <Filter>core\console</Filter>
     </ClInclude>
     <ClInclude Include="core\console\message.h">
+      <Filter>core\console</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\memory_object.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\console\message_types.h">
       <Filter>core\console</Filter>
     </ClInclude>
   </ItemGroup>

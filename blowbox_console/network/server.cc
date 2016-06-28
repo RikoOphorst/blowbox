@@ -1,6 +1,7 @@
 #include "server.h"
 
 #include "../console/console.h"
+#include "../network/message_types.h"
 
 #include <iostream>
 #include <string>
@@ -26,13 +27,14 @@ namespace network
 	{
 		console_ = console;
 
-		//console_->AddLog("Booting up server..");
+		console_->AddLog("Booting up server..");
 		peer_ = RakNet::RakPeerInterface::GetInstance();
 
 		RakNet::SocketDescriptor sd(BB_CONSOLE_SERVER_PORT, 0);
 		peer_->Startup(BB_CONSOLE_MAX_CLIENTS, &sd, 1);
 
-		//console_->AddLog(std::string("Console listening on port ") + std::to_string(BB_CONSOLE_SERVER_PORT) + " for connections..");
+		console_->AddLog(std::string("Console listening on 127.0.0.1:") + std::to_string(sd.port) + " for connections..");
+		console_->AddLog(std::string("Console listening on ") + peer_->GetLocalIP(0) + ":" + std::to_string(sd.port) + " for connections..");
 		// We need to let the server accept incoming connections from the clients
 		peer_->SetMaximumIncomingConnections(BB_CONSOLE_MAX_CLIENTS);
 	}
@@ -45,8 +47,6 @@ namespace network
 			qApp->processEvents();
 
 			RakNet::Packet* packet;
-
-			bool exit = false;
 
 			while (!console_->IsClosed())
 			{	
@@ -74,6 +74,19 @@ namespace network
 						console_->AddLog(std::string("A new connection was tried, but was not accepted because we are at the maximum amount of connections."));
 						break;
 
+					case BB_CONSOLE_MESSAGE_TEXT_LOG:
+					{
+						RakNet::BitStream bit_stream(packet->data, packet->length, true);
+
+						ConsoleMessageTextLog log;
+
+						bit_stream.IgnoreBytes(sizeof(RakNet::MessageID));
+						bit_stream.Read(log);
+
+						console_->AddLog(log);
+					}
+						break;
+
 					default:
 						console_->AddLog(std::string("An unidentified message is coming in.."));
 						break;
@@ -81,7 +94,6 @@ namespace network
 				}
 			}
 
-			std::cout << "duuurp" << std::endl;
 			RakNet::RakPeerInterface::DestroyInstance(peer_);
 		}
 	}
