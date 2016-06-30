@@ -1,8 +1,7 @@
 #pragma once
-#include "../blowbox/util/macros.h"
 
 #include "../blowbox/core/console/console.h"
-#include "../blowbox/core/console/message.h"
+//#include "../blowbox/core/console/message.h"
 
 // Core
 #include "../blowbox/core/blowbox.h"

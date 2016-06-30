@@ -23,9 +23,12 @@ int main(int argc, char** argv)
 	FreeListAllocator* allocator = MemoryManager::Instance()->ConstructAllocator<FreeListAllocator>(sizeof(Console) * 10000);
 	Console* console = Console::Create(allocator);
 
-	BB_REPORT("This is a log",		BB_MESSAGE_TYPE_LOG);
-	BB_REPORT("This is a warning",	BB_MESSAGE_TYPE_WARNING);
-	BB_REPORT("This is a error",	BB_MESSAGE_TYPE_ERROR);
+	for (int i = 0; i < 100; i++)
+	{
+		console->Log(std::string("Ayy") + std::to_string(i), static_cast<BB_MESSAGE_TYPES>(i % 3));
+	}
+
+	std::cin.get();
 
 	/*Blowbox* blowbox = Blowbox::Create();
 	Window* window = Window::MakeWindow("blowbox", 800, 600);
