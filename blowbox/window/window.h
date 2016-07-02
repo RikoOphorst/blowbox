@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include <WindowsIncludes.h>
 #include <string>
 
 namespace blowbox

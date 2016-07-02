@@ -9,6 +9,12 @@
 #include "../../core/memory/memory_object.h"
 #include "../../core/console/message.h"
 
+namespace RakNet
+{
+	class RakPeerInterface;
+	struct SystemAddress;
+}
+
 namespace blowbox
 {
 	class Console : public memory::MObject

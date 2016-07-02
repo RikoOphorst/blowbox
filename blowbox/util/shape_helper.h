@@ -17,22 +17,22 @@ namespace blowbox
 	{
 		struct Shape
 		{
-			Shape(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const D3D12_PRIMITIVE_TOPOLOGY& topology) : vertices(vertices), indices(indices), topology(topology) {}
+			/*Shape(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const D3D12_PRIMITIVE_TOPOLOGY& topology) : vertices(vertices), indices(indices), topology(topology) {}
 			std::vector<Vertex> vertices;
 			std::vector<unsigned int> indices;
-			D3D12_PRIMITIVE_TOPOLOGY topology;
+			D3D12_PRIMITIVE_TOPOLOGY topology;*/
 		};
 		
 		class ShapeHelper
 		{
 		public:
-			static Shape CreateQuad();
+			/*static Shape CreateQuad();
 			static Shape CreateTriangle();
 			static Shape CreateCircle();
 			static Shape CreateBox();
 			static Shape CreatePyramid();
 			static Shape CreateSphere();
-			static Shape CreateCylinder();
+			static Shape CreateCylinder();*/
 		};
 	}
 }

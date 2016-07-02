@@ -2,25 +2,10 @@
 
 #include "../graphics/direct3d/direct3d.h"
 
-namespace blowbox
-{
-	namespace direct3d
-	{
-
-	}
-}
-
-using namespace blowbox::direct3d;
 using namespace DirectX;
 
 namespace blowbox
-{
-	namespace direct3d
-	{
-		class IndexedVertexBuffer;
-		class Shader;
-	}
-	
+{	
 	/**
 	* @class blowbox::GameObject
 	* @author Riko Ophorst
@@ -54,17 +39,11 @@ namespace blowbox
 
 		void SetAlpha(const float& a);
 
-		void SetVertexBuffer(IndexedVertexBuffer* vertex_buffer);
-		void SetShader(Shader* shader);
-
 		const XMVECTOR& GetPosition() const;
 		const XMVECTOR& GetRotation() const;
 		const XMVECTOR& GetScale() const;
 		const XMVECTOR& GetAnchor() const;
 		const float& GetAlpha() const;
-
-		IndexedVertexBuffer* GetVertexBuffer() const;
-		Shader* GetShader() const;
 
 		XMMATRIX GetWorld() const;
 	private:
@@ -74,8 +53,5 @@ namespace blowbox
 		XMVECTOR anchor_;
 		
 		float alpha_;
-
-		IndexedVertexBuffer* vertex_buffer_;
-		Shader* shader_;
 	};
 }

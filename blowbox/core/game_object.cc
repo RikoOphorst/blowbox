@@ -1,9 +1,5 @@
 #include "game_object.h"
 
-#include "../graphics/direct3d/vertex.h"
-#include "../graphics/direct3d/indexed_vertex_buffer.h"
-#include "../graphics/direct3d/shader.h"
-
 namespace blowbox
 {
 	//------------------------------------------------------------------------------------------------------
@@ -120,18 +116,6 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void GameObject::SetVertexBuffer(IndexedVertexBuffer* vertex_buffer)
-	{
-		vertex_buffer_ = vertex_buffer;
-	}
-
-	//------------------------------------------------------------------------------------------------------
-	void GameObject::SetShader(Shader* shader)
-	{
-		shader_ = shader;
-	}
-
-	//------------------------------------------------------------------------------------------------------
 	const XMVECTOR& GameObject::GetPosition() const
 	{
 		return position_;
@@ -159,18 +143,6 @@ namespace blowbox
 	const float& GameObject::GetAlpha() const
 	{
 		return alpha_;
-	}
-
-	//------------------------------------------------------------------------------------------------------
-	IndexedVertexBuffer* GameObject::GetVertexBuffer() const
-	{
-		return vertex_buffer_;
-	}
-
-	//------------------------------------------------------------------------------------------------------
-	Shader* GameObject::GetShader() const
-	{
-		return shader_;
 	}
 
 	//------------------------------------------------------------------------------------------------------

@@ -15,6 +15,7 @@
 // Memory
 #include "../blowbox/core/memory/memory_manager.h"
 #include "../blowbox/core/memory/memory_pool.h"
+#include "../blowbox/core/memory/memory_object.h"
 #include "../blowbox/core/memory/stl_allocator.h"
 #include "../blowbox/core/memory/linear_allocator.h"
 #include "../blowbox/core/memory/free_list_allocator.h"
@@ -24,23 +25,6 @@
 
 // Smart pointers
 #include "../blowbox/core/memory/smart_ptrs/shared_ptr.h"
-
-// Graphics
-#include "../blowbox/graphics/direct3d/camera.h"
-#include "../blowbox/graphics/direct3d/command_allocator.h"
-#include "../blowbox/graphics/direct3d/command_list.h"
-#include "../blowbox/graphics/direct3d/command_queue.h"
-#include "../blowbox/graphics/direct3d/descriptor_heap.h"
-#include "../blowbox/graphics/direct3d/device.h"
-#include "../blowbox/graphics/direct3d/pipeline_state.h"
-#include "../blowbox/graphics/direct3d/renderer.h"
-#include "../blowbox/graphics/direct3d/root_signature.h"
-#include "../blowbox/graphics/direct3d/swap_chain.h"
-#include "../blowbox/graphics/direct3d/vertex.h"
-#include "../blowbox/graphics/direct3d/vertex_buffer.h"
-#include "../blowbox/graphics/direct3d/indexed_vertex_buffer.h"
-#include "../blowbox/graphics/direct3d/shader.h"
-#include "../blowbox/graphics/direct3d/resource.h"
 
 // Utils
 #include "../blowbox/util/shape_helper.h"

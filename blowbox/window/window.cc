@@ -77,26 +77,31 @@ namespace blowbox
 		}
 	}
 	
+	//------------------------------------------------------------------------------------------------------
 	const HWND& Window::GetWindowHandle() const
 	{
 		return hwindow_;
 	}
 	
+	//------------------------------------------------------------------------------------------------------
 	const HINSTANCE& Window::GetWindowInstance() const
 	{
 		return hinstance_;
 	}
 	
+	//------------------------------------------------------------------------------------------------------
 	const unsigned int& Window::GetWidth() const
 	{
 		return width_;
 	}
 	
+	//------------------------------------------------------------------------------------------------------
 	const unsigned int& Window::GetHeight() const
 	{
 		return height_;
 	}
 	
+	//------------------------------------------------------------------------------------------------------
 	const float& Window::GetAspectRatio() const
 	{
 		return aspect_ratio_;

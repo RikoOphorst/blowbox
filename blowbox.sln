@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blowbox", "blowbox\blowbox.vcxproj", "{6D58A2CD-DB60-4547-AC94-52F06545C3F2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blowbox_test", "blowbox_test\blowbox_test.vcxproj", "{E75EDCE2-3265-4CDD-A588-7289CEB68AF3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6D58A2CD-DB60-4547-AC94-52F06545C3F2} = {6D58A2CD-DB60-4547-AC94-52F06545C3F2}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blowbox_console", "blowbox_console\blowbox_console.vcxproj", "{AC62BF1C-257B-494B-9D57-6E5D0C57A44A}"
 EndProject

@@ -1,5 +1,10 @@
 #include "console.h"
 
+#include <RakPeerInterface.h>
+#include <BitStream.h>
+#include <PacketLogger.h>
+#include <MessageIdentifiers.h>
+
 #include <iostream>
 
 #define BB_CONSOLE_SERVER_PORT 60000

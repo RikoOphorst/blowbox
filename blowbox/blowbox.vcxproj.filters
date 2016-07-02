@@ -42,9 +42,6 @@
     <ClCompile Include="core\blowbox.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\direct3d\renderer.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
     <ClCompile Include="core\threading\job_manager.cc">
       <Filter>core\threading</Filter>
     </ClCompile>
@@ -54,63 +51,12 @@
     <ClCompile Include="core\threading\worker_thread.cc">
       <Filter>core\threading</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\direct3d\render_target.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\root_signature.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\swap_chain.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\vertex_buffer.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\command_allocator.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\command_list.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\command_queue.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\debug_controller.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\depth_stencil.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\descriptor_heap.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\device.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\pipeline_state.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\shader.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
     <ClCompile Include="blowbox_include.h" />
     <ClCompile Include="core\game_object.cc">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="util\shape_helper.cc">
       <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\indexed_vertex_buffer.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\camera.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\constant_buffer.cc">
-      <Filter>graphics\direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\direct3d\buffer.cc">
-      <Filter>graphics\direct3d</Filter>
     </ClCompile>
     <ClCompile Include="core\memory\memory_manager.cc">
       <Filter>core\memory</Filter>
@@ -156,9 +102,6 @@
     <ClInclude Include="core\blowbox.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\direct3d\renderer.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
     <ClInclude Include="util\macros.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -174,48 +117,6 @@
     <ClInclude Include="graphics\direct3d\direct3d.h">
       <Filter>graphics\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\direct3d\render_target.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\root_signature.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\swap_chain.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\vertex_buffer.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\command_allocator.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\command_list.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\command_queue.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\debug_controller.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\depth_stencil.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\descriptor_heap.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\device.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\pipeline_state.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\shader.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\vertex.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
     <ClInclude Include="util\s2ws.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -224,21 +125,6 @@
     </ClInclude>
     <ClInclude Include="util\shape_helper.h">
       <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\indexed_vertex_buffer.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\camera.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\constant_buffer.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\resource.h">
-      <Filter>graphics\direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\buffer.h">
-      <Filter>graphics\direct3d</Filter>
     </ClInclude>
     <ClInclude Include="core\memory\memory_manager.h">
       <Filter>core\memory</Filter>

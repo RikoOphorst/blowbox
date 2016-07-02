@@ -2,13 +2,10 @@
 
 #include <vector>
 
+#include "../core/memory/memory_object.h"
+
 namespace blowbox
 {
-	namespace direct3d
-	{
-		class Renderer;
-	}
-
 	class Window;
 	class GameObject;
 	
@@ -17,13 +14,13 @@ namespace blowbox
 	* @author Riko Ophorst
 	* @brief Creates a blowbox application
 	*/
-	class Blowbox
+	class Blowbox : public memory::MObject
 	{
 	public:
 		/**
 		* @brief Default blowbox constructor
 		*/
-		Blowbox();
+		Blowbox(memory::Allocator* allocator);
 
 		/**
 		* @brief Default blowbox destructor
@@ -33,7 +30,7 @@ namespace blowbox
 		/**
 		* @brief Creates a blowbox instance
 		*/
-		static Blowbox* Create();
+		static Blowbox* Create(memory::Allocator* allocator);
 
 		/**
 		* @brief Initialises the blowbox engine
@@ -46,12 +43,6 @@ namespace blowbox
 		void Run();
 
 		/**
-		* @brief Set the Renderer used by blowbox
-		* @param[in] renderer (blowbox::direct3d::Renderer*) The renderer
-		*/
-		void SetRenderer(direct3d::Renderer* renderer);
-
-		/**
 		* @brief Set the Window used by blowbox
 		* @param[in] window (blowbox::Window*) the window 
 		*/
@@ -61,7 +52,6 @@ namespace blowbox
 	private:
 		bool can_run_; //<! Can the application be run?
 		bool running_; //<! Is the application running?
-		direct3d::Renderer* renderer_; //<! The renderer this Blowbox uses
 		Window* window_; //<! The window this Blowbox uses
 		std::vector<GameObject*> game_objects_; //<! All the game objects in the game
 	};

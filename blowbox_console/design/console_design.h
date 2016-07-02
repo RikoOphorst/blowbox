@@ -21,6 +21,7 @@
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QDesktopWidget>
 
 QT_BEGIN_NAMESPACE
 

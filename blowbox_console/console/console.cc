@@ -78,7 +78,11 @@ namespace console
 
 		main_window_->setPalette(palette);
 
-		main_window_->move(1920.0f + (1920.0f / 2.0f) - main_window_->size().width() / 2.0f, (1080 / 2.0f) - main_window_->size().height() / 2.0f);
+		QDesktopWidget* desktop = qApp->desktop();
+		QRect rect = desktop->availableGeometry(desktop->primaryScreen());
+		int screens = desktop->screenCount();
+
+		main_window_->move(rect.width() * (screens - 1) + (rect.width() / 2.0f) - main_window_->size().width() / 2.0f, (rect.height() / 2.0f) - main_window_->size().height() / 2.0f);
 	}
 
 	//------------------------------------------------------------------------------------------------------

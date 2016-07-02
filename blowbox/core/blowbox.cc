@@ -1,17 +1,16 @@
 #include "blowbox.h"
 
-#include "../core/game_object.h"
-#include "../util/macros.h"
-#include "../graphics/direct3d/renderer.h"
 #include "../window/window.h"
+#include "../core/console/console.h"
+#include "../core/game_object.h"
 
 #include <iostream>
 
 namespace blowbox
 {
 	//------------------------------------------------------------------------------------------------------
-	Blowbox::Blowbox() :
-		renderer_(nullptr),
+	Blowbox::Blowbox(memory::Allocator* allocator) :
+		MObject(allocator),
 		can_run_(false),
 		running_(false)
 	{
@@ -21,21 +20,19 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	Blowbox::~Blowbox()
 	{
-		BB_SAFE_DELETE(renderer_);
+		
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	Blowbox* Blowbox::Create()
+	Blowbox* Blowbox::Create(memory::Allocator* allocator)
 	{
-		return new Blowbox();
+		return memory::MemoryManager::Allocate<Blowbox>(allocator, allocator);
 	}
 
 	//------------------------------------------------------------------------------------------------------
 	void Blowbox::Initialise()
 	{
-		BB_ASSERT_NOTNULL(renderer_, "A renderer has to be set in order to initialise Blowbox. Use Blowbox::SetRenderer() to set a renderer.");
-
-		renderer_->Initialise(window_);
+		//BB_ASSERT_NOTNULL(renderer_, "A renderer has to be set in order to initialise Blowbox. Use Blowbox::SetRenderer() to set a renderer.");
 
 		can_run_ = true;
 	}
@@ -43,20 +40,14 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	void Blowbox::Run()
 	{
-		BB_ASSERT(can_run_, "Blowbox has to be initialised before it can be run. Use Blowbox::Initialise() to initialise Blowbox.");
+		//BB_ASSERT(can_run_, "Blowbox has to be initialised before it can be run. Use Blowbox::Initialise() to initialise Blowbox.");
 
 		running_ = true;
 
 		while (running_)
 		{
-			renderer_->Draw(game_objects_);
+			window_->ProcessMessages();
 		}
-	}
-
-	//------------------------------------------------------------------------------------------------------
-	void Blowbox::SetRenderer(direct3d::Renderer* renderer)
-	{
-		renderer_ = renderer;
 	}
 
 	//------------------------------------------------------------------------------------------------------
