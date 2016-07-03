@@ -19,10 +19,10 @@ namespace blowbox
 			actual_message_.foregroundG = 150;
 			actual_message_.foregroundB = 150;
 			actual_message_.foregroundA = 255;
-			actual_message_.backgroundR = 0;
-			actual_message_.backgroundG = 0;
-			actual_message_.backgroundB = 0;
-			actual_message_.backgroundA = 0;
+			actual_message_.backgroundR = 25;
+			actual_message_.backgroundG = 25;
+			actual_message_.backgroundB = 35;
+			actual_message_.backgroundA = 255;
 			break;
 		case BB_MESSAGE_TYPE_WARNING:
 			actual_message_.foregroundR = 50;
@@ -39,10 +39,10 @@ namespace blowbox
 			actual_message_.foregroundG = 150;
 			actual_message_.foregroundB = 150;
 			actual_message_.foregroundA = 255;
-			actual_message_.backgroundR = 204;
-			actual_message_.backgroundG = 0;
-			actual_message_.backgroundB = 0;
-			actual_message_.backgroundA = 130;
+			actual_message_.backgroundR = 116;
+			actual_message_.backgroundG = 12;
+			actual_message_.backgroundB = 17;
+			actual_message_.backgroundA = 255;
 			break;
 		};
 	}

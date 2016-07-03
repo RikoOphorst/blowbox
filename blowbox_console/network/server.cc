@@ -2,6 +2,7 @@
 
 #include "../console/console.h"
 #include "../network/message_types.h"
+#include <fstream>
 
 #include <iostream>
 #include <string>

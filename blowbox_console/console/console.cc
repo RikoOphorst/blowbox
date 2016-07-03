@@ -124,7 +124,10 @@ namespace console
 
 		QTextCharFormat format;
 		format.setForeground(QBrush(QColor(log.foregroundR, log.foregroundG, log.foregroundB, log.foregroundA)));
-		format.setBackground(QBrush(QColor(log.backgroundR, log.backgroundG, log.backgroundB, log.backgroundA)));
+		if (log.backgroundR == 0 && log.backgroundG == 0 && log.backgroundB == 0 && log.backgroundA == 0)
+			format.setBackground(QBrush(QColor(25, 25, 35, 255)));
+		else
+			format.setBackground(QBrush(QColor(log.backgroundR, log.backgroundG, log.backgroundB, log.backgroundA)));
 		format.setFontPointSize(10);
 		cursor.setCharFormat(format);
 

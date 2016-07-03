@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <comdef.h>
 
 #define BB_CONSOLE_SERVER_PORT 60000
 #define BB_CONSOLE_MAX_CLIENTS 1
@@ -606,8 +607,8 @@ bool InitD3D()
 
 	// compile vertex shader
 	ID3DBlob* vertexShader; // d3d blob for holding vertex shader bytecode
-	ID3DBlob* errorBuff; // a buffer holding the error data if any
-	hr = D3DCompileFromFile(L"C:\\Users\\Localriko\\Documents\\Visual Studio 2015\\Projects\\blowbox\\x64\\Debug\\VertexShader.hlsl",
+	ID3DBlob* errorBuff = nullptr; // a buffer holding the error data if any
+	hr = D3DCompileFromFile(L"../shaders/VertexShader.hlsl",
 		nullptr,
 		nullptr,
 		"main",
@@ -618,7 +619,15 @@ bool InitD3D()
 		&errorBuff);
 	if (FAILED(hr))
 	{
-		OutputDebugStringA((char*)errorBuff->GetBufferPointer());
+		if (errorBuff == nullptr)
+		{
+			_com_error err(hr);
+			console->Log(std::string(err.ErrorMessage()), BB_MESSAGE_TYPE_ERROR);
+		}
+		else
+		{
+			console->Log(static_cast<char*>(errorBuff->GetBufferPointer()), BB_MESSAGE_TYPE_ERROR);
+		}
 		return false;
 	}
 
@@ -629,8 +638,8 @@ bool InitD3D()
 	vertexShaderBytecode.pShaderBytecode = vertexShader->GetBufferPointer();
 
 	// compile pixel shader
-	ID3DBlob* pixelShader;
-	hr = D3DCompileFromFile(L"C:\\Users\\Localriko\\Documents\\Visual Studio 2015\\Projects\\blowbox\\x64\\Debug\\PixelShader.hlsl",
+	ID3DBlob* pixelShader = nullptr;
+	hr = D3DCompileFromFile(L"../shaders/PixelShader.hlsl",
 		nullptr,
 		nullptr,
 		"main",
@@ -641,7 +650,15 @@ bool InitD3D()
 		&errorBuff);
 	if (FAILED(hr))
 	{
-		OutputDebugStringA((char*)errorBuff->GetBufferPointer());
+		if (errorBuff == nullptr)
+		{
+			_com_error err(hr);
+			console->Log(std::string(err.ErrorMessage()), BB_MESSAGE_TYPE_ERROR);
+		}
+		else
+		{
+			console->Log(static_cast<char*>(errorBuff->GetBufferPointer()), BB_MESSAGE_TYPE_ERROR);
+		}
 		return false;
 	}
 
