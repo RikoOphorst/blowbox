@@ -8,9 +8,7 @@
 #include "../blowbox/core/game_object.h"
 
 // Threading
-#include "../blowbox/core/threading/job.h"
-#include "../blowbox/core/threading/job_manager.h"
-#include "../blowbox/core/threading/worker_thread.h"
+#include "../blowbox/core/threading/task.h"
 
 // Memory
 #include "../blowbox/core/memory/memory_manager.h"

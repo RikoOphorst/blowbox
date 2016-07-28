@@ -184,8 +184,8 @@
     <ClCompile Include="core\memory\pointer_util.cc" />
     <ClCompile Include="core\memory\pool_allocator.cc" />
     <ClCompile Include="core\memory\stack_allocator.cc" />
-    <ClCompile Include="core\threading\job.cc" />
-    <ClCompile Include="core\threading\job_manager.cc" />
+    <ClCompile Include="core\threading\task_manager.cc" />
+    <ClCompile Include="core\threading\task.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
     <ClCompile Include="blowbox_include.h" />
     <ClCompile Include="util\linked_list.cc" />
@@ -211,8 +211,8 @@
     <ClInclude Include="core\memory\smart_ptrs\shared_ptr.h" />
     <ClInclude Include="core\memory\stack_allocator.h" />
     <ClInclude Include="core\memory\stl_allocator.h" />
-    <ClInclude Include="core\threading\job.h" />
-    <ClInclude Include="core\threading\job_manager.h" />
+    <ClInclude Include="core\threading\task_manager.h" />
+    <ClInclude Include="core\threading\task.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
     <ClInclude Include="graphics\direct3d\direct3d.h" />
     <ClInclude Include="util\linked_list.h" />

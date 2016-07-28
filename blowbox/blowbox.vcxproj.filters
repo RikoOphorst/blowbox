@@ -42,12 +42,6 @@
     <ClCompile Include="core\blowbox.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\threading\job_manager.cc">
-      <Filter>core\threading</Filter>
-    </ClCompile>
-    <ClCompile Include="core\threading\job.cc">
-      <Filter>core\threading</Filter>
-    </ClCompile>
     <ClCompile Include="core\threading\worker_thread.cc">
       <Filter>core\threading</Filter>
     </ClCompile>
@@ -94,6 +88,12 @@
     <ClCompile Include="core\memory\memory_object.cc">
       <Filter>core\memory</Filter>
     </ClCompile>
+    <ClCompile Include="core\threading\task.cc">
+      <Filter>core\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="core\threading\task_manager.cc">
+      <Filter>core\threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -104,12 +104,6 @@
     </ClInclude>
     <ClInclude Include="util\macros.h">
       <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="core\threading\job_manager.h">
-      <Filter>core\threading</Filter>
-    </ClInclude>
-    <ClInclude Include="core\threading\job.h">
-      <Filter>core\threading</Filter>
     </ClInclude>
     <ClInclude Include="core\threading\worker_thread.h">
       <Filter>core\threading</Filter>
@@ -176,6 +170,12 @@
     </ClInclude>
     <ClInclude Include="core\console\message_types.h">
       <Filter>core\console</Filter>
+    </ClInclude>
+    <ClInclude Include="core\threading\task.h">
+      <Filter>core\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="core\threading\task_manager.h">
+      <Filter>core\threading</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
