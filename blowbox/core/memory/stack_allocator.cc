@@ -8,6 +8,7 @@ namespace blowbox
 {
 	namespace memory
 	{
+		//------------------------------------------------------------------------------------------------------
 		StackAllocator::StackAllocator(void* start, const size_t& size) :
 			Allocator(start, size),
 			top_(start),
@@ -16,11 +17,13 @@ namespace blowbox
 
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		StackAllocator::~StackAllocator()
 		{
 		
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void* StackAllocator::Allocate(const size_t& size, const uint32_t& alignment)
 		{
 			BB_ASSERT(size != 0 && alignment != 0, "Size and/or alignment cannot be null");
@@ -50,6 +53,7 @@ namespace blowbox
 			return (void*)aligned_address;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void StackAllocator::Deallocate(void* ptr)
 		{
 			BB_ASSERT(ptr == prev_alloc_, "You can only deallocate the last allocated object in this allocator");

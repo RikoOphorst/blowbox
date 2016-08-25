@@ -8,6 +8,7 @@ namespace blowbox
 {
 	namespace memory
 	{
+		//------------------------------------------------------------------------------------------------------
 		PoolAllocator::PoolAllocator(void* start, const size_t& size, const size_t& object_size, const uint32_t& object_alignment) :
 			Allocator(start, size),
 			object_size_(object_size),
@@ -75,11 +76,13 @@ namespace blowbox
 			*new_block = nullptr;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		PoolAllocator::~PoolAllocator()
 		{
 			free_list_ = nullptr;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void* PoolAllocator::Allocate(const size_t& size, const uint32_t& alignment)
 		{
 			BB_ASSERT(size == object_size_ && alignment == object_alignment_, "Object with wrong size or alignment is trying to be aligned in the allocator, which is not possible.");
@@ -102,6 +105,7 @@ namespace blowbox
 			return address;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void PoolAllocator::Deallocate(void* ptr)
 		{
 			// The lvalue here is complicated. It takes the ptr we want to deallocate,

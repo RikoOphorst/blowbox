@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../graphics/direct3d/direct3d.h"
+#include "../graphics/direct3d.h"
 
 using namespace DirectX;
 

@@ -188,6 +188,7 @@
     <ClCompile Include="core\threading\task.cc" />
     <ClCompile Include="core\threading\worker_thread.cc" />
     <ClCompile Include="blowbox_include.h" />
+    <ClCompile Include="graphics\renderer.cc" />
     <ClCompile Include="util\linked_list.cc" />
     <ClCompile Include="util\shape_helper.cc" />
     <ClCompile Include="window\window.cc" />
@@ -214,7 +215,8 @@
     <ClInclude Include="core\threading\task_manager.h" />
     <ClInclude Include="core\threading\task.h" />
     <ClInclude Include="core\threading\worker_thread.h" />
-    <ClInclude Include="graphics\direct3d\direct3d.h" />
+    <ClInclude Include="graphics\direct3d.h" />
+    <ClInclude Include="graphics\renderer.h" />
     <ClInclude Include="util\linked_list.h" />
     <ClInclude Include="util\macros.h" />
     <ClInclude Include="util\s2ws.h" />

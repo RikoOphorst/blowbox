@@ -4,10 +4,13 @@
 
 #include "../core/memory/memory_object.h"
 
+using namespace blowbox::memory;
+
 namespace blowbox
 {
+	class Console;
 	class Window;
-	class GameObject;
+	class Renderer;
 	
 	/**
 	* @class blowbox::Blowbox
@@ -30,12 +33,17 @@ namespace blowbox
 		/**
 		* @brief Creates a blowbox instance
 		*/
-		static Blowbox* Create(memory::Allocator* allocator);
+		static Blowbox* Create();
 
 		/**
 		* @brief Initialises the blowbox engine
 		*/
 		void Initialise();
+
+		/**
+		* @brief Shuts down the blowbox engine
+		*/
+		void Shutdown();
 
 		/**
 		* @brief Run the blowbox engine
@@ -47,12 +55,14 @@ namespace blowbox
 		* @param[in] window (blowbox::Window*) the window 
 		*/
 		void SetWindow(Window* window);
-
-		void AddGameObject(GameObject* game_object);
 	private:
+		static bool blowbox_created_; //<! Defines whether an instance of blowbox has been created
+
+		StackAllocator* subsystem_allocator_; //<! Allocator used for allocating subsystems (e.g. renderer, console)
 		bool can_run_; //<! Can the application be run?
 		bool running_; //<! Is the application running?
-		Window* window_; //<! The window this Blowbox uses
-		std::vector<GameObject*> game_objects_; //<! All the game objects in the game
+		Console* console_; //<! The console this blowbox instance uses
+		Window* window_; //<! The window this blowbox instance uses
+		Renderer* renderer_; //<! The renderer this blowbox instance uses
 	};
 }

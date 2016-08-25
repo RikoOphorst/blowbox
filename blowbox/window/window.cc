@@ -1,15 +1,18 @@
 #include "window.h"
 
+using namespace blowbox::memory;
+
 namespace blowbox
 {
 	//------------------------------------------------------------------------------------------------------
-	Window* Window::MakeWindow(const std::string& name, unsigned int width, unsigned int height)
+	Window* Window::Create(Allocator* allocator, const std::string& name, unsigned int width, unsigned int height)
 	{
-		return new Window(name, width, height);
+		return MemoryManager::Allocate<Window>(allocator, allocator, name, width, height);
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	Window::Window(const std::string& name, unsigned int width, unsigned int height) :
+	Window::Window(Allocator* allocator, const std::string& name, unsigned int width, unsigned int height) :
+		MObject(allocator),
 		width_(width),
 		height_(height),
 		aspect_ratio_((float)width / (float)height)
@@ -49,7 +52,7 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	Window::~Window()
 	{
-
+		DestroyWindow(hwindow_);
 	}
 
 	//------------------------------------------------------------------------------------------------------

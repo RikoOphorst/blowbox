@@ -16,9 +16,6 @@
     <Filter Include="hid">
       <UniqueIdentifier>{5c01553e-f02f-42a6-b3b6-ce47eac7a620}</UniqueIdentifier>
     </Filter>
-    <Filter Include="graphics\direct3d">
-      <UniqueIdentifier>{187f4cd0-0030-4b2e-82c8-a80d62398b1c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="util">
       <UniqueIdentifier>{e935618a-56cd-4f32-a73e-234fdedf8e1a}</UniqueIdentifier>
     </Filter>
@@ -94,6 +91,9 @@
     <ClCompile Include="core\threading\task_manager.cc">
       <Filter>core\threading</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\renderer.cc">
+      <Filter>graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -107,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="core\threading\worker_thread.h">
       <Filter>core\threading</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\direct3d\direct3d.h">
-      <Filter>graphics\direct3d</Filter>
     </ClInclude>
     <ClInclude Include="util\s2ws.h">
       <Filter>util</Filter>
@@ -176,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="core\threading\task_manager.h">
       <Filter>core\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\direct3d.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\renderer.h">
+      <Filter>graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

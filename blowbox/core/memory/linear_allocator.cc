@@ -8,6 +8,7 @@ namespace blowbox
 {
 	namespace memory
 	{
+		//------------------------------------------------------------------------------------------------------
 		LinearAllocator::LinearAllocator(void* start, const size_t& size) :
 			Allocator(start, size),
 			marker_(start)
@@ -15,11 +16,13 @@ namespace blowbox
 
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		LinearAllocator::~LinearAllocator()
 		{
 
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void* LinearAllocator::Allocate(const size_t& size, const uint32_t& alignment)
 		{
 			BB_ASSERT(size > 0, "A block with no size cannot be allocated.");
@@ -47,9 +50,16 @@ namespace blowbox
 			return (void*)aligned_address;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void LinearAllocator::Deallocate(void* ptr)
 		{
 			BB_ASSERT(false, "Linear allocators cannot deallocate pointers. Once it's allocated, it stays allocated.");
+		}
+		
+		//------------------------------------------------------------------------------------------------------
+		void LinearAllocator::Reset()
+		{
+			marker_ = start_;
 		}
 	}
 }

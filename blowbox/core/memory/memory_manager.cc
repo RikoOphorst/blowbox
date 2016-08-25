@@ -2,6 +2,8 @@
 
 #include "../../../blowbox/core/memory/free_list_allocator.h"
 #include "../../../blowbox/core/memory/linear_allocator.h"
+#include "../../../blowbox/core/memory/stack_allocator.h"
+#include "../../../blowbox/core/memory/pool_allocator.h"
 #include "../../../blowbox/core/memory/memory_pool.h"
 #include "../../../blowbox/core/memory/heap_inspector.h"
 #include "../../../blowbox/core/memory/pointer_util.h"
@@ -18,12 +20,12 @@ namespace blowbox
 			memory_pool_(memory_pool)
 		{
 			void* pool_start = memory_pool_->GetStartOfMemoryPool();
-			all_allocators_ = new (pool_start)FreeListAllocator((void*)((uintptr_t)pool_start + sizeof(FreeListAllocator)), 10000);
-			memory_pool_->SetStartOffset(memory_pool_->GetStartOffset() + sizeof(FreeListAllocator) + 10000);
+			all_allocators_ = new (pool_start)memory::FreeListAllocator((void*)((uintptr_t)pool_start + sizeof(memory::FreeListAllocator)), 10000);
+			memory_pool_->SetStartOffset(memory_pool_->GetStartOffset() + sizeof(memory::FreeListAllocator) + 10000);
 
 			pool_start = memory_pool_->GetStartOfMemoryPool();
-			memory_allocator_ = new (pool_start)FreeListAllocator((void*)((uintptr_t)pool_start + sizeof(FreeListAllocator)), memory_pool_->GetSizeOfMemoryPool() - memory_pool_->GetStartOffset());
-			memory_pool_->SetStartOffset(memory_pool_->GetStartOffset() + sizeof(FreeListAllocator) + (memory_pool_->GetSizeOfMemoryPool() - memory_pool_->GetStartOffset()));
+			memory_allocator_ = new (pool_start)memory::FreeListAllocator((void*)((uintptr_t)pool_start + sizeof(memory::FreeListAllocator)), memory_pool_->GetSizeOfMemoryPool() - memory_pool_->GetStartOffset());
+			memory_pool_->SetStartOffset(memory_pool_->GetStartOffset() + sizeof(memory::FreeListAllocator) + (memory_pool_->GetSizeOfMemoryPool() - memory_pool_->GetStartOffset()));
 
 			// Disable the heap inspector notifications for the memory allocator.
 			// In the heap inspector client it causes a warning to popup for every
@@ -66,10 +68,29 @@ namespace blowbox
 		}
 
 		//------------------------------------------------------------------------------------------------------
+		LinearAllocator* MemoryManager::LinearAllocator(const size_t& size)
+		{
+			return MemoryManager::Instance()->ConstructAllocator<memory::LinearAllocator>(size);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		StackAllocator* MemoryManager::StackAllocator(const size_t& size)
+		{
+			return MemoryManager::Instance()->ConstructAllocator<memory::StackAllocator>(size);
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		FreeListAllocator* MemoryManager::FreeListAllocator(const size_t& size)
+		{
+			return MemoryManager::Instance()->ConstructAllocator<memory::FreeListAllocator>(size);
+		}
+
+		//------------------------------------------------------------------------------------------------------
 		void MemoryManager::DestructAllocator(Allocator* allocator)
 		{
-			all_allocators_->Deallocate(allocator);
-			memory_allocator_->Deallocate(allocator->GetStart());
+			void* start = allocator->GetStart();
+			Instance()->all_allocators_->Deallocate(allocator);
+			Instance()->memory_allocator_->Deallocate(start);
 		}
 	}
 }

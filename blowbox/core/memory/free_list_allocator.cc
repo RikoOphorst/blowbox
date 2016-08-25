@@ -8,6 +8,7 @@ namespace blowbox
 {
 	namespace memory
 	{
+		//------------------------------------------------------------------------------------------------------
 		FreeListAllocator::FreeListAllocator(void* start, const size_t& size) :
 			Allocator(start, size),
 			first_block_((FreeBlock*)start)
@@ -18,11 +19,13 @@ namespace blowbox
 			first_block_->next = nullptr;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		FreeListAllocator::~FreeListAllocator()
 		{
 			first_block_ = nullptr;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void* FreeListAllocator::Allocate(const size_t& size, const uint32_t& alignment)
 		{
 			BB_ASSERT(size != 0 && alignment != 0, "Size and/or alignment of the block to be allocated are zero, which is not possible.");
@@ -100,6 +103,7 @@ namespace blowbox
 			return nullptr;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void FreeListAllocator::Deallocate(void* ptr)
 		{
 			BB_ASSERT(ptr != nullptr, "Cannot deallocate a null pointer.");

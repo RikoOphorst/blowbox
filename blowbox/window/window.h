@@ -3,6 +3,8 @@
 #include <WindowsIncludes.h>
 #include <string>
 
+#include "../core/memory/memory_object.h"
+
 namespace blowbox
 {
 	/**
@@ -10,45 +12,45 @@ namespace blowbox
 	* @author Riko Ophorst
 	* @brief A window that can be used for rendering
 	*/
-	class Window
+	class Window : public memory::MObject
 	{
 	public:
 		/**
 		* @brief Factory method for creating a window
-		* @param[in] name (const std::string&) the name of the window (the title)
-		* @param[in] width (unsigned int) the width of the inner window
-		* @param[in] height (unsigned int) the height of the inner window
+		* @param[in]	allocator	The allocator that should be used to create this window
+		* @param[in]	name		The name of the window (the title)
+		* @param[in]	width		The width of the inner window
+		* @param[in]	height		The height of the inner window
 		*/
-		static Window* MakeWindow(const std::string& name, unsigned int width, unsigned int height);
+		static Window* Create(memory::Allocator* allocator, const std::string& name, unsigned int width, unsigned int height);
 		
 		/**
-		* @brief Default Window constructor
-		* @param[in] name (const std::string&) the name of the window (the title)
-		* @param[in] width (unsigned int) the width of the inner window
-		* @param[in] height (unsigned int) the height of the inner window
+		* @brief Window constructor
+		* @param[in]	allocator	The allocator that's used to create this window
+		* @param[in]	name		The name of the window (the title)
+		* @param[in]	width		The width of the inner window
+		* @param[in]	height		The height of the inner window
 		*/
-		Window(const std::string& name, unsigned int width, unsigned int height);
+		Window(memory::Allocator* allocator, const std::string& name, unsigned int width, unsigned int height);
 
-		/**
-		* @brief Default Window destructor
-		*/
-		~Window();
+		~Window(); //<! Window destructor
 
 		/**
 		* @brief Reads windows messages
+		* @param[in]	hwindow		Handle to the window
+		* @param[in]	message		The received message
+		* @param[in]	wparam		WPARAM component of the message
+		* @param[in]	lparam		LPARAM component of the message
 		*/
 		static LRESULT CALLBACK WindowProc(HWND hwindow, UINT message, WPARAM wparam, LPARAM lparam);
 
-		/**
-		* @brief Reads the windows message queue
-		*/
-		void ProcessMessages();
+		void ProcessMessages(); //<! Processes the message queue
 
-		const HWND& GetWindowHandle() const;
-		const HINSTANCE& GetWindowInstance() const;
-		const unsigned int& GetWidth() const;
-		const unsigned int& GetHeight() const;
-		const float& GetAspectRatio() const;
+		const HWND& GetWindowHandle() const; //<! Get the window handle
+		const HINSTANCE& GetWindowInstance() const; //<! Get the window instance
+		const unsigned int& GetWidth() const; //<! Get the width of the window
+		const unsigned int& GetHeight() const; //<! Get the height of the window
+		const float& GetAspectRatio() const; //<! Get the aspect ratio of the window
 	private:
 		HWND hwindow_; //<! Handle to the window
 		HINSTANCE hinstance_; //<! Windows process handle

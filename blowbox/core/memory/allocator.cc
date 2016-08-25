@@ -4,6 +4,7 @@ namespace blowbox
 {
 	namespace memory
 	{
+		//------------------------------------------------------------------------------------------------------
 		Allocator::Allocator(void* start, const size_t& size) :
 			start_(start),
 			size_(size),
@@ -14,6 +15,7 @@ namespace blowbox
 
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		Allocator::~Allocator()
 		{
 			// Only doing this so that the memory is "clean"
@@ -23,31 +25,37 @@ namespace blowbox
 			num_allocations_ = 0;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void* Allocator::GetStart()
 		{
 			return start_;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		const size_t& Allocator::GetSize()
 		{
 			return size_;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		const size_t& Allocator::GetUsedMemory()
 		{
 			return used_memory_;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		const size_t& Allocator::GetNumAllocations()
 		{
 			return num_allocations_;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		void Allocator::SetHeapInspectorNotifications(const bool& enabled)
 		{
 			heap_inspector_notifications_enabled_ = enabled;
 		}
 
+		//------------------------------------------------------------------------------------------------------
 		const bool& Allocator::GetHeapInspectorNotifications()
 		{
 			return heap_inspector_notifications_enabled_;

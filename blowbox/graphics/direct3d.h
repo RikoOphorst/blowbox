@@ -5,8 +5,6 @@
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
 
-#include "../../util/macros.h"
-
 //////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright (C) Microsoft Corporation.  All Rights Reserved.
@@ -112,11 +110,13 @@ struct CD3DX12_BOX : public D3D12_BOX
 	~CD3DX12_BOX() {}
 	operator const D3D12_BOX&() const { return *this; }
 };
+//------------------------------------------------------------------------------------------------------
 inline bool operator==(const D3D12_BOX& l, const D3D12_BOX& r)
 {
 	return l.left == r.left && l.top == r.top && l.front == r.front &&
 		l.right == r.right && l.bottom == r.bottom && l.back == r.back;
 }
+//------------------------------------------------------------------------------------------------------
 inline bool operator!=(const D3D12_BOX& l, const D3D12_BOX& r)
 {
 	return !(l == r);

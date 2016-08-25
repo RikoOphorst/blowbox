@@ -6,6 +6,12 @@ namespace blowbox
 {
 	namespace memory
 	{
+		/**
+		* @class blowbox::memory::StlAllocator
+		* @author Riko Ophorst
+		* @brief Wrapper class around blowbox-allocators to make them STL compliant
+		* @tparam T The object to be allocated in the allocator
+		*/
 		template <typename T>
 		class StlAllocator : public std::allocator<T>
 		{

@@ -21,13 +21,15 @@ namespace blowbox
 		peer_started_(false),
 		connected_(false)
 	{
+		temp_message_allocator_ = MemoryManager::LinearAllocator(100);
+
 		Connect();
 	}
 
 	//------------------------------------------------------------------------------------------------------
 	Console::~Console()
 	{
-
+		Disconnect();
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -124,8 +126,8 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	void Console::Log(const std::string& log, BB_MESSAGE_TYPES message_type)
 	{
-		Message* message = Message::Create(allocator_, log, message_type);
+		Message* message = Message::Create(temp_message_allocator_, log, message_type);
 		Log(message);
-		memory::MemoryManager::Deallocate(allocator_, message);
+		temp_message_allocator_->Reset();
 	}
 }
