@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/memory/memory_object.h"
+#include "../graphics/direct3d.h"
 
 using namespace blowbox::memory;
 
@@ -11,7 +12,7 @@ namespace blowbox
 	public:
 		static Renderer* Create(Allocator* allocator);
 
-		Renderer();
+		Renderer(Allocator* allocator);
 		~Renderer();
 	};
 }

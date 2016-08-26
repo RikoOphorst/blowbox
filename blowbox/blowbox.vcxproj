@@ -175,6 +175,7 @@
     <ClCompile Include="core\console\console.cc" />
     <ClCompile Include="core\console\message.cc" />
     <ClCompile Include="core\game_object.cc" />
+    <ClCompile Include="core\input\input_manager.cc" />
     <ClCompile Include="core\memory\allocator.cc" />
     <ClCompile Include="core\memory\free_list_allocator.cc" />
     <ClCompile Include="core\memory\linear_allocator.cc" />
@@ -199,6 +200,7 @@
     <ClInclude Include="core\console\message.h" />
     <ClInclude Include="core\console\message_types.h" />
     <ClInclude Include="core\game_object.h" />
+    <ClInclude Include="core\input\input_manager.h" />
     <ClInclude Include="core\memory\allocator.h" />
     <ClInclude Include="core\memory\free_list_allocator.h" />
     <ClInclude Include="core\memory\heap_inspector.h" />

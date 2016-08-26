@@ -31,6 +31,9 @@
     <Filter Include="core\console">
       <UniqueIdentifier>{29a170a6-1807-4141-bca3-c822dad55528}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\input">
+      <UniqueIdentifier>{068fe02c-e9e6-4b72-8da5-906e335515fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window\window.cc">
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="graphics\renderer.cc">
       <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="core\input\input_manager.cc">
+      <Filter>core\input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +185,9 @@
     </ClInclude>
     <ClInclude Include="graphics\renderer.h">
       <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="core\input\input_manager.h">
+      <Filter>core\input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

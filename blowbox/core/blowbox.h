@@ -11,19 +11,20 @@ namespace blowbox
 	class Console;
 	class Window;
 	class Renderer;
-	
+	class InputManager;
+
 	/**
 	* @class blowbox::Blowbox
 	* @author Riko Ophorst
 	* @brief Creates a blowbox application
 	*/
-	class Blowbox : public memory::MObject
+	class Blowbox : public MObject
 	{
 	public:
 		/**
 		* @brief Default blowbox constructor
 		*/
-		Blowbox(memory::Allocator* allocator);
+		Blowbox(Allocator* allocator);
 
 		/**
 		* @brief Default blowbox destructor
@@ -41,20 +42,19 @@ namespace blowbox
 		void Initialise();
 
 		/**
-		* @brief Shuts down the blowbox engine
-		*/
-		void Shutdown();
-
-		/**
 		* @brief Run the blowbox engine
 		*/
 		void Run();
 
 		/**
-		* @brief Set the Window used by blowbox
-		* @param[in] window (blowbox::Window*) the window 
+		* @brief Shuts down the blowbox engine
 		*/
-		void SetWindow(Window* window);
+		void Shutdown();
+
+		Console* GetConsole() const; //<! Get the console
+		Window* GetWindow() const; //<! Get the window
+		Renderer* GetRenderer() const; //<! Get the renderer
+		InputManager* GetInputManager() const; //<! Get the input manager
 	private:
 		static bool blowbox_created_; //<! Defines whether an instance of blowbox has been created
 
@@ -64,5 +64,6 @@ namespace blowbox
 		Console* console_; //<! The console this blowbox instance uses
 		Window* window_; //<! The window this blowbox instance uses
 		Renderer* renderer_; //<! The renderer this blowbox instance uses
+		InputManager* input_manager_; //<! The input manager this blowbox instance uses
 	};
 }

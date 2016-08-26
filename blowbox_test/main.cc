@@ -19,6 +19,8 @@ int main(int argc, char** argv)
 
 	blowbox->Initialise();
 
+	blowbox->Run();
+
 	std::cin.get();
 	return 0;
 }
