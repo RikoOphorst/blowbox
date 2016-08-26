@@ -2,6 +2,8 @@
 
 namespace blowbox
 {
+	InputManager* InputManager::instance_ = nullptr;
+
 	//------------------------------------------------------------------------------------------------------
 	InputManager* InputManager::Create(Allocator* allocator)
 	{

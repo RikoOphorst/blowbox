@@ -21,7 +21,7 @@ namespace blowbox
 		peer_started_(false),
 		connected_(false)
 	{
-		temp_message_allocator_ = MemoryManager::LinearAllocator(100);
+		temp_message_allocator_ = MemoryManager::LinearAllocator(10000);
 
 		Connect();
 	}

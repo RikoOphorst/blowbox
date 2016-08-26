@@ -42,9 +42,6 @@
     <ClCompile Include="core\blowbox.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="core\threading\worker_thread.cc">
-      <Filter>core\threading</Filter>
-    </ClCompile>
     <ClCompile Include="blowbox_include.h" />
     <ClCompile Include="core\game_object.cc">
       <Filter>core</Filter>
@@ -110,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="util\macros.h">
       <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="core\threading\worker_thread.h">
-      <Filter>core\threading</Filter>
     </ClInclude>
     <ClInclude Include="util\s2ws.h">
       <Filter>util</Filter>

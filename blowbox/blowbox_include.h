@@ -3,6 +3,9 @@
 // Console
 #include "../blowbox/core/console/console.h"
 
+// Threading
+#include "../blowbox/core/threading/task_manager.h"
+
 // Core
 #include "../blowbox/util/macros.h"
 #include "../blowbox/core/blowbox.h"

@@ -9,6 +9,7 @@ using namespace blowbox::memory;
 namespace blowbox
 {
 	class Console;
+	class TaskManager;
 	class Window;
 	class Renderer;
 	class InputManager;
@@ -62,6 +63,7 @@ namespace blowbox
 		bool can_run_; //<! Can the application be run?
 		bool running_; //<! Is the application running?
 		Console* console_; //<! The console this blowbox instance uses
+		TaskManager* task_manager_; //<! The task manager this blowbox instance uses
 		Window* window_; //<! The window this blowbox instance uses
 		Renderer* renderer_; //<! The renderer this blowbox instance uses
 		InputManager* input_manager_; //<! The input manager this blowbox instance uses

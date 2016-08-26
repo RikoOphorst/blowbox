@@ -60,6 +60,8 @@ namespace blowbox
 		void LinearAllocator::Reset()
 		{
 			marker_ = start_;
+			used_memory_ = 0;
+			num_allocations_ = 0;
 		}
 	}
 }
