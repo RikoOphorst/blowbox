@@ -1,9 +1,17 @@
 # blowbox
 Blowbox is a work in progress C++ game engine. It is very much still in progress.
 
-Currently (12 feb 2016) it supports:
+
+#### Features (27 Aug 2016):
 - Custom memory allocation with my own memory allocation library
 - Memory debugging with HeapInspector
+- Custom task-based multithreading
+- Custom external console setup for remote monitoring
+
+#### Features coming up:
+- DirectX 12 forward rendering
+- Vulkan forward rendering
+- Component based game object model
 
 #### Prerequisites:
 - [Visual Studio **2013**](http://go.microsoft.com/fwlink/?LinkId=517284)
@@ -12,4 +20,3 @@ Currently (12 feb 2016) it supports:
 - RakNet, version 4.081
 - HeapInspector, version 1.5
 - Qt, version 5.5 - Enable all VS2013 options
-
