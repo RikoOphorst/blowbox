@@ -35,7 +35,7 @@ namespace blowbox
 		*/
 		Message(memory::Allocator* allocator, const std::string& message, const BB_MESSAGE_TYPES& message_type);
 		
-		~Message(); //<! Message destructor
+		~Message(); //!< Message destructor
 
 		/**
 		* @brief Factory to create messages
@@ -45,8 +45,8 @@ namespace blowbox
 		*/
 		static Message* Create(memory::Allocator* allocator, const std::string& message, const BB_MESSAGE_TYPES& message_type);
 
-		const ConsoleMessageTextLog& GetActualMessage(); //<! Get the actual packet that will be send
+		const ConsoleMessageTextLog& GetActualMessage(); //!< Get the actual packet that will be send
 	private:
-		ConsoleMessageTextLog actual_message_; //<! The actual packet that will be send
+		ConsoleMessageTextLog actual_message_; //!< The actual packet that will be send
 	};
 }

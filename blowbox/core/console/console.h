@@ -33,7 +33,7 @@ namespace blowbox
 		*/
 		Console(memory::Allocator* allocator);
 
-		~Console(); //<! Console destructor
+		~Console(); //!< Console destructor
 
 		/**
 		* @brief Factory to create the Console
@@ -41,9 +41,9 @@ namespace blowbox
 		*/
 		static Console* Create(memory::Allocator* allocator);
 		
-		static Console* Instance(); //<! Get the Console instance
-		void Connect(); //<! Connect to the external console server
-		void Disconnect(); //<! Disconnect from the external console server
+		static Console* Instance(); //!< Get the Console instance
+		void Connect(); //!< Connect to the external console server
+		void Disconnect(); //!< Disconnect from the external console server
 
 		/**
 		* @brief Logs a message to the external console
@@ -58,14 +58,14 @@ namespace blowbox
 		*/
 		void Log(const std::string& log, BB_MESSAGE_TYPES type);
 	private:
-		static Console* instance_; //<! Singleton instance of Console
+		static Console* instance_; //!< Singleton instance of Console
 
-		LinearAllocator* temp_message_allocator_; //<! Temporary message allocator
+		LinearAllocator* temp_message_allocator_; //!< Temporary message allocator
 
-		RakNet::RakPeerInterface* peer_; //<! Stores the peer information
-		RakNet::SystemAddress server_; //<! The server address of the external console
-		bool peer_started_; //<! Has the peer started?
-		bool connection_attempt_started_; //<! Has the connection attempted to start?
-		bool connected_; //<! Are we connected?
+		RakNet::RakPeerInterface* peer_; //!< Stores the peer information
+		RakNet::SystemAddress server_; //!< The server address of the external console
+		bool peer_started_; //!< Has the peer started?
+		bool connection_attempt_started_; //!< Has the connection attempted to start?
+		bool connected_; //!< Are we connected?
 	};
 }

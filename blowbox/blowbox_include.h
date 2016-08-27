@@ -27,7 +27,6 @@
 
 // Utils
 #include "../blowbox/util/shape_helper.h"
-#include "../blowbox/util/linked_list.h"
 
 // Window
 #include "../blowbox/window/window.h"

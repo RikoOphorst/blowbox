@@ -52,20 +52,20 @@ namespace blowbox
 		*/
 		void Shutdown();
 
-		Console* GetConsole() const; //<! Get the console
-		Window* GetWindow() const; //<! Get the window
-		Renderer* GetRenderer() const; //<! Get the renderer
-		InputManager* GetInputManager() const; //<! Get the input manager
+		Console* GetConsole() const; //!< Get the console
+		Window* GetWindow() const; //!< Get the window
+		Renderer* GetRenderer() const; //!< Get the renderer
+		InputManager* GetInputManager() const; //!< Get the input manager
 	private:
-		static bool blowbox_created_; //<! Defines whether an instance of blowbox has been created
+		static bool blowbox_created_; //!< Defines whether an instance of blowbox has been created
 
-		StackAllocator* subsystem_allocator_; //<! Allocator used for allocating subsystems (e.g. renderer, console)
-		bool can_run_; //<! Can the application be run?
-		bool running_; //<! Is the application running?
-		Console* console_; //<! The console this blowbox instance uses
-		TaskManager* task_manager_; //<! The task manager this blowbox instance uses
-		Window* window_; //<! The window this blowbox instance uses
-		Renderer* renderer_; //<! The renderer this blowbox instance uses
-		InputManager* input_manager_; //<! The input manager this blowbox instance uses
+		StackAllocator* subsystem_allocator_; //!< Allocator used for allocating subsystems (e.g. renderer, console)
+		bool can_run_; //!< Can the application be run?
+		bool running_; //!< Is the application running?
+		Console* console_; //!< The console this blowbox instance uses
+		TaskManager* task_manager_; //!< The task manager this blowbox instance uses
+		Window* window_; //!< The window this blowbox instance uses
+		Renderer* renderer_; //!< The renderer this blowbox instance uses
+		InputManager* input_manager_; //!< The input manager this blowbox instance uses
 	};
 }

@@ -25,10 +25,10 @@ namespace blowbox
 			*/
 			MemoryObject(memory::Allocator* allocator) : self_storage_allocator_(allocator) {} 
 
-			memory::Allocator* GetSelfStorageAllocator() const; //<! Get the self storage allocator, useful if you want to deallocate this object without knowing who allocated it
+			memory::Allocator* GetSelfStorageAllocator() const; //!< Get the self storage allocator, useful if you want to deallocate this object without knowing who allocated it
 
 		protected:
-			memory::Allocator* self_storage_allocator_; //<! The allocator used to allocate this object
+			memory::Allocator* self_storage_allocator_; //!< The allocator used to allocate this object
 		};
 
 		/**

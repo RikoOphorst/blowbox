@@ -130,11 +130,11 @@ namespace blowbox
 			*/
 			static void DestructAllocator(Allocator* allocator);
 		private:
-			memory::FreeListAllocator* all_allocators_; //<! An allocator that stores ALL allocators in this process
-			memory::FreeListAllocator* memory_allocator_; //<! An allocator that stores ALL available memory in this process
-			MemoryPool* memory_pool_; //<! The ENTIRE memory pool that is available in this process
+			memory::FreeListAllocator* all_allocators_; //!< An allocator that stores ALL allocators in this process
+			memory::FreeListAllocator* memory_allocator_; //!< An allocator that stores ALL available memory in this process
+			MemoryPool* memory_pool_; //!< The ENTIRE memory pool that is available in this process
 
-			static MemoryManager* instance_; //<! Singleton instance of this MemoryManager
+			static MemoryManager* instance_; //!< Singleton instance of this MemoryManager
 		};
 
 		//------------------------------------------------------------------------------------------------------

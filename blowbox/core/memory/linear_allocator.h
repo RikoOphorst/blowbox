@@ -44,7 +44,7 @@ namespace blowbox
 			*/
 			void Reset();
 		private:
-			void* marker_; //<! A marker to the current end of the currently allocated memory block in this allocator's memory zone
+			void* marker_; //!< A marker to the current end of the currently allocated memory block in this allocator's memory zone
 		};
 	}
 }

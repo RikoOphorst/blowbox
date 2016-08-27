@@ -23,7 +23,7 @@ namespace blowbox
 			*/
 			PoolAllocator(void* start, const size_t& size, const size_t& object_size, const uint32_t& object_alignment);
 
-			~PoolAllocator(); //<! PoolAllocator destructor
+			~PoolAllocator(); //!< PoolAllocator destructor
 
 			/**
 			* @brief Allocates a new block of memory within this allocator
@@ -38,10 +38,10 @@ namespace blowbox
 			*/
 			void Deallocate(void* ptr);
 		private:
-			size_t object_size_; //<! The size of the pooled object
-			uint32_t object_alignment_; //<! The alignment of the pooled object
+			size_t object_size_; //!< The size of the pooled object
+			uint32_t object_alignment_; //!< The alignment of the pooled object
 
-			void** free_list_; //<! Linked-list of unallocated free-nodes
+			void** free_list_; //!< Linked-list of unallocated free-nodes
 		};
 	}
 }

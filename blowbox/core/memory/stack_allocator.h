@@ -21,7 +21,7 @@ namespace blowbox
 			*/
 			StackAllocator(void* start, const size_t& size);
 
-			~StackAllocator(); //<! StackAllocator destructor
+			~StackAllocator(); //!< StackAllocator destructor
 
 			/**
 			* @brief Allocates a new block of memory within this allocator
@@ -37,18 +37,18 @@ namespace blowbox
 			void Deallocate(void* ptr);
 		private:
 			/**
-			* @struct blowbox::memory::StackAllocation::AllocationHeader
+			* @struct blowbox::memory::StackAllocator::AllocationHeader
 			* @author Riko Ophorst
 			* @brief Allocation header prepended to each allocation
 			*/
 			struct AllocationHeader
 			{
-				uint32_t adjustment; //<! Adjustment used to achieve correct alignment of allocation
-				void* prev_alloc; //<! Pointer to the previous allocation
+				uint32_t adjustment; //!< Adjustment used to achieve correct alignment of allocation
+				void* prev_alloc; //!< Pointer to the previous allocation
 			};
 
-			void* top_; //<! Pointer to the top of the stack
-			void* prev_alloc_; //<! Pointer to the previous (last) allocation
+			void* top_; //!< Pointer to the top of the stack
+			void* prev_alloc_; //!< Pointer to the previous (last) allocation
 		};
 	}
 }

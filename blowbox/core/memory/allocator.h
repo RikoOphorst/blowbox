@@ -21,7 +21,7 @@ namespace blowbox
 			*/
 			Allocator(void* start, const size_t& size);
 
-			virtual ~Allocator(); //<! Allocator destructor
+			virtual ~Allocator(); //!< Allocator destructor
 
 			/**
 			* @brief Allocates a new block of memory within this allocator
@@ -36,22 +36,22 @@ namespace blowbox
 			*/
 			virtual void Deallocate(void* ptr) = 0;
 
-			void* GetStart(); //<! Get the start of the memory block
-			const size_t& GetSize(); //<! Get the size of the memory block
+			void* GetStart(); //!< Get the start of the memory block
+			const size_t& GetSize(); //!< Get the size of the memory block
 
-			const size_t& GetUsedMemory(); //<! Get the used memory in this allocator
-			const size_t& GetNumAllocations(); //<! Get the number of allocations in the allocator
+			const size_t& GetUsedMemory(); //!< Get the used memory in this allocator
+			const size_t& GetNumAllocations(); //!< Get the number of allocations in the allocator
 
-			void SetHeapInspectorNotifications(const bool& enabled); //<! Set whether this allocator notifies HeapInspector of allocs/deallocs
-			const bool& GetHeapInspectorNotifications(); //<! Get whether we're notifying HeapInspector of allocs/deallocs
+			void SetHeapInspectorNotifications(const bool& enabled); //!< Set whether this allocator notifies HeapInspector of allocs/deallocs
+			const bool& GetHeapInspectorNotifications(); //!< Get whether we're notifying HeapInspector of allocs/deallocs
 		protected:
-			void* start_; //<! Start of the memory block
-			size_t size_; //<! Size of the memory block
+			void* start_; //!< Start of the memory block
+			size_t size_; //!< Size of the memory block
 
-			size_t used_memory_; //<! Used memory in the allocator
-			size_t num_allocations_; //<! Number of allocations in the allocator
+			size_t used_memory_; //!< Used memory in the allocator
+			size_t num_allocations_; //!< Number of allocations in the allocator
 
-			bool heap_inspector_notifications_enabled_; //<! Are we notifying HeapInspector?
+			bool heap_inspector_notifications_enabled_; //!< Are we notifying HeapInspector?
 		};
 	}
 }

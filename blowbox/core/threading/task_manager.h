@@ -64,18 +64,18 @@ namespace blowbox
 		*/
 		void AddTask(Task* task);
 
-		std::mutex& GetTasksMutex(); //<! Get the mutex for accessing the tasks object
-		const std::vector<Task*>& GetTasks(); //<! Get all tasks currently in the execution queue (so no tasks that are already executing or have finished executing)
-		std::vector<std::thread>& GetThreads(); //<! Get all the hardware threads the task manager uses
-		std::condition_variable& GetCheckForTask(); //<! Get the condition variable used for (un)blocking the worker threads
+		std::mutex& GetTasksMutex(); //!< Get the mutex for accessing the tasks object
+		const std::vector<Task*>& GetTasks(); //!< Get all tasks currently in the execution queue (so no tasks that are already executing or have finished executing)
+		std::vector<std::thread>& GetThreads(); //!< Get all the hardware threads the task manager uses
+		std::condition_variable& GetCheckForTask(); //!< Get the condition variable used for (un)blocking the worker threads
 	public:
-		static TaskManager* instance_; //<! Singleton instance of TaskManager
+		static TaskManager* instance_; //!< Singleton instance of TaskManager
 
-		bool running_; //<! Is the task manager running?
+		bool running_; //!< Is the task manager running?
 
-		std::mutex tasks_mutex_; //<! Mutex used for modifying the tasks queue
-		std::vector<Task*> tasks_; //<! All the tasks that are queued up for execution
-		std::vector<std::thread> threads_; //<! All threads working to execute the tasks
-		std::condition_variable check_for_task_; //<! CV used for (un)blocking the worker threads
+		std::mutex tasks_mutex_; //!< Mutex used for modifying the tasks queue
+		std::vector<Task*> tasks_; //!< All the tasks that are queued up for execution
+		std::vector<std::thread> threads_; //!< All threads working to execute the tasks
+		std::condition_variable check_for_task_; //!< CV used for (un)blocking the worker threads
 	};
 }

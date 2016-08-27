@@ -16,6 +16,6 @@ namespace blowbox
 		~InputManager();
 
 	private:
-		static InputManager* instance_; //<! Singleton instance of InputManager
+		static InputManager* instance_; //!< Singleton instance of InputManager
 	};
 }

@@ -21,17 +21,17 @@ namespace blowbox
 	*/
 	struct ConsoleMessageTextLog
 	{
-		__int64 dateSend; //<! The send date
-		short foregroundR; //<! Color (red channel) of the foreground text
-		short foregroundG; //<! Color (green channel) of the foreground text
-		short foregroundB; //<! Color (blue channel) of the foreground text
-		short foregroundA; //<! Color (alpha channel) of the foreground text
-		short backgroundR; //<! Color (red channel) of the background text
-		short backgroundG; //<! Color (green channel) of the background text
-		short backgroundB; //<! Color (blue channel) of the background text
-		short backgroundA; //<! Color (alpha channel) of the background text
-		char log[512]; //<! The actual text-log
-		short log_length; //<! The length of the log
+		__int64 dateSend; //!< The send date
+		short foregroundR; //!< Color (red channel) of the foreground text
+		short foregroundG; //!< Color (green channel) of the foreground text
+		short foregroundB; //!< Color (blue channel) of the foreground text
+		short foregroundA; //!< Color (alpha channel) of the foreground text
+		short backgroundR; //!< Color (red channel) of the background text
+		short backgroundG; //!< Color (green channel) of the background text
+		short backgroundB; //!< Color (blue channel) of the background text
+		short backgroundA; //!< Color (alpha channel) of the background text
+		char log[512]; //!< The actual text-log
+		short log_length; //!< The length of the log
 	};
 
 #pragma pack(pop)

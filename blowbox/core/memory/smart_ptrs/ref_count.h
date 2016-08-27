@@ -70,9 +70,9 @@ namespace blowbox
 				allocator_->Deallocate(this);
 			}
 		private:
-			Allocator* allocator_; //<! The allocator in which the ptr is allocated
-			T* ptr_; //<! The pointer 
-			unsigned int references_; //<! Number of references to this pointer
+			Allocator* allocator_; //!< The allocator in which the ptr is allocated
+			T* ptr_; //!< The pointer 
+			unsigned int references_; //!< Number of references to this pointer
 		};
 	}
 }

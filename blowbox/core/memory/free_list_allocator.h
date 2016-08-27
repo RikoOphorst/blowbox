@@ -46,8 +46,8 @@ namespace blowbox
 			*/
 			struct AllocationHeader
 			{
-				size_t size; //<! The size of the allocation that was made
-				uint8_t adjustment; //<! The adjustment that was used to align the block correctly
+				size_t size; //!< The size of the allocation that was made
+				uint8_t adjustment; //!< The adjustment that was used to align the block correctly
 			};
 
 			/**
@@ -57,11 +57,11 @@ namespace blowbox
 			*/
 			struct FreeBlock
 			{
-				size_t size; //<! The size of the free block
-				FreeBlock* next; //<! The next free block available in the allocator
+				size_t size; //!< The size of the free block
+				FreeBlock* next; //!< The next free block available in the allocator
 			};
 
-			FreeBlock* first_block_; //<! The first free block in the allocator
+			FreeBlock* first_block_; //!< The first free block in the allocator
 		};
 	}
 }

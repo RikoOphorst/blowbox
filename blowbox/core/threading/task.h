@@ -20,10 +20,10 @@ namespace blowbox
 			task_id = task_id_accumulator++;
 		}
 
-		std::string task_name; //<! A task can have a name which will be stored here, in the task context
-		int task_id; //<! A task always has an ID, which will be stored here, in the task context
+		std::string task_name; //!< A task can have a name which will be stored here, in the task context
+		int task_id; //!< A task always has an ID, which will be stored here, in the task context
 
-		static unsigned int task_id_accumulator; //<! Acculumator value to generate unique ID's for every task context (and subsequently every task)
+		static unsigned int task_id_accumulator; //!< Acculumator value to generate unique ID's for every task context (and subsequently every task)
 	};
 
 	/**
@@ -40,7 +40,7 @@ namespace blowbox
 		*/
 		Task(TaskContext* context);
 
-		~Task(); //<! Task destructor
+		~Task(); //!< Task destructor
 
 		/**
 		* @brief Execute this task
@@ -73,10 +73,10 @@ namespace blowbox
 		* @param[in]	context		The context in which the task operates
 		*/
 		virtual void DoWork(TaskContext* context) = 0;
-		TaskContext* context_; //<! The context to this task
+		TaskContext* context_; //!< The context to this task
 
 	private:
-		std::vector<Task*> dependencies_; //<! The dependencies of this task
-		bool is_finished_; //<! Is this task finished?
+		std::vector<Task*> dependencies_; //!< The dependencies of this task
+		bool is_finished_; //!< Is this task finished?
 	};
 }

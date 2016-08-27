@@ -39,13 +39,13 @@ int main(int argc, char** argv)
 	//------------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------------
 
-	float tasks = 1;						//<! The amount of tasks the work load should be split into
-	float data_size = 100000;				//<! The amount of dummy data to create
-	float task_size = data_size / tasks;	//<! The chunk of data one task has to process
-	std::vector<Task*> all_tasks;			//<! Vector to store all tasks
-	std::vector<TaskContext*> all_contexts;	//<! Vector to store all task contexts
-	std::mutex finished_mutex;				//<! Mutex to provide thread-safety to the finished flag
-	bool finished = false;					//<! Defines whether the sum-routine is completed
+	float tasks = 1;						//!< The amount of tasks the work load should be split into
+	float data_size = 100000;				//!< The amount of dummy data to create
+	float task_size = data_size / tasks;	//!< The chunk of data one task has to process
+	std::vector<Task*> all_tasks;			//!< Vector to store all tasks
+	std::vector<TaskContext*> all_contexts;	//!< Vector to store all task contexts
+	std::mutex finished_mutex;				//!< Mutex to provide thread-safety to the finished flag
+	bool finished = false;					//!< Defines whether the sum-routine is completed
 	
 	//------------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------------

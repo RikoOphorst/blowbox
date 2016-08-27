@@ -33,7 +33,7 @@ namespace blowbox
 		*/
 		Window(memory::Allocator* allocator, const std::string& name, unsigned int width, unsigned int height);
 
-		~Window(); //<! Window destructor
+		~Window(); //!< Window destructor
 
 		/**
 		* @brief Reads windows messages
@@ -44,18 +44,18 @@ namespace blowbox
 		*/
 		static LRESULT CALLBACK WindowProc(HWND hwindow, UINT message, WPARAM wparam, LPARAM lparam);
 
-		void ProcessMessages(); //<! Processes the message queue
+		void ProcessMessages(); //!< Processes the message queue
 
-		const HWND& GetWindowHandle() const; //<! Get the window handle
-		const HINSTANCE& GetWindowInstance() const; //<! Get the window instance
-		const unsigned int& GetWidth() const; //<! Get the width of the window
-		const unsigned int& GetHeight() const; //<! Get the height of the window
-		const float& GetAspectRatio() const; //<! Get the aspect ratio of the window
+		const HWND& GetWindowHandle() const; //!< Get the window handle
+		const HINSTANCE& GetWindowInstance() const; //!< Get the window instance
+		const unsigned int& GetWidth() const; //!< Get the width of the window
+		const unsigned int& GetHeight() const; //!< Get the height of the window
+		const float& GetAspectRatio() const; //!< Get the aspect ratio of the window
 	private:
-		HWND hwindow_; //<! Handle to the window
-		HINSTANCE hinstance_; //<! Windows process handle
-		unsigned int width_; //<! Width of the window
-		unsigned int height_; //<! Height of the window
-		float aspect_ratio_; //<! Aspect ratio of the window
+		HWND hwindow_; //!< Handle to the window
+		HINSTANCE hinstance_; //!< Windows process handle
+		unsigned int width_; //!< Width of the window
+		unsigned int height_; //!< Height of the window
+		float aspect_ratio_; //!< Aspect ratio of the window
 	};
 }
