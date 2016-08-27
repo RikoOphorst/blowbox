@@ -7,10 +7,10 @@
 #include <comdef.h>
 #include <chrono>
 
+#include "sum-numbers.h"
+
 #define BB_CONSOLE_SERVER_PORT 60000
 #define BB_CONSOLE_MAX_CLIENTS 1
-
-#include "sum-numbers.h"
 
 using namespace blowbox;
 using namespace blowbox::direct3d;
