@@ -1,5 +1,7 @@
 #include "window.h"
 
+#include "../core/console/console.h"
+
 using namespace blowbox::memory;
 
 namespace blowbox
@@ -64,7 +66,7 @@ namespace blowbox
 			return DefWindowProcA(hwindow, message, wparam, lparam);
 		}
 		Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
-		
+
 		return DefWindowProcA(hwindow, message, wparam, lparam);
 	}
 
@@ -77,6 +79,11 @@ namespace blowbox
 		{
 			TranslateMessage(&msg);
 			DispatchMessageA(&msg);
+
+			if (msg.message == WM_KEYDOWN)
+			{
+				Console::Instance()->Log("Keydown boys", BB_MESSAGE_TYPE_LOG);
+			}
 		}
 	}
 	

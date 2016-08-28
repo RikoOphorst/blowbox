@@ -12,13 +12,13 @@ namespace blowbox
 		MObject(allocator),
 		running_(false)
 	{
-
+		StartUp();
 	}
 
 	//------------------------------------------------------------------------------------------------------
 	TaskManager::~TaskManager()
 	{
-
+		ShutDown();
 	}
 	
 	//------------------------------------------------------------------------------------------------------
@@ -37,6 +37,11 @@ namespace blowbox
 	void TaskManager::WorkThread()
 	{
 		TaskManager* instance = Instance();
+
+		while (instance == nullptr)
+		{
+			instance = Instance();
+		}
 
 		while (true)
 		{

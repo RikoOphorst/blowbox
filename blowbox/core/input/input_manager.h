@@ -6,16 +6,42 @@ using namespace blowbox::memory;
 
 namespace blowbox
 {
+	class Window;
+
+	/**
+	* @class blowbox::InputManager
+	* @author Riko Ophorst
+	* @brief Manages input from the user and makes it easily accessible
+	*/
 	class InputManager : public MObject
 	{
 	public:
-		static InputManager* Create(Allocator* allocator);
+		/**
+		* @brief Create the instance of the input manager
+		* @param[in]	allocator		The allocator to use to allocate this manager
+		* @param[in]	input_window	Window that should be used as "input provider"
+		*/
+		static InputManager* Create(Allocator* allocator, Window* input_window);
+
+		/**
+		* @brief Singleton accessor to the instance of this InputManager
+		*/
 		static InputManager* Instance();
 
-		InputManager(Allocator* allocator);
+		/**
+		* @brief InputManager constructor
+		* @param[in]	allocator		The allocator used to allocate this manager
+		* @param[in]	input_window	Window that should be used as "input provider"
+		*/
+		InputManager(Allocator* allocator, Window* input_window);
+
+		/**
+		* @brief InputManager destructor
+		*/
 		~InputManager();
 
 	private:
+		Window* input_window_; //!< Main window the input manager uses to pull input from
 		static InputManager* instance_; //!< Singleton instance of InputManager
 	};
 }

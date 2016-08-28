@@ -2,8 +2,10 @@
 
 #include <WindowsIncludes.h>
 #include <string>
+#include <functional>
 
 #include "../core/memory/memory_object.h"
+#include "../core/input/input_manager.h"
 
 namespace blowbox
 {

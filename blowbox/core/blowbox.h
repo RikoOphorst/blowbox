@@ -53,6 +53,7 @@ namespace blowbox
 		void Shutdown();
 
 		Console* GetConsole() const; //!< Get the console
+		TaskManager* GetTaskManager() const; //!< Get the task manager
 		Window* GetWindow() const; //!< Get the window
 		Renderer* GetRenderer() const; //!< Get the renderer
 		InputManager* GetInputManager() const; //!< Get the input manager

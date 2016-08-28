@@ -2,6 +2,7 @@
 
 #include "../util/macros.h"
 #include "../core/console/console.h"
+#include "../core/threading/task_manager.h"
 #include "../window/window.h"
 #include "../graphics/renderer.h"
 #include "../core/input/input_manager.h"
@@ -55,9 +56,10 @@ namespace blowbox
 		subsystem_allocator_ = MemoryManager::StackAllocator(2000);
 
 		console_ = Console::Create(subsystem_allocator_);
+		task_manager_ = TaskManager::Create(subsystem_allocator_);
 		window_ = Window::Create(subsystem_allocator_, "blowbox", 1280, 720);
 		renderer_ = Renderer::Create(subsystem_allocator_);
-		input_manager_ = InputManager::Create(subsystem_allocator_);
+		input_manager_ = InputManager::Create(subsystem_allocator_, window_);
 
 		can_run_ = true;
 	}
@@ -81,6 +83,7 @@ namespace blowbox
 		MemoryManager::Deallocate(subsystem_allocator_, input_manager_);
 		MemoryManager::Deallocate(subsystem_allocator_, renderer_);
 		MemoryManager::Deallocate(subsystem_allocator_, window_);
+		MemoryManager::Deallocate(subsystem_allocator_, task_manager_);
 		MemoryManager::Deallocate(subsystem_allocator_, console_);
 
 		MemoryManager::Instance()->DestructAllocator(subsystem_allocator_);
@@ -90,6 +93,12 @@ namespace blowbox
 	Console* Blowbox::GetConsole() const
 	{
 		return console_;
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	TaskManager* Blowbox::GetTaskManager() const
+	{
+		return task_manager_;
 	}
 
 	//------------------------------------------------------------------------------------------------------

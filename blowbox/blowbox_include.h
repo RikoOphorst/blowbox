@@ -5,6 +5,7 @@
 
 // Threading
 #include "../blowbox/core/threading/task_manager.h"
+#include "../blowbox/core/threading/task.h"
 
 // Core
 #include "../blowbox/util/macros.h"

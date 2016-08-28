@@ -1,13 +1,15 @@
 #include "input_manager.h"
 
+#include "../../window/window.h"
+
 namespace blowbox
 {
 	InputManager* InputManager::instance_ = nullptr;
 
 	//------------------------------------------------------------------------------------------------------
-	InputManager* InputManager::Create(Allocator* allocator)
+	InputManager* InputManager::Create(Allocator* allocator, Window* input_window)
 	{
-		return instance_ = MemoryManager::Allocate<InputManager>(allocator, allocator);
+		return instance_ = MemoryManager::Allocate<InputManager>(allocator, allocator, input_window);
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -17,10 +19,11 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	InputManager::InputManager(Allocator* allocator) :
-		MObject(allocator)
+	InputManager::InputManager(Allocator* allocator, Window* input_window) :
+		MObject(allocator),
+		input_window_(input_window)
 	{
-		
+		//input_window_->
 	}
 
 	//------------------------------------------------------------------------------------------------------
