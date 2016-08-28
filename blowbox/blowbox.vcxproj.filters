@@ -177,5 +177,8 @@
     <ClInclude Include="core\input\input_manager.h">
       <Filter>core\input</Filter>
     </ClInclude>
+    <ClInclude Include="core\input\key.h">
+      <Filter>core\input</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -65,7 +65,7 @@ namespace blowbox
 			SetWindowLongPtrA(hwindow, GWLP_USERDATA, (LONG_PTR)(((LPCREATESTRUCT)lparam)->lpCreateParams));
 			return DefWindowProcA(hwindow, message, wparam, lparam);
 		}
-		Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
+		//Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
 
 		return DefWindowProcA(hwindow, message, wparam, lparam);
 	}
@@ -80,10 +80,7 @@ namespace blowbox
 			TranslateMessage(&msg);
 			DispatchMessageA(&msg);
 
-			if (msg.message == WM_KEYDOWN)
-			{
-				Console::Instance()->Log("Keydown boys", BB_MESSAGE_TYPE_LOG);
-			}
+			window_input_listener_(msg);
 		}
 	}
 	
@@ -115,5 +112,11 @@ namespace blowbox
 	const float& Window::GetAspectRatio() const
 	{
 		return aspect_ratio_;
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	void Window::SetWindowInputListener(std::function<void(MSG message)> listener)
+	{
+		window_input_listener_ = listener;
 	}
 }

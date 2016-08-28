@@ -1,6 +1,9 @@
 #include "input_manager.h"
 
 #include "../../window/window.h"
+#include "../../core/console/console.h"
+
+using namespace std::placeholders;
 
 namespace blowbox
 {
@@ -23,12 +26,25 @@ namespace blowbox
 		MObject(allocator),
 		input_window_(input_window)
 	{
-		//input_window_->
+
+		std::function<void(MSG message)> message = std::bind(&InputManager::ProcessWinMessage, this, _1);
+		input_window_->SetWindowInputListener(message);
 	}
 
 	//------------------------------------------------------------------------------------------------------
 	InputManager::~InputManager()
 	{
 
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	void InputManager::ProcessWinMessage(MSG message)
+	{
+		switch (message.message)
+		{
+		case WM_KEYDOWN:
+			Console::Instance()->Log(std::to_string(message.wParam), BB_MESSAGE_TYPE_LOG);
+			break;
+		}
 	}
 }

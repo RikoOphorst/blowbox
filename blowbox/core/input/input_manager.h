@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../core/memory/memory_object.h"
+#include <WindowsIncludes.h>
 
 using namespace blowbox::memory;
 
@@ -40,6 +41,11 @@ namespace blowbox
 		*/
 		~InputManager();
 
+		/**
+		* @brief Processes input from the Windows message queue
+		* @param[in]	message		The message to be processed
+		*/
+		void ProcessWinMessage(MSG message);
 	private:
 		Window* input_window_; //!< Main window the input manager uses to pull input from
 		static InputManager* instance_; //!< Singleton instance of InputManager

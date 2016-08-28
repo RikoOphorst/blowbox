@@ -199,6 +199,7 @@
     <ClInclude Include="core\console\message_types.h" />
     <ClInclude Include="core\game_object.h" />
     <ClInclude Include="core\input\input_manager.h" />
+    <ClInclude Include="core\input\key.h" />
     <ClInclude Include="core\memory\allocator.h" />
     <ClInclude Include="core\memory\free_list_allocator.h" />
     <ClInclude Include="core\memory\heap_inspector.h" />
