@@ -94,6 +94,9 @@
     <ClCompile Include="core\input\input_manager.cc">
       <Filter>core\input</Filter>
     </ClCompile>
+    <ClCompile Include="core\input\key.cc">
+      <Filter>core\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">

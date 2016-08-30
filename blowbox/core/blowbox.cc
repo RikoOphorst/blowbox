@@ -28,7 +28,7 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	Blowbox::~Blowbox()
 	{
-		
+		Shutdown();
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -53,15 +53,18 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	void Blowbox::Initialise()
 	{
-		subsystem_allocator_ = MemoryManager::StackAllocator(2000);
+		if (can_run_ == false)
+		{
+			subsystem_allocator_ = MemoryManager::StackAllocator(2000);
 
-		console_ = Console::Create(subsystem_allocator_);
-		task_manager_ = TaskManager::Create(subsystem_allocator_);
-		window_ = Window::Create(subsystem_allocator_, "blowbox", 1280, 720);
-		renderer_ = Renderer::Create(subsystem_allocator_);
-		input_manager_ = InputManager::Create(subsystem_allocator_, window_);
+			console_ = Console::Create(subsystem_allocator_);
+			task_manager_ = TaskManager::Create(subsystem_allocator_);
+			window_ = Window::Create(subsystem_allocator_, "blowbox", 1280, 720);
+			renderer_ = Renderer::Create(subsystem_allocator_);
+			input_manager_ = InputManager::Create(subsystem_allocator_, window_);
 
-		can_run_ = true;
+			can_run_ = true;
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -71,22 +74,46 @@ namespace blowbox
 
 		running_ = true;
 
+		std::string message = "";
+
 		while (running_)
 		{
 			window_->ProcessMessages();
+			input_manager_->Update();
+
+			if (input_manager_->GetKey(BB_KEY_ENTER).is_pressed)
+			{
+				Console::Instance()->Log(message, BB_MESSAGE_TYPE_LOG);
+				message = "";
+			}
+			else
+			{
+				for (int i = 0; i < 200; i++)
+				{
+					if (input_manager_->GetKey(static_cast<BB_KEY_TYPE>(i)).is_pressed)
+					{
+						message += input_manager_->GetParsedFrameText();
+					}
+				}
+			}
 		}
 	}
 
 	//------------------------------------------------------------------------------------------------------
 	void Blowbox::Shutdown()
 	{
-		MemoryManager::Deallocate(subsystem_allocator_, input_manager_);
-		MemoryManager::Deallocate(subsystem_allocator_, renderer_);
-		MemoryManager::Deallocate(subsystem_allocator_, window_);
-		MemoryManager::Deallocate(subsystem_allocator_, task_manager_);
-		MemoryManager::Deallocate(subsystem_allocator_, console_);
+		if (can_run_ == true)
+		{
+			MemoryManager::Deallocate(subsystem_allocator_, input_manager_);
+			MemoryManager::Deallocate(subsystem_allocator_, renderer_);
+			MemoryManager::Deallocate(subsystem_allocator_, window_);
+			MemoryManager::Deallocate(subsystem_allocator_, task_manager_);
+			MemoryManager::Deallocate(subsystem_allocator_, console_);
 
-		MemoryManager::Instance()->DestructAllocator(subsystem_allocator_);
+			MemoryManager::Instance()->DestructAllocator(subsystem_allocator_);
+
+			can_run_ = false;
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------------

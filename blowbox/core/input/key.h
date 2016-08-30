@@ -1,8 +1,18 @@
 #pragma once
 
+#include <string>
+
+#ifndef KEY_HEADER
+#define KEY_HEADER
+
 namespace blowbox
 {
-	enum Key
+	/**
+	* @enum blowbox::BB_KEY_TYPE
+	* @author Riko Ophorst
+	* @brief Enumerates all keys on the keyboard (and then some)
+	*/
+	enum BB_KEY_TYPE
 	{
 		BB_KEY_BACKSPACE = 0x08,
 		BB_KEY_TAB = 0x09,
@@ -112,32 +122,32 @@ namespace blowbox
 		BB_KEY_F23 = 0x86,
 		BB_KEY_F24 = 0x87,
 
-		BB_KEY_NUMLOCK = 0x90,
-		BB_KEY_SCROLLLOCK = 0x91,
-		BB_KEY_LEFTSHIFT = 0xA0,
-		BB_KEY_RIGHTSHIFT = 0xA1,
-		BB_KEY_LEFTCONTROL = 0xA2,
-		BB_KEY_RIGHTCONTROL = 0xA3,
-		BB_KEY_LEFTMENU = 0xA4,
-		BB_KEY_RIGHTMENU = 0xA5,
-		BB_KEY_BROWSERBACK = 0xA6,
-		BB_KEY_BROWSERFORWARD = 0xA7,
-		BB_KEY_BROWSERREFRESH = 0xA8,
-		BB_KEY_BROWSERSTOP = 0xA9,
-		BB_KEY_BROWSERSEARCH = 0xAA,
-		BB_KEY_BROWSERFAVORITES = 0xAB,
-		BB_KEY_BROWSERHOME = 0xAC,
-		BB_KEY_VOLUMEMUTE = 0xAD,
-		BB_KEY_VOLUMEDOWN = 0xAE,
-		BB_KEY_VOLUMEUP = 0xAF,
-		BB_KEY_NEXTTRACK = 0xB0,
-		BB_KEY_PREVIOUSTRACK = 0xB1,
-		BB_KEY_STOPMEDIA = 0xB2,
-		BB_KEY_PLAYPAUSE = 0xB3,
-		BB_KEY_LAUNCHMAIL = 0xB4,
-		BB_KEY_SELECTMEDIA = 0xB5,
-		BB_KEY_LAUNCHAPP1 = 0xB6,
-		BB_KEY_LAUNCHAPP2 = 0xB7,
+		BB_KEY_NUM_LOCK = 0x90,
+		BB_KEY_SCROLL_LOCK = 0x91,
+		BB_KEY_LEFT_SHIFT = 0xA0,
+		BB_KEY_RIGHT_SHIFT = 0xA1,
+		BB_KEY_LEFT_CONTROL = 0xA2,
+		BB_KEY_RIGHT_CONTROL = 0xA3,
+		BB_KEY_LEFT_MENU = 0xA4,
+		BB_KEY_RIGHT_MENU = 0xA5,
+		BB_KEY_BROWSER_BACK = 0xA6,
+		BB_KEY_BROWSER_FORWARD = 0xA7,
+		BB_KEY_BROWSER_REFRESH = 0xA8,
+		BB_KEY_BROWSER_STOP = 0xA9,
+		BB_KEY_BROWSER_SEARCH = 0xAA,
+		BB_KEY_BROWSER_FAVORITES = 0xAB,
+		BB_KEY_BROWSER_HOME = 0xAC,
+		BB_KEY_VOLUME_MUTE = 0xAD,
+		BB_KEY_VOLUME_DOWN = 0xAE,
+		BB_KEY_VOLUME_UP = 0xAF,
+		BB_KEY_NEXT_TRACK = 0xB0,
+		BB_KEY_PREVIOUS_TRACK = 0xB1,
+		BB_KEY_STOP_MEDIA = 0xB2,
+		BB_KEY_PLAY_PAUSE = 0xB3,
+		BB_KEY_LAUNCH_MAIL = 0xB4,
+		BB_KEY_SELECT_MEDIA = 0xB5,
+		BB_KEY_LAUNCH_APP1 = 0xB6,
+		BB_KEY_LAUNCH_APP2 = 0xB7,
 		BB_KEY_OEM1 = 0xBA,
 		BB_KEY_OEMPLUS = 0xB8,
 		BB_KEY_OEMCOMMA = 0xBC,
@@ -165,4 +175,32 @@ namespace blowbox
 
 		BB_KEY_NULL = 0
 	};
+
+	/**
+	* @struct blowbox::KeyState
+	* @author Riko Ophorst
+	* @brief The state of a key
+	*/
+	struct KeyState
+	{
+		/**
+		* @brief KeyState constructor
+		*/
+		KeyState() : key(BB_KEY_NULL), is_pressed(false), is_released(false), is_down(false) {};
+		BB_KEY_TYPE key; //<! The key this KeyState represents
+		bool is_pressed; //<! If a key is down, this will be true for one frame and then return to false, even if the key is continued to be held down after the first registered press-frame
+		bool is_released; //<! If a key returns to the up-state, this will be true for one frame and then return to false
+		bool is_down; //<! Is the key down?
+	};
+
+	std::string KeyToString(const BB_KEY_TYPE& key);
+	char KeyToChar(const BB_KEY_TYPE& key, bool shift = false, bool caps_lock = false);
+	bool IsKeyAChar(const BB_KEY_TYPE& key);
+
+	BB_KEY_TYPE StringToKey(const char* name);
+
+	char ToUpper(char c);
+	char ToLower(char c);
 }
+
+#endif

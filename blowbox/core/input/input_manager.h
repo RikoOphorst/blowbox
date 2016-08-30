@@ -1,7 +1,10 @@
 #pragma once
 
-#include "../../core/memory/memory_object.h"
 #include <WindowsIncludes.h>
+#include "../../core/memory/memory_object.h"
+#include "../../core/input/key.h"
+#include <map>
+#include <queue>
 
 using namespace blowbox::memory;
 
@@ -17,6 +20,18 @@ namespace blowbox
 	class InputManager : public MObject
 	{
 	public:
+		struct KeyEvent
+		{
+			enum BB_KEY_EVENT_TYPE
+			{
+				BB_KEY_EVENT_UP,
+				BB_KEY_EVENT_DOWN
+			};
+
+			BB_KEY_TYPE key;
+			BB_KEY_EVENT_TYPE event_type;
+		};
+
 		/**
 		* @brief Create the instance of the input manager
 		* @param[in]	allocator		The allocator to use to allocate this manager
@@ -46,8 +61,26 @@ namespace blowbox
 		* @param[in]	message		The message to be processed
 		*/
 		void ProcessWinMessage(MSG message);
+
+		/**
+		* @brief Updates the input manager
+		*/
+		void Update();
+
+		/**
+		* @brief Get the state of a given key
+		* @param[in]	key		The key you want the state of
+		*/
+		const KeyState& GetKey(const BB_KEY_TYPE& key);
+
+		const std::string& GetParsedFrameText();
 	private:
-		Window* input_window_; //!< Main window the input manager uses to pull input from
 		static InputManager* instance_; //!< Singleton instance of InputManager
+
+		Window* input_window_; //!< Main window the input manager uses to pull input from
+		std::map<BB_KEY_TYPE, KeyState> key_states_; //!< The state of every key
+		std::queue<KeyEvent> key_events_; //!< All key events get queued up each frame in this container
+		std::string parsed_frame_text_; //!< Stores the parsed frame text
+		bool caps_lock_; //!< Is caps lock on?
 	};
 }

@@ -15,8 +15,8 @@ int main(int argc, char** argv)
 	blowbox->Initialise();
 
 	blowbox->Run();
-
-	blowbox->Shutdown();
+	
+	MemoryManager::Deallocate(blowbox->GetSelfStorageAllocator(), blowbox);
 
 	return 0;
 }

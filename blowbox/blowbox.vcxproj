@@ -176,6 +176,7 @@
     <ClCompile Include="core\console\message.cc" />
     <ClCompile Include="core\game_object.cc" />
     <ClCompile Include="core\input\input_manager.cc" />
+    <ClCompile Include="core\input\key.cc" />
     <ClCompile Include="core\memory\allocator.cc" />
     <ClCompile Include="core\memory\free_list_allocator.cc" />
     <ClCompile Include="core\memory\linear_allocator.cc" />
