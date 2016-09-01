@@ -1,4 +1,5 @@
 #include "blowbox.h"
+#include "blowbox.h"
 
 #include "../util/macros.h"
 #include "../core/console/console.h"
@@ -20,7 +21,8 @@ namespace blowbox
 	Blowbox::Blowbox(memory::Allocator* allocator) :
 		MObject(allocator),
 		can_run_(false),
-		running_(false)
+		running_(false),
+		prepare_shutdown_(false)
 	{
 
 	}
@@ -63,6 +65,7 @@ namespace blowbox
 			renderer_ = Renderer::Create(subsystem_allocator_);
 			input_manager_ = InputManager::Create(subsystem_allocator_, window_);
 
+			window_->SetWindowQuitListener(std::bind(&blowbox::Blowbox::PrepareShutdown, this));
 			can_run_ = true;
 		}
 	}
@@ -81,20 +84,10 @@ namespace blowbox
 			window_->ProcessMessages();
 			input_manager_->Update();
 
-			if (input_manager_->GetKey(BB_KEY_ENTER).is_pressed)
+			if (prepare_shutdown_)
 			{
-				Console::Instance()->Log(message, BB_MESSAGE_TYPE_LOG);
-				message = "";
-			}
-			else
-			{
-				for (int i = 0; i < 200; i++)
-				{
-					if (input_manager_->GetKey(static_cast<BB_KEY_TYPE>(i)).is_pressed)
-					{
-						message += input_manager_->GetParsedFrameText();
-					}
-				}
+				Shutdown();
+				break;
 			}
 		}
 	}
@@ -114,6 +107,12 @@ namespace blowbox
 
 			can_run_ = false;
 		}
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	void Blowbox::PrepareShutdown()
+	{
+		prepare_shutdown_ = true;
 	}
 
 	//------------------------------------------------------------------------------------------------------

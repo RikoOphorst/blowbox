@@ -55,10 +55,16 @@ namespace blowbox
 		const float& GetAspectRatio() const; //!< Get the aspect ratio of the window
 		
 		/**
-		* @brief Sets the function that should be called when a message arrives in the message queue of the window\
+		* @brief Sets the function that should be called when a message arrives in the message queue of the window
 		* @param[in]	listener	The listener function
 		*/
 		void SetWindowInputListener(std::function<void(MSG message)> listener);
+
+		/**
+		* @brief Set on window quit listener
+		* @param[in]	listener	The listener function
+		*/
+		void SetWindowQuitListener(std::function<void(void)> listener);
 	private:
 		HWND hwindow_; //!< Handle to the window
 		HINSTANCE hinstance_; //!< Windows process handle
@@ -66,5 +72,6 @@ namespace blowbox
 		unsigned int height_; //!< Height of the window
 		float aspect_ratio_; //!< Aspect ratio of the window
 		std::function<void(MSG message)> window_input_listener_; //!< Listener to the input of the window
+		std::function<void(void)> window_quit_listener_; //!< Listener to the window quit message
 	};
 }

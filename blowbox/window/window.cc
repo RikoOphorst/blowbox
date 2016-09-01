@@ -33,7 +33,7 @@ namespace blowbox
 
 		RegisterClassA(&wndclass);
 
-		int style = WS_OVERLAPPED | WS_MAXIMIZEBOX | WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX | WS_SIZEBOX;
+		int style = NULL;
 
 		RECT client_rect;
 		client_rect.left = client_rect.top = 0;
@@ -47,6 +47,8 @@ namespace blowbox
 		int y = GetSystemMetrics(SM_CYSCREEN) / 2 - actualHeight / 2;
 
 		hwindow_ = CreateWindowA(wndclass.lpszClassName, name.c_str(), style, x, y, actualWidth, actualHeight, GetDesktopWindow(), NULL, wndclass.hInstance, this);
+
+		SetWindowLong(hwindow_, GWL_STYLE, 0);
 
 		ShowWindow(hwindow_, SW_SHOWNORMAL);
 	}
@@ -65,7 +67,12 @@ namespace blowbox
 			SetWindowLongPtrA(hwindow, GWLP_USERDATA, (LONG_PTR)(((LPCREATESTRUCT)lparam)->lpCreateParams));
 			return DefWindowProcA(hwindow, message, wparam, lparam);
 		}
-		//Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
+		Window* window = reinterpret_cast<Window*>(GetWindowLongPtrA(hwindow, GWLP_USERDATA));
+
+		if (message == WM_CLOSE)
+		{
+			window->window_quit_listener_();
+		}
 
 		return DefWindowProcA(hwindow, message, wparam, lparam);
 	}
@@ -118,5 +125,11 @@ namespace blowbox
 	void Window::SetWindowInputListener(std::function<void(MSG message)> listener)
 	{
 		window_input_listener_ = listener;
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	void Window::SetWindowQuitListener(std::function<void(void)> listener)
+	{
+		window_quit_listener_ = listener;
 	}
 }

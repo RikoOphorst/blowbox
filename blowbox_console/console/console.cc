@@ -143,7 +143,7 @@ namespace console
 		network::ConsoleMessageTextLog msg;
 
 		memcpy(msg.log, log.c_str(), log.size());
-		msg.log_length = log.size();
+		msg.log_length = static_cast<short>(log.size());
 		msg.foregroundR = 150;
 		msg.foregroundG = 150;
 		msg.foregroundB = 150;

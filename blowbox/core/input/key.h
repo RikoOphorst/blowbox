@@ -193,13 +193,42 @@ namespace blowbox
 		bool is_down; //<! Is the key down?
 	};
 
+	/**
+	* @brief Converts a key to a name-string
+	* @param[in]	key		The key to be converted
+	*/
 	std::string KeyToString(const BB_KEY_TYPE& key);
+	
+	/**
+	* @brief Converts a given key to a char
+	* @param[in]	key			The key to be converted
+	* @param[in]	shift		Is shift being held?
+	* @param[in]	caps_lock	Is caps lock on?
+	*/
 	char KeyToChar(const BB_KEY_TYPE& key, bool shift = false, bool caps_lock = false);
+
+	/**
+	* @brief Is the given key a typeable character?
+	* @param[in]	key		The key to be checked
+	*/
 	bool IsKeyAChar(const BB_KEY_TYPE& key);
 
+	/**
+	* @brief Converts a name to a BB_KEY_TYPE
+	* @param[in]	name	the name of the key you want the BB_KEY_* of
+	*/
 	BB_KEY_TYPE StringToKey(const char* name);
 
+	/**
+	* @brief Converts a given char to uppercase
+	* @param[in]	c	the char to convert
+	*/
 	char ToUpper(char c);
+	
+	/**
+	* @brief Converts a given char to lowercase
+	* @param[in]	c	the char to convert
+	*/
 	char ToLower(char c);
 }
 

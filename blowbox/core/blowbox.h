@@ -52,6 +52,11 @@ namespace blowbox
 		*/
 		void Shutdown();
 
+		/**
+		* @brief Prepares for shutdown at the immediate start of the next frame
+		*/
+		void PrepareShutdown();
+
 		Console* GetConsole() const; //!< Get the console
 		TaskManager* GetTaskManager() const; //!< Get the task manager
 		Window* GetWindow() const; //!< Get the window
@@ -63,6 +68,7 @@ namespace blowbox
 		StackAllocator* subsystem_allocator_; //!< Allocator used for allocating subsystems (e.g. renderer, console)
 		bool can_run_; //!< Can the application be run?
 		bool running_; //!< Is the application running?
+		bool prepare_shutdown_; //!< Do we prepare for shutdown?
 		Console* console_; //!< The console this blowbox instance uses
 		TaskManager* task_manager_; //!< The task manager this blowbox instance uses
 		Window* window_; //!< The window this blowbox instance uses

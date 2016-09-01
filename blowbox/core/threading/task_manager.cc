@@ -12,7 +12,7 @@ namespace blowbox
 		MObject(allocator),
 		running_(false)
 	{
-		StartUp();
+		
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -24,7 +24,9 @@ namespace blowbox
 	//------------------------------------------------------------------------------------------------------
 	TaskManager* TaskManager::Create(Allocator* allocator)
 	{
-		return instance_ = MemoryManager::Allocate<TaskManager>(allocator, allocator);
+		instance_ = MemoryManager::Allocate<TaskManager>(allocator, allocator);
+		instance_->StartUp();
+		return instance_;
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -37,11 +39,6 @@ namespace blowbox
 	void TaskManager::WorkThread()
 	{
 		TaskManager* instance = Instance();
-
-		while (instance == nullptr)
-		{
-			instance = Instance();
-		}
 
 		while (true)
 		{

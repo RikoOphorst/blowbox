@@ -97,6 +97,9 @@
     <ClCompile Include="core\input\key.cc">
       <Filter>core\input</Filter>
     </ClCompile>
+    <ClCompile Include="core\input\mouse.cc">
+      <Filter>core\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -181,6 +184,9 @@
       <Filter>core\input</Filter>
     </ClInclude>
     <ClInclude Include="core\input\key.h">
+      <Filter>core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="core\input\mouse.h">
       <Filter>core\input</Filter>
     </ClInclude>
   </ItemGroup>
