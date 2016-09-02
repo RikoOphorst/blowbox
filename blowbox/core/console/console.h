@@ -33,7 +33,10 @@ namespace blowbox
 		*/
 		Console(memory::Allocator* allocator);
 
-		~Console(); //!< Console destructor
+		/**
+		* @brief Console destructor
+		*/
+		~Console();
 
 		/**
 		* @brief Factory to create the Console
@@ -44,6 +47,8 @@ namespace blowbox
 		static Console* Instance(); //!< Get the Console instance
 		void Connect(); //!< Connect to the external console server
 		void Disconnect(); //!< Disconnect from the external console server
+
+		void Update();
 
 		/**
 		* @brief Logs a message to the external console
@@ -63,7 +68,7 @@ namespace blowbox
 		LinearAllocator* temp_message_allocator_; //!< Temporary message allocator
 
 		RakNet::RakPeerInterface* peer_; //!< Stores the peer information
-		RakNet::SystemAddress server_; //!< The server address of the external console
+		RakNet::SystemAddress client_; //!< The server address of the external console
 		bool peer_started_; //!< Has the peer started?
 		bool connection_attempt_started_; //!< Has the connection attempted to start?
 		bool connected_; //!< Are we connected?

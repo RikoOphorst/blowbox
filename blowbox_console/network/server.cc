@@ -31,13 +31,40 @@ namespace network
 		console_->AddLog("Booting up server..");
 		peer_ = RakNet::RakPeerInterface::GetInstance();
 
-		RakNet::SocketDescriptor sd(BB_CONSOLE_SERVER_PORT, 0);
-		peer_->Startup(BB_CONSOLE_MAX_CLIENTS, &sd, 1);
+		RakNet::SocketDescriptor sd;
+		
+		peer_->Startup(1, &sd, 1);
 
-		console_->AddLog(std::string("Console listening on 127.0.0.1:") + std::to_string(sd.port) + " for connections..");
-		console_->AddLog(std::string("Console listening on ") + peer_->GetLocalIP(0) + ":" + std::to_string(sd.port) + " for connections..");
-		// We need to let the server accept incoming connections from the clients
-		peer_->SetMaximumIncomingConnections(BB_CONSOLE_MAX_CLIENTS);
+		peer_->Connect("127.0.0.1", BB_CONSOLE_SERVER_PORT, 0, 0);
+
+		bool connected = false;
+
+		while (!connected)
+		{
+			RakNet::Packet* packet;
+
+			bool unavailable = false;
+
+			for (packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
+			{
+				switch (packet->data[0])
+				{
+				case ID_CONNECTION_REQUEST_ACCEPTED:
+					connected = true;
+					client_ = packet->systemAddress;
+					break;
+				default:
+					unavailable = true;
+					std::cout << "The console is unavailable: " << RakNet::PacketLogger::BaseIDTOString(packet->data[0]) << std::endl;
+					break;
+				}
+			}
+
+			if (unavailable)
+			{
+				break;
+			}
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------------
