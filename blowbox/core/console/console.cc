@@ -90,6 +90,18 @@ namespace blowbox
 					connected_ = true;
 					client_ = packet->systemAddress;
 					break;
+
+				case ID_DISCONNECTION_NOTIFICATION:
+				case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+					connected_ = false;
+					client_ = NULL;
+					break;
+
+				case ID_REMOTE_CONNECTION_LOST:
+				case ID_CONNECTION_LOST:
+					connected_ = false;
+					client_ = NULL;
+					break;
 				}
 			}
 		}

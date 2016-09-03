@@ -19,6 +19,8 @@ namespace RakNet
 
 namespace blowbox
 {
+	typedef std::basic_stringstream<char, std::char_traits<char>, std::allocator<char>> logstream;
+
 	/**
 	* @class blowbox::Console
 	* @author Riko Ophorst
@@ -61,7 +63,9 @@ namespace blowbox
 		* @param[in]	log		The actual log to be logged
 		* @param[in]	type	The type of log
 		*/
-		void Log(const std::string& log, BB_MESSAGE_TYPES type);
+		void Log(const std::string& log, BB_MESSAGE_TYPES type = BB_MESSAGE_TYPE_LOG);
+
+		void Log(std::stringstream& log, BB_MESSAGE_TYPES type = BB_MESSAGE_TYPE_LOG);
 	private:
 		static Console* instance_; //!< Singleton instance of Console
 

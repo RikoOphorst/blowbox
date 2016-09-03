@@ -4,6 +4,7 @@
 #include "../../core/console/message_types.h"
 
 #include <string>
+#include <sstream>
 
 namespace blowbox
 {
@@ -34,6 +35,8 @@ namespace blowbox
 		* @param[in]	message_type	The type of message to send
 		*/
 		Message(memory::Allocator* allocator, const std::string& message, const BB_MESSAGE_TYPES& message_type);
+
+		Message() : MObject(nullptr) {};
 		
 		~Message(); //!< Message destructor
 
@@ -46,7 +49,19 @@ namespace blowbox
 		static Message* Create(memory::Allocator* allocator, const std::string& message, const BB_MESSAGE_TYPES& message_type);
 
 		const ConsoleMessageTextLog& GetActualMessage(); //!< Get the actual packet that will be send
+
 	private:
 		ConsoleMessageTextLog actual_message_; //!< The actual packet that will be send
+	};
+
+	class Log : public std::stringstream
+	{
+	public:
+		Log() {};
+
+		void Send()
+		{
+			Console::Instance()->Log(*this);
+		};
 	};
 }

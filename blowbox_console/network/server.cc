@@ -83,40 +83,17 @@ namespace network
 				{
 					switch (packet->data[0])
 					{
-					case ID_NEW_INCOMING_CONNECTION:
-					case ID_REMOTE_NEW_INCOMING_CONNECTION:
-						console_->AddLog(std::string("New connection incoming: ") + packet->systemAddress.ToString());
-						break;
-
-					case ID_DISCONNECTION_NOTIFICATION:
-					case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-						console_->AddLog(std::string("Console is disconnecting from: ") + packet->systemAddress.ToString());
-						break;
-
-					case ID_REMOTE_CONNECTION_LOST:
-					case ID_CONNECTION_LOST:
-						console_->AddLog(std::string("Connection to a client has been lost: ") + packet->systemAddress.ToString());
-						break;
-
-					case ID_NO_FREE_INCOMING_CONNECTIONS:
-						console_->AddLog(std::string("A new connection was tried, but was not accepted because we are at the maximum amount of connections."));
-						break;
-
 					case BB_CONSOLE_MESSAGE_TEXT_LOG:
-					{
-						RakNet::BitStream bit_stream(packet->data, packet->length, true);
+						{
+							RakNet::BitStream bit_stream(packet->data, packet->length, true);
 
-						ConsoleMessageTextLog log;
+							ConsoleMessageTextLog log;
 
-						bit_stream.IgnoreBytes(sizeof(RakNet::MessageID));
-						bit_stream.Read(log);
+							bit_stream.IgnoreBytes(sizeof(RakNet::MessageID));
+							bit_stream.Read(log);
 
-						console_->AddLog(log);
-					}
-						break;
-
-					default:
-						console_->AddLog(std::string("An unidentified message is coming in.."));
+							console_->AddLog(log);
+						}
 						break;
 					}
 				}
