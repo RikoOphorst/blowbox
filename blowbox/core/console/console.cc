@@ -70,7 +70,7 @@ namespace blowbox
 			connection_attempt_started_ = false;
 			peer_started_ = false;
 
-			peer_->CloseConnection(client_, true);
+			peer_->CloseConnection(client_, true, 0, PacketPriority::IMMEDIATE_PRIORITY);
 
 			peer_ = nullptr;
 		}
@@ -123,6 +123,17 @@ namespace blowbox
 	void Console::Log(const std::string& log, BB_MESSAGE_TYPES message_type)
 	{
 		Message* message = Message::Create(temp_message_allocator_, log, message_type);
+		Log(message);
+		temp_message_allocator_->Reset();
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	void Console::Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type)
+	{
+		std::stringstream ss;
+		ss << log.rdbuf();
+
+		Message* message = Message::Create(temp_message_allocator_, ss.str(), message_type);
 		Log(message);
 		temp_message_allocator_->Reset();
 	}

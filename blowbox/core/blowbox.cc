@@ -84,11 +84,6 @@ namespace blowbox
 			window_->ProcessMessages();
 			input_manager_->Update();
 
-			Console::Instance()->Log("dicks", BB_MESSAGE_TYPE_LOG);
-
-			Console::Instance()->Log(Log() << "dicks");
-
-
 			if (prepare_shutdown_)
 			{
 				Shutdown();

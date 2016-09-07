@@ -50,6 +50,9 @@ namespace blowbox
 		void Connect(); //!< Connect to the external console server
 		void Disconnect(); //!< Disconnect from the external console server
 
+		/**
+		* @brief Frame update for the console, checks for available console connection requests
+		*/
 		void Update();
 
 		/**
@@ -63,9 +66,14 @@ namespace blowbox
 		* @param[in]	log		The actual log to be logged
 		* @param[in]	type	The type of log
 		*/
-		void Log(const std::string& log, BB_MESSAGE_TYPES type = BB_MESSAGE_TYPE_LOG);
+		void Log(const std::string& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG);
 
-		void Log(std::stringstream& log, BB_MESSAGE_TYPES type = BB_MESSAGE_TYPE_LOG);
+		/**
+		* @brief Logs a message to the external console
+		* @param[in]	log				The log stream to be logged (use BB_LOGSTREAM to initialise stream)
+		* @param[in]	message_type	The type of message to be logged
+		*/
+		void Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG);
 	private:
 		static Console* instance_; //!< Singleton instance of Console
 

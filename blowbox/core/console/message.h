@@ -53,15 +53,4 @@ namespace blowbox
 	private:
 		ConsoleMessageTextLog actual_message_; //!< The actual packet that will be send
 	};
-
-	class Log : public std::stringstream
-	{
-	public:
-		Log() {};
-
-		void Send()
-		{
-			Console::Instance()->Log(*this);
-		};
-	};
 }

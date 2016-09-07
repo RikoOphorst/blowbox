@@ -28,7 +28,7 @@ namespace network
 	{
 		console_ = console;
 
-		console_->AddLog("Booting up server..");
+		console_->AddLog("Booting up client..");
 		peer_ = RakNet::RakPeerInterface::GetInstance();
 
 		RakNet::SocketDescriptor sd;
@@ -37,34 +37,7 @@ namespace network
 
 		peer_->Connect("127.0.0.1", BB_CONSOLE_SERVER_PORT, 0, 0);
 
-		bool connected = false;
-
-		while (!connected)
-		{
-			RakNet::Packet* packet;
-
-			bool unavailable = false;
-
-			for (packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
-			{
-				switch (packet->data[0])
-				{
-				case ID_CONNECTION_REQUEST_ACCEPTED:
-					connected = true;
-					client_ = packet->systemAddress;
-					break;
-				default:
-					unavailable = true;
-					std::cout << "The console is unavailable: " << RakNet::PacketLogger::BaseIDTOString(packet->data[0]) << std::endl;
-					break;
-				}
-			}
-
-			if (unavailable)
-			{
-				break;
-			}
-		}
+		connected_ = false;
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -79,6 +52,12 @@ namespace network
 			while (!console_->IsClosed())
 			{	
 				qApp->processEvents();
+
+				if (connected_ == false)
+				{
+					peer_->Connect("127.0.0.1", BB_CONSOLE_SERVER_PORT, 0, 0);
+				}
+
 				for (packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
 				{
 					switch (packet->data[0])
@@ -94,6 +73,20 @@ namespace network
 
 							console_->AddLog(log);
 						}
+						break;
+					case ID_CONNECTION_REQUEST_ACCEPTED:
+						connected_ = true;
+						client_ = packet->systemAddress;
+
+						console_->AddLog("New blowbox found.");
+						break;
+					case ID_CONNECTION_LOST:
+					case ID_DISCONNECTION_NOTIFICATION:
+					case ID_REMOTE_CONNECTION_LOST:
+					case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+						connected_ = false;
+						client_ = packet->systemAddress;
+						console_->AddLog("blowbox connection lost.");
 						break;
 					}
 				}

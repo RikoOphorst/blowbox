@@ -64,14 +64,4 @@ namespace blowbox
 	{
 		return actual_message_;
 	}
-
-	//------------------------------------------------------------------------------------------------------
-	Message& operator<<(Message& message, int& a)
-	{
-		std::string new_log = std::string(message.actual_message_.log, message.actual_message_.log_length) + std::to_string(a);
-		memcpy(message.actual_message_.log, new_log.c_str(), new_log.size());
-		message.actual_message_.log_length = static_cast<short>(new_log.size());
-
-		return *this;
-	}
 }
