@@ -8,6 +8,7 @@
 #include <iostream>
 
 #define BB_CONSOLE_SERVER_PORT 60000
+#define BB_CONSOLE_MAX_CLIENTS 1
 
 namespace blowbox
 {
@@ -52,48 +53,12 @@ namespace blowbox
 
 		peer_ = RakNet::RakPeerInterface::GetInstance();
 
-		RakNet::SocketDescriptor sd;
+		RakNet::SocketDescriptor sd(BB_CONSOLE_SERVER_PORT, 0);
+		peer_->Startup(BB_CONSOLE_MAX_CLIENTS, &sd, 1); 
+		peer_->SetMaximumIncomingConnections(BB_CONSOLE_MAX_CLIENTS);
 
-		peer_started_ = false;
-		connection_attempt_started_ = false;
+		peer_started_ = true;
 		connected_ = false;
-
-		if (peer_->Startup(1, &sd, 1) == RakNet::StartupResult::RAKNET_STARTED)
-		{
-			peer_started_ = true;
-
-			if (peer_->Connect("127.0.0.1", BB_CONSOLE_SERVER_PORT, 0, 0) == RakNet::ConnectionAttemptResult::CONNECTION_ATTEMPT_STARTED)
-			{
-				connection_attempt_started_ = true;
-			}
-		}
-
-		while (!connected_)
-		{
-			RakNet::Packet* packet;
-
-			bool unavailable = false;
-
-			for (packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
-			{
-				switch (packet->data[0])
-				{
-				case ID_CONNECTION_REQUEST_ACCEPTED:
-					connected_ = true;
-					server_ = packet->systemAddress;
-					break;
-				default:
-					unavailable = true;
-					std::cout << "The console is unavailable: " << RakNet::PacketLogger::BaseIDTOString(packet->data[0]) << std::endl;
-					break;
-				}
-			}
-
-			if (unavailable)
-			{
-				break;
-			}
-		}
 	}
 
 	//------------------------------------------------------------------------------------------------------
@@ -105,9 +70,40 @@ namespace blowbox
 			connection_attempt_started_ = false;
 			peer_started_ = false;
 
-			peer_->CloseConnection(server_, true);
+			peer_->CloseConnection(client_, true, 0, PacketPriority::IMMEDIATE_PRIORITY);
 
 			peer_ = nullptr;
+		}
+	}
+
+	//------------------------------------------------------------------------------------------------------
+	void Console::Update()
+	{
+		if (!connected_)
+		{
+			for (auto packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
+			{
+				switch (packet->data[0])
+				{
+				case ID_NEW_INCOMING_CONNECTION:
+				case ID_REMOTE_NEW_INCOMING_CONNECTION:
+					connected_ = true;
+					client_ = packet->systemAddress;
+					break;
+
+				case ID_DISCONNECTION_NOTIFICATION:
+				case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+					connected_ = false;
+					client_ = NULL;
+					break;
+
+				case ID_REMOTE_CONNECTION_LOST:
+				case ID_CONNECTION_LOST:
+					connected_ = false;
+					client_ = NULL;
+					break;
+				}
+			}
 		}
 	}
 
@@ -117,9 +113,9 @@ namespace blowbox
 		if (connected_)
 		{
 			RakNet::BitStream bit_stream;
-			bit_stream.Write((RakNet::MessageID)BB_CONSOLE_MESSAGE_TEXT_LOG);
+			bit_stream.Write(static_cast<RakNet::MessageID>(BB_CONSOLE_MESSAGE_TEXT_LOG));
 			bit_stream.Write(message->GetActualMessage());
-			peer_->Send(&bit_stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, server_, false);
+			peer_->Send(&bit_stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, client_, false);
 		}
 	}
 
@@ -127,6 +123,17 @@ namespace blowbox
 	void Console::Log(const std::string& log, BB_MESSAGE_TYPES message_type)
 	{
 		Message* message = Message::Create(temp_message_allocator_, log, message_type);
+		Log(message);
+		temp_message_allocator_->Reset();
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	void Console::Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type)
+	{
+		std::stringstream ss;
+		ss << log.rdbuf();
+
+		Message* message = Message::Create(temp_message_allocator_, ss.str(), message_type);
 		Log(message);
 		temp_message_allocator_->Reset();
 	}

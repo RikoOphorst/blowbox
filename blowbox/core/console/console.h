@@ -19,6 +19,8 @@ namespace RakNet
 
 namespace blowbox
 {
+	typedef std::basic_stringstream<char, std::char_traits<char>, std::allocator<char>> logstream;
+
 	/**
 	* @class blowbox::Console
 	* @author Riko Ophorst
@@ -33,7 +35,10 @@ namespace blowbox
 		*/
 		Console(memory::Allocator* allocator);
 
-		~Console(); //!< Console destructor
+		/**
+		* @brief Console destructor
+		*/
+		~Console();
 
 		/**
 		* @brief Factory to create the Console
@@ -46,6 +51,11 @@ namespace blowbox
 		void Disconnect(); //!< Disconnect from the external console server
 
 		/**
+		* @brief Frame update for the console, checks for available console connection requests
+		*/
+		void Update();
+
+		/**
 		* @brief Logs a message to the external console
 		* @param[in]	message		The message to be sent
 		*/
@@ -56,14 +66,21 @@ namespace blowbox
 		* @param[in]	log		The actual log to be logged
 		* @param[in]	type	The type of log
 		*/
-		void Log(const std::string& log, BB_MESSAGE_TYPES type);
+		void Log(const std::string& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG);
+
+		/**
+		* @brief Logs a message to the external console
+		* @param[in]	log				The log stream to be logged (use BB_LOGSTREAM to initialise stream)
+		* @param[in]	message_type	The type of message to be logged
+		*/
+		void Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG);
 	private:
 		static Console* instance_; //!< Singleton instance of Console
 
 		LinearAllocator* temp_message_allocator_; //!< Temporary message allocator
 
 		RakNet::RakPeerInterface* peer_; //!< Stores the peer information
-		RakNet::SystemAddress server_; //!< The server address of the external console
+		RakNet::SystemAddress client_; //!< The server address of the external console
 		bool peer_started_; //!< Has the peer started?
 		bool connection_attempt_started_; //!< Has the connection attempted to start?
 		bool connected_; //!< Are we connected?

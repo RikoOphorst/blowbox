@@ -2,6 +2,8 @@
 
 #include "../core/console/console.h"
 
+#define BB_LOGSTREAM std::stringstream()
+
 #define BB_BREAK(msg) { Console::Instance()->Log(msg, blowbox::BB_MESSAGE_TYPE_ERROR); DebugBreak(); }
 #define BB_CHECK(hr) { HRESULT _hr = hr; if (_hr != S_OK) { _com_error error(_hr); Console::Instance()->Log(error.ErrorMessage(), blowbox::BB_MESSAGE_TYPE_ERROR); DebugBreak(); } }
 #define BB_GUARANTEE_DELETE(ptr) if (ptr != nullptr) { delete ptr; ptr = nullptr; } else { Console::Instance()->Log("Trying to delete a pointer that already is null.", blowbox::BB_MESSAGE_TYPE_ERROR); DebugBreak(); }

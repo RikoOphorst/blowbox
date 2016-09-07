@@ -10,6 +10,7 @@
 #include "../core/game_object.h"
 
 #include <iostream>
+#include <sstream>
 
 using namespace blowbox::memory;
 
@@ -77,10 +78,9 @@ namespace blowbox
 
 		running_ = true;
 
-		std::string message = "";
-
 		while (running_)
 		{
+			console_->Update();
 			window_->ProcessMessages();
 			input_manager_->Update();
 

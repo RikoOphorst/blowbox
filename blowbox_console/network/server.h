@@ -24,11 +24,12 @@ namespace network
 		void Initialise(console::Console* console);
 
 		void Run();
-
-		void Update();
 	private:
 		console::Console* console_;
 
 		RakNet::RakPeerInterface* peer_;
+		RakNet::SystemAddress client_; //!< The client address of the application
+
+		bool connected_;
 	};
 }
