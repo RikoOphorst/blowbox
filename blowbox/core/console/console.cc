@@ -60,27 +60,30 @@ namespace blowbox
 		peer_started_ = true;
 		connected_ = false;
 
-		for (auto packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
+		while (!connected_)
 		{
-			switch (packet->data[0])
+			for (auto packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
 			{
-			case ID_NEW_INCOMING_CONNECTION:
-			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				connected_ = true;
-				client_ = packet->systemAddress;
-				break;
+				switch (packet->data[0])
+				{
+				case ID_NEW_INCOMING_CONNECTION:
+				case ID_REMOTE_NEW_INCOMING_CONNECTION:
+					connected_ = true;
+					client_ = packet->systemAddress;
+					break;
 
-			case ID_DISCONNECTION_NOTIFICATION:
-			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				connected_ = false;
-				client_ = NULL;
-				break;
+				case ID_DISCONNECTION_NOTIFICATION:
+				case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+					connected_ = false;
+					client_ = NULL;
+					break;
 
-			case ID_REMOTE_CONNECTION_LOST:
-			case ID_CONNECTION_LOST:
-				connected_ = false;
-				client_ = NULL;
-				break;
+				case ID_REMOTE_CONNECTION_LOST:
+				case ID_CONNECTION_LOST:
+					connected_ = false;
+					client_ = NULL;
+					break;
+				}
 			}
 		}
 	}
@@ -139,7 +142,7 @@ namespace blowbox
 			RakNet::BitStream bit_stream;
 			bit_stream.Write(static_cast<RakNet::MessageID>(BB_CONSOLE_MESSAGE_TEXT_LOG));
 			bit_stream.Write(message->GetActualMessage());
-			peer_->Send(&bit_stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, client_, false);
+			peer_->Send(&bit_stream, IMMEDIATE_PRIORITY, PacketReliability::RELIABLE_ORDERED, 0, client_, false);
 		}
 	}
 

@@ -19,7 +19,7 @@ namespace blowbox
 
 		void Update();
 	private:
-		IDXGIFactory1* factory_;
+		IDXGIFactory2* factory_;
 		ID3D12Device* device_;
 	};
 }
