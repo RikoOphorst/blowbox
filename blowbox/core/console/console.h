@@ -59,21 +59,21 @@ namespace blowbox
 		* @brief Logs a message to the external console
 		* @param[in]	message		The message to be sent
 		*/
-		void Log(Message* message);
+		void Log(Message* message, bool wait_for_ack = false);
 
 		/**
 		* @brief Logs a message to the external console
 		* @param[in]	log		The actual log to be logged
 		* @param[in]	type	The type of log
 		*/
-		void Log(const std::string& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG);
+		void Log(const std::string& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG, bool wait_for_ack = false);
 
 		/**
 		* @brief Logs a message to the external console
 		* @param[in]	log				The log stream to be logged (use BB_LOGSTREAM to initialise stream)
 		* @param[in]	message_type	The type of message to be logged
 		*/
-		void Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG);
+		void Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type = BB_MESSAGE_TYPE_LOG, bool wait_for_ack = false);
 	private:
 		static Console* instance_; //!< Singleton instance of Console
 

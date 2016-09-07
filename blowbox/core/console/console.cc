@@ -135,33 +135,50 @@ namespace blowbox
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void Console::Log(Message* message)
+	void Console::Log(Message* message, bool wait_for_ack)
 	{
 		if (connected_)
 		{
 			RakNet::BitStream bit_stream;
 			bit_stream.Write(static_cast<RakNet::MessageID>(BB_CONSOLE_MESSAGE_TEXT_LOG));
 			bit_stream.Write(message->GetActualMessage());
-			peer_->Send(&bit_stream, IMMEDIATE_PRIORITY, PacketReliability::RELIABLE_ORDERED, 0, client_, false);
+			peer_->Send(&bit_stream, IMMEDIATE_PRIORITY, wait_for_ack ? RELIABLE_ORDERED_WITH_ACK_RECEIPT : RELIABLE_ORDERED, 0, client_, false);
+
+			if (wait_for_ack)
+			{
+				bool received = false;
+				while (!received)
+				{
+					for (auto packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
+					{
+						switch (packet->data[0])
+						{
+						case ID_SND_RECEIPT_ACKED:
+							received = true;
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 
 	//------------------------------------------------------------------------------------------------------
-	void Console::Log(const std::string& log, BB_MESSAGE_TYPES message_type)
+	void Console::Log(const std::string& log, BB_MESSAGE_TYPES message_type, bool wait_for_ack)
 	{
 		Message* message = Message::Create(temp_message_allocator_, log, message_type);
-		Log(message);
+		Log(message, wait_for_ack);
 		temp_message_allocator_->Reset();
 	}
 	
 	//------------------------------------------------------------------------------------------------------
-	void Console::Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type)
+	void Console::Log(const std::basic_ostream<char, std::char_traits<char>>& log, BB_MESSAGE_TYPES message_type, bool wait_for_ack)
 	{
 		std::stringstream ss;
 		ss << log.rdbuf();
 
 		Message* message = Message::Create(temp_message_allocator_, ss.str(), message_type);
-		Log(message);
+		Log(message, wait_for_ack);
 		temp_message_allocator_->Reset();
 	}
 }
