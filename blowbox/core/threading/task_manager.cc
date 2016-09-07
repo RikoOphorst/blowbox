@@ -25,7 +25,6 @@ namespace blowbox
 	TaskManager* TaskManager::Create(Allocator* allocator)
 	{
 		instance_ = MemoryManager::Allocate<TaskManager>(allocator, allocator);
-		instance_->StartUp();
 		return instance_;
 	}
 

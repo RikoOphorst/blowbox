@@ -14,5 +14,12 @@ namespace blowbox
 
 		Renderer(Allocator* allocator);
 		~Renderer();
+
+		void Startup();
+
+		void Update();
+	private:
+		IDXGIFactory1* factory_;
+		ID3D12Device* device_;
 	};
 }

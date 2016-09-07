@@ -61,9 +61,15 @@ namespace blowbox
 			subsystem_allocator_ = MemoryManager::StackAllocator(2000);
 
 			console_ = Console::Create(subsystem_allocator_);
+			
 			task_manager_ = TaskManager::Create(subsystem_allocator_);
+			task_manager_->StartUp();
+
 			window_ = Window::Create(subsystem_allocator_, "blowbox", 1280, 720);
+			
 			renderer_ = Renderer::Create(subsystem_allocator_);
+			renderer_->Startup();
+			
 			input_manager_ = InputManager::Create(subsystem_allocator_, window_);
 
 			window_->SetWindowQuitListener(std::bind(&blowbox::Blowbox::PrepareShutdown, this));
