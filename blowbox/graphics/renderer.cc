@@ -31,6 +31,8 @@ namespace blowbox
 		{
 			ID3D12Debug* debug_controller;
 			BB_CHECK(D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)));
+			debug_controller->EnableDebugLayer();
+			debug_controller->Release();
 		}
 #endif
 		
@@ -46,8 +48,8 @@ namespace blowbox
 			if (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE)
 			{
 				// this adapter is a software adapter, skip it
-				i++;
-				continue;
+				//i++;
+				//continue;
 			}
 			
 			if (D3D12CreateDevice(adapter, D3D_FEATURE_LEVEL_11_0, __uuidof(ID3D12Device), nullptr) == S_OK)
@@ -63,10 +65,12 @@ namespace blowbox
 
 		if (adapter == nullptr)
 		{
-			BB_BREAK(BB_LOGSTREAM << "No valid adapter (GPU) was found with feature level 11_0");
+			Console::Instance()->Log(BB_LOGSTREAM << "No valid adapter (GPU) was found with feature level 11_0");
+			OutputDebugStringA("No valid adapter (GPU) was found with feature level 11_0");
+			return;
 		}
 
-		D3D12CreateDevice(adapter, D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&device_));
+		BB_CHECK(D3D12CreateDevice(adapter, D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&device_)));
 	}
 	
 	//------------------------------------------------------------------------------------------------------

@@ -59,6 +59,30 @@ namespace blowbox
 
 		peer_started_ = true;
 		connected_ = false;
+
+		for (auto packet = peer_->Receive(); packet; peer_->DeallocatePacket(packet), packet = peer_->Receive())
+		{
+			switch (packet->data[0])
+			{
+			case ID_NEW_INCOMING_CONNECTION:
+			case ID_REMOTE_NEW_INCOMING_CONNECTION:
+				connected_ = true;
+				client_ = packet->systemAddress;
+				break;
+
+			case ID_DISCONNECTION_NOTIFICATION:
+			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+				connected_ = false;
+				client_ = NULL;
+				break;
+
+			case ID_REMOTE_CONNECTION_LOST:
+			case ID_CONNECTION_LOST:
+				connected_ = false;
+				client_ = NULL;
+				break;
+			}
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------------
