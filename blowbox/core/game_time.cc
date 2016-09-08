@@ -1,5 +1,8 @@
 #include "game_time.h"
 
+#include "../util/macros.h"
+#include "../core/console/console.h"
+
 namespace blowbox
 {
 	GameTime* GameTime::instance_ = nullptr;
@@ -21,7 +24,8 @@ namespace blowbox
 		MObject(allocator),
 		delta_time_(0.0f),
 		elapsed_time_(0.0f),
-		average_delta_precision_(100)
+		average_delta_precision_(250),
+		num_ticks_(0)
 	{
 
 	}
@@ -38,6 +42,7 @@ namespace blowbox
 		last_frame_time_ = std::chrono::high_resolution_clock::now();
 		elapsed_time_ = 0.0f;
 		delta_time_ = 0.0f;
+		num_ticks_ = 0;
 		delta_times_.clear();
 	}
 
@@ -50,11 +55,14 @@ namespace blowbox
 		elapsed_time_ += delta_time_;
 
 		delta_times_.push_front(delta_time_);
-		if (delta_times_.size() >= average_delta_precision_)
+		if (delta_times_.size() > average_delta_precision_)
 		{
 			delta_times_.pop_back();
 		}
 
+		Console::Instance()->Log(BB_LOGSTREAM << "Average FPS: " << 1.0f / GetAverageDelta() << " Delta times " << delta_times_.size());
+
+		num_ticks_++;
 		last_frame_time_ = now;
 	}
 	
@@ -82,5 +90,11 @@ namespace blowbox
 		}
 
 		return total / g->delta_times_.size();
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	uint64_t GameTime::GetNumTicks()
+	{
+		return Instance()->num_ticks_;
 	}
 }

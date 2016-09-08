@@ -327,7 +327,7 @@ namespace blowbox
 		ID3D12CommandList* command_lists[] = { command_list_ };
 		command_queue_->ExecuteCommandLists(_countof(command_lists), command_lists);
 
-		BB_CHECK(swap_chain_->Present(0, 0));
+		BB_CHECK(swap_chain_->Present(1, 0));
 		current_back_buffer_ = (current_back_buffer_ + 1) % buffer_count_;
 
 		FlushCommandQueue();

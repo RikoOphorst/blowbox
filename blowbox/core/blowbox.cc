@@ -98,10 +98,6 @@ namespace blowbox
 			
 			renderer_->Update();
 
-			Console::Instance()->Log(BB_LOGSTREAM << "Current frame time: " << game_time_->GetDelta() << " Elapsed game time: " << game_time_->GetElapsed() << " Average frame time: " << game_time_->GetAverageDelta());
-
-			Sleep(16);
-
 			if (prepare_shutdown_)
 			{
 				Shutdown();
