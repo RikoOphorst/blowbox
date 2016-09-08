@@ -190,6 +190,7 @@
     <ClCompile Include="core\threading\task_manager.cc" />
     <ClCompile Include="core\threading\task.cc" />
     <ClCompile Include="blowbox_include.h" />
+    <ClCompile Include="core\game_time.cc" />
     <ClCompile Include="graphics\renderer.cc" />
     <ClCompile Include="util\shape_helper.cc" />
     <ClCompile Include="window\window.cc" />
@@ -218,6 +219,7 @@
     <ClInclude Include="core\memory\stl_allocator.h" />
     <ClInclude Include="core\threading\task_manager.h" />
     <ClInclude Include="core\threading\task.h" />
+    <ClInclude Include="core\game_time.h" />
     <ClInclude Include="graphics\direct3d.h" />
     <ClInclude Include="graphics\renderer.h" />
     <ClInclude Include="util\macros.h" />

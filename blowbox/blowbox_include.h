@@ -11,6 +11,7 @@
 #include "../blowbox/util/macros.h"
 #include "../blowbox/core/blowbox.h"
 #include "../blowbox/core/game_object.h"
+#include "../blowbox/core/game_time.h"
 
 // Memory
 #include "../blowbox/core/memory/memory_manager.h"

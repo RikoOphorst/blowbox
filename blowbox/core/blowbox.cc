@@ -8,6 +8,7 @@
 #include "../graphics/renderer.h"
 #include "../core/input/input_manager.h"
 #include "../core/game_object.h"
+#include "../core/game_time.h"
 
 #include <iostream>
 #include <sstream>
@@ -72,6 +73,9 @@ namespace blowbox
 			
 			input_manager_ = InputManager::Create(subsystem_allocator_, window_);
 
+			game_time_ = GameTime::Create(subsystem_allocator_);
+			game_time_->Reset();
+
 			window_->SetWindowQuitListener(std::bind(&blowbox::Blowbox::PrepareShutdown, this));
 			can_run_ = true;
 		}
@@ -86,11 +90,17 @@ namespace blowbox
 
 		while (running_)
 		{
+			game_time_->Tick();
+			
 			console_->Update();
 			window_->ProcessMessages();
 			input_manager_->Update();
-
+			
 			renderer_->Update();
+
+			Console::Instance()->Log(BB_LOGSTREAM << "Current frame time: " << game_time_->GetDelta() << " Elapsed game time: " << game_time_->GetElapsed() << " Average frame time: " << game_time_->GetAverageDelta());
+
+			Sleep(16);
 
 			if (prepare_shutdown_)
 			{
@@ -105,6 +115,7 @@ namespace blowbox
 	{
 		if (can_run_ == true)
 		{
+			MemoryManager::Deallocate(subsystem_allocator_, game_time_);
 			MemoryManager::Deallocate(subsystem_allocator_, input_manager_);
 			MemoryManager::Deallocate(subsystem_allocator_, renderer_);
 			MemoryManager::Deallocate(subsystem_allocator_, window_);

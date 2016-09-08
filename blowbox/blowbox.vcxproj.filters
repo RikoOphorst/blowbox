@@ -100,6 +100,9 @@
     <ClCompile Include="core\input\mouse.cc">
       <Filter>core\input</Filter>
     </ClCompile>
+    <ClCompile Include="core\game_time.cc">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\window.h">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="core\input\mouse.h">
       <Filter>core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="core\game_time.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
