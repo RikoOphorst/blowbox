@@ -13,6 +13,7 @@ namespace blowbox
 	class Window;
 	class Renderer;
 	class InputManager;
+	class GameTime;
 
 	/**
 	* @class blowbox::Blowbox
@@ -74,5 +75,6 @@ namespace blowbox
 		Window* window_; //!< The window this blowbox instance uses
 		Renderer* renderer_; //!< The renderer this blowbox instance uses
 		InputManager* input_manager_; //!< The input manager this blowbox instance uses
+		GameTime* game_time_; //!< Manages the game time
 	};
 }

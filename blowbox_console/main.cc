@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
 	QString year = QString::number(now.tm_year + 1900);
 
-	QString month = QString::number(now.tm_mon);
+	QString month = QString::number(now.tm_mon + 1);
 	if (month.size() < 2)
 		month = "0" + month;
 
